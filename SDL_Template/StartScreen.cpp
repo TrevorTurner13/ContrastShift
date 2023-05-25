@@ -44,21 +44,36 @@ StartScreen::StartScreen() {
 	// play mode entities
 	mPlayModes = new GameEntity(Graphics::SCREEN_WIDTH * 0.5f, Graphics::SCREEN_HEIGHT * 0.55f);
 	mOnePlayerMode = new GLTexture( "Play.png", 0,0,118,43);
-	mTwoPlayerMode = new GLTexture("2 Players", "emulogic.ttf", 32, { 230, 230, 230 });
-	mCursor = new GLTexture("Cursor.png");
+	mTwoPlayerMode = new GLTexture("HowToPlay.png", 0,0,279,43);
+	//mCursor = new GLTexture("Cursor.png");
+	mPlayHighlight = new GLTexture("PlayHighlight.png", 0, 0, 131, 60);
+	mHowToPlayHighlight = new GLTexture("HowToPlayHighLight.png", 0, 0, 293, 60);
+	mPlayDefault = new GLTexture("Play.png", 0, 0, 118, 43);
+	mHowToPlayDefault = new GLTexture("HowToPlay.png", 0, 0, 279, 43);
 
 	mPlayModes->Parent(this);
 	mOnePlayerMode->Parent(mPlayModes);
 	mTwoPlayerMode->Parent(mPlayModes);
-	mCursor->Parent(mPlayModes);
+	//mCursor->Parent(mPlayModes);
+	mPlayHighlight->Parent(mPlayModes);
+	mPlayDefault->Parent(mPlayModes);
+	mHowToPlayDefault->Parent(mPlayModes);
+	mHowToPlayHighlight->Parent(mPlayModes);
 
 	mOnePlayerMode->Position(0.0f, -35.0f);
 	mTwoPlayerMode->Position(0.0f, 35.0f);
-	mCursor->Position(-175.0f, -35.0f);
-
-	mCursorStartPos = mCursor->Position(Local);
-	mCursorOffset = Vector2(0.0f, 70.0f);
+	//mCursor->Position(-175.0f, -35.0f);
+	mPlayHighlight->Position(0.0f, -35.0f);
+	mPlayDefault->Position(0.0f, -35.0f);
+	mHowToPlayDefault->Position(0.0f, 35.0f);
+	mHowToPlayHighlight->Position(0.0f, 35.0f);
+	//mCursorStartPos = mCursor->Position(Local);
+	//mCursorOffset = Vector2(0.0f, 70.0f);
+	
 	mSelectedMode = 0;
+	mOnePlayerMode = mPlayHighlight;
+
+
 
 	// bottom bar entities
 	mBottomBar = new GameEntity(Graphics::SCREEN_WIDTH * 0.5f, Graphics::SCREEN_HEIGHT * 0.7f);
@@ -113,8 +128,8 @@ StartScreen::~StartScreen() {
 	mOnePlayerMode = nullptr;
 	delete mTwoPlayerMode;
 	mTwoPlayerMode = nullptr;
-	delete mCursor;
-	mCursor = nullptr;
+	//delete mCursor;
+	//mCursor = nullptr;
 
 	// bottom bar entities
 	delete mBottomBar;
@@ -149,12 +164,23 @@ void StartScreen::ChangeSelectedMode(int change) {
 
 	if (mSelectedMode < 0) {
 		mSelectedMode = 1;
+		
 	}
 	else if (mSelectedMode > 1) {
 		mSelectedMode = 0;
 	}
+	if (mSelectedMode == 0) {
+		mOnePlayerMode = mPlayHighlight;
+		mTwoPlayerMode = mHowToPlayDefault;
+	}
+	else if (mSelectedMode == 1) {
+		mOnePlayerMode = mPlayDefault;
+		mTwoPlayerMode = mHowToPlayHighlight;
+	}
+		
+	
 
-	mCursor->Position(mCursorStartPos + mCursorOffset * (float)mSelectedMode);
+	//mCursor->Position(mCursorStartPos + mCursorOffset * (float)mSelectedMode);
 }
 
 void StartScreen::Update() {
@@ -181,6 +207,7 @@ void StartScreen::Update() {
 			ChangeSelectedMode(-1);
 		}
 	}
+	mOnePlayerMode->Update();
 }
 
 void StartScreen::Render() {
@@ -199,8 +226,9 @@ void StartScreen::Render() {
 	}
 
 	mOnePlayerMode->Render();
+	
 	mTwoPlayerMode->Render();
-	mCursor->Render();
+	//mCursor->Render();
 
 	mNamco->Render();
 	mDates->Render();

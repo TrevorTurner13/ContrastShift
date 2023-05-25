@@ -31,9 +31,16 @@ private:
 	Texture* mOnePlayerMode;
 	Texture* mTwoPlayerMode;
 	Texture* mCursor;
+	Texture* mPlayDefault;
+	Texture* mPlayHighlight;
+	Texture* mHowToPlayHighlight;
+	Texture* mHowToPlayDefault;
 	Vector2 mCursorStartPos;
 	Vector2 mCursorOffset;
 	int mSelectedMode;
+
+
+
 
 	// Bottom Bar Entities
 	GameEntity* mBottomBar;
