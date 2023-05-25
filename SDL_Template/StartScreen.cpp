@@ -32,8 +32,8 @@ StartScreen::StartScreen() {
 	mTopScore->Score(645987);
 
 	// logo entities
-	mLogo = new GLTexture("GalagaLogo.png", 0, 0, 360, 180);
-	mAnimatedLogo = new AnimatedGLTexture("GalagaLogo.png", 0, 0, 360, 180, 3, 0.2f, Animation::Layouts::Vertical);
+	mLogo = new GLTexture("RealmSeekerLogo.png", 0, 0, 673, 83);
+	mAnimatedLogo = new AnimatedGLTexture("RealmSeekerLogo.png", 0, 0, 673, 83, 3, 0.2f, Animation::Layouts::Vertical);
 
 	mLogo->Parent(this);
 	mAnimatedLogo->Parent(this);
