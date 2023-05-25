@@ -58,6 +58,8 @@ private:
 	// stars
 	//BackgroundStars* mStars;
 
+	float mBackgroundColor;
+
 public:
 	StartScreen();
 	~StartScreen();
