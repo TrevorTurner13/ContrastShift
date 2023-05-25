@@ -43,7 +43,7 @@ StartScreen::StartScreen() {
 
 	// play mode entities
 	mPlayModes = new GameEntity(Graphics::SCREEN_WIDTH * 0.5f, Graphics::SCREEN_HEIGHT * 0.55f);
-	mOnePlayerMode = new GLTexture("1 Player ", "emulogic.ttf", 32, { 230, 230, 230 });
+	mOnePlayerMode = new GLTexture( "Play.png", 0,0,118,43);
 	mTwoPlayerMode = new GLTexture("2 Players", "emulogic.ttf", 32, { 230, 230, 230 });
 	mCursor = new GLTexture("Cursor.png");
 
