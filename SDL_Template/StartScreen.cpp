@@ -6,8 +6,8 @@ StartScreen::StartScreen() {
 
 
 	// logo entities
-	mLogo = new GLTexture("RealmSeekerLogo2.png", 0, 0, 666, 97);
-	mAnimatedLogo = new AnimatedGLTexture("RealmSeekerLogo2.png", 0, 0, 666, 97, 3, 0.2f, Animation::Layouts::Vertical);
+	mLogo = new GLTexture("ContrastShift.png", 0, 0, 788, 112);
+	mAnimatedLogo = new AnimatedGLTexture("ContrastShift.png", 0, 0, 788, 112, 3, 0.2f, Animation::Layouts::Vertical);
 
 	mLogo->Parent(this);
 	mAnimatedLogo->Parent(this);
@@ -17,13 +17,13 @@ StartScreen::StartScreen() {
 
 	//play mode entities
 	mPlayModes = new GameEntity(Graphics::SCREEN_WIDTH * 0.5f, Graphics::SCREEN_HEIGHT * 0.55f);
-	mOnePlayerMode = new GLTexture( "Play.png", 0,0,118,43);
-	mTwoPlayerMode = new GLTexture("HowToPlay.png", 0,0,279,43);
+	mOnePlayerMode = new GLTexture( "PlayNew.png", 0,0,146,60);
+	mTwoPlayerMode = new GLTexture("HowToPlayNew.png", 0,0,339,43);
 	
-	mPlayHighlight = new GLTexture("PlayHighlight.png", 0, 0, 131, 60);
-	mHowToPlayHighlight = new GLTexture("HowToPlayHighLight.png", 0, 0, 293, 60);
-	mPlayDefault = new GLTexture("Play.png", 0, 0, 118, 43);
-	mHowToPlayDefault = new GLTexture("HowToPlay.png", 0, 0, 279, 43);
+	mPlayHighlight = new GLTexture("PlayHighlightNew.png", 0, 0, 146, 60);
+	mHowToPlayHighlight = new GLTexture("HowToPlayHighLightNew.png", 0, 0, 355, 61);
+	mPlayDefault = new GLTexture("PlayNew.png", 0, 0, 128, 42);
+	mHowToPlayDefault = new GLTexture("HowToPlayNew.png", 0, 0, 339, 43);
 
 	mPlayModes->Parent(this);
 	mOnePlayerMode->Parent(mPlayModes);
