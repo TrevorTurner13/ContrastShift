@@ -39,7 +39,7 @@ namespace SDLFramework {
 
 	void GameManager::Update() {
 		mInputManager->Update();
-
+		mClouds->Update();
 		mScreenManager->Update();
 	}
 
@@ -50,6 +50,7 @@ namespace SDLFramework {
 
 	void GameManager::Render() {
 		mGraphics->ClearBackBuffer();
+		mClouds->Render();
 		mScreenManager->Render();
 		mGraphics->Render();
 	}
@@ -74,12 +75,17 @@ namespace SDLFramework {
 
 		mTimer = Timer::Instance();
 
+		mClouds = BackgroundClouds::Instance();
+
 		mScreenManager = ScreenManager::Instance();
 	}
 
 	GameManager::~GameManager() {
 		ScreenManager::Release();
 		mScreenManager = nullptr;
+
+		BackgroundClouds::Release();
+		mClouds = nullptr;
 
 		Timer::Release();
 		mTimer = nullptr;
