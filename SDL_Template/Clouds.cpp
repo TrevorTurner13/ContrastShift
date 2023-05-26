@@ -19,10 +19,10 @@ Clouds::Clouds(int layer) : GLTexture("CloudLargeWhite.png", 0, 0, 80, 32) {
 	Position(Vector2((float)(mRand->RandomInt() % Graphics::Instance()->SCREEN_WIDTH),
 		(float)(150 + mRand->RandomInt() % 100)));
 
-	float inverseLayer = 1.5f / layer;
+	float inverseLayer = 1.8f / layer;
 	Scale(Vec2_One * inverseLayer);
 
-	mScrollSpeed = -1.0f / layer;
+	mScrollSpeed = -0.5f / layer;
 }
 
 Clouds::~Clouds() {
