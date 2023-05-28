@@ -8,6 +8,7 @@ private:
 	static const int LAYER_COUNT = 3;
 	CloudLayer* mLayers[LAYER_COUNT];
 	GLTexture* mMoon;
+	GLTexture* mGround;
 
 public:
 	static BackgroundClouds* Instance();

@@ -50,9 +50,9 @@ StartScreen::StartScreen() {
 
 	// bottom bar entities
 	mBottomBar = new GameEntity(Graphics::SCREEN_WIDTH * 0.5f, Graphics::SCREEN_HEIGHT * 0.85f);
-	mNamco = new GLTexture("BRANDVOR", "Dragon Fire.ttf", 70, { 230, 230, 230 });
-	mDates = new GLTexture("2023-Forever Brandvor LTD.", "Dragon Fire.ttf", 32, { 230, 230, 230 });
-	mRights = new GLTexture("ALL RIGHTS RESERVED", "Dragon Fire.ttf", 32, { 230, 230, 230 });
+	mNamco = new GLTexture("BRANDVOR", "Dragon Fire.ttf", 70, { 230, 0, 0 });
+	mDates = new GLTexture("2023-Forever Brandvor LTD.", "Dragon Fire.ttf", 32, { 230, 0, 0 });
+	mRights = new GLTexture("ALL RIGHTS RESERVED", "Dragon Fire.ttf", 32, { 230, 0, 0 });
 
 	mBottomBar->Parent(this);
 	mNamco->Parent(mBottomBar);
