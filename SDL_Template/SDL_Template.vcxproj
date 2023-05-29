@@ -223,8 +223,8 @@ xcopy "$(ProjectDir)..\Data\*" "$(OutDir)Data\" /y /s</Command>
     <ClInclude Include="tinyxml2.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="fs.shader" />
-    <None Include="vs.shader" />
+    <None Include="..\Assets\Shaders\fs.shader" />
+    <None Include="..\Assets\Shaders\vs.shader" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

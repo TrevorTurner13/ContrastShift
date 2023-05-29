@@ -118,4 +118,10 @@ namespace SDLFramework {
 
 		GLGraphics::Instance()->DrawSprite(this, mClipped ? &mSourceRect : nullptr, &mDestinationRect, Rotation(World), Flip);
 	}
+
+	void GLTexture::RenderFlip() {
+		UpdateDstRect();
+
+		GLGraphics::Instance()->DrawSprite(this, mClipped ? &mSourceRect : nullptr, &mDestinationRect, Rotation(World), SDL_FLIP_HORIZONTAL);
+	}
 }

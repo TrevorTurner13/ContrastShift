@@ -241,10 +241,10 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="vs.shader">
+    <None Include="..\Assets\Shaders\fs.shader">
       <Filter>Resource Files\Shaders</Filter>
     </None>
-    <None Include="fs.shader">
+    <None Include="..\Assets\Shaders\vs.shader">
       <Filter>Resource Files\Shaders</Filter>
     </None>
   </ItemGroup>

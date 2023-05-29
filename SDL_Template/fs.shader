@@ -1,15 +1,21 @@
-#version 330 core
+#version 330 core
 
-in vec4 fragmentColor;
-in vec2 fragmentUV;
+in vec4 fragmentColor;
+in vec2 fragmentUV;
 
-out vec4 color;
+out vec4 color;
 
-uniform sampler2D tSampler;
+uniform sampler2D tSampler;
+uniform bool flipHorizontal;
 
+void main()
+{   
+	vec2 uv = fragmentUV;    
+	if (flipHorizontal)    
+	{        
+		uv.x = 1.0 - uv.x;    
+	}    
 
-void main()
-{
-    vec4 imageTexture = texture(tSampler, fragmentUV);
-    color = imageTexture * fragmentColor;
+	vec4 imageTexture = texture(tSampler, uv);    
+	color = imageTexture * fragmentColor;
 }

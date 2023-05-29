@@ -11,7 +11,7 @@ void Player::HandleMovement() {
 	else if (mInput->KeyDown(SDL_SCANCODE_LEFT)) {
 		Translate(-Vec2_Right * mMoveSpeed * mTimer->DeltaTime(), World);
 		mMovingLeft = true; 
-		mMovingRight = false;
+
 	}
 	else {
 		mMovingLeft = false;
@@ -58,13 +58,13 @@ Player::Player() {
 
 	mGuy = new AnimatedGLTexture("Character Sprite.png", 0, 2560, 320, 320, 6, 1.0f, Animation::Layouts::Horizontal);
 	mGuy->Parent(this);
-	mGuy->Position(Vector2(-150.0f, -222.0f));
+	mGuy->Position(Vector2(-110.0f, -222.0f));
 	mGuy->Scale(Vector2(0.5f, 0.5f));
 	mGuy->SetWrapMode(Animation::WrapModes::Loop);
 
-	mGuyRunning = new AnimatedGLTexture("Character Sprite.png", 0, 2240, 320, 320, 6, 0.5f, Animation::Layouts::Horizontal);
+	mGuyRunning = new AnimatedGLTexture("Character Sprite.png", 0, 2240, 320, 310, 6, 0.5f, Animation::Layouts::Horizontal);
 	mGuyRunning->Parent(this);
-	mGuyRunning->Position(Vector2(-150.0f, -230.0f));
+	mGuyRunning->Position(Vector2(-110.0f, -230.0f));
 	mGuyRunning->Scale(Vector2(0.5f, 0.5f));
 	mGuyRunning->SetWrapMode(Animation::WrapModes::Loop);
 
@@ -186,7 +186,8 @@ void Player::Render() {
 			mGuyRunning->Render();
 		}
 		else if (mMovingLeft) {
-			mGuyRunning->Render();
+			mGuyRunning->RenderFlip();
+
 		}
 	}
 

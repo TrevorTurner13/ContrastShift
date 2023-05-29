@@ -32,6 +32,8 @@ namespace SDLFramework {
 
 		// Inherited from Texture
 		virtual void Render() override;
+
+		void RenderFlip();
 	};
 }
 #endif

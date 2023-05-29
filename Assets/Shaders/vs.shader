@@ -9,20 +9,18 @@ out vec4 fragmentColor;
 out vec2 fragmentUV;
 
 uniform mat4 scaleMatrix;
+uniform mat4 flipMatrix;
 uniform mat4 rotateMatrix;
 uniform mat4 translateMatrix;
 uniform mat4 proj;
 
 void main()
 {
-    vec4 v1 =  translateMatrix * rotateMatrix *  scaleMatrix * vec4(vertexPosition.xy, 0.0, 1.0);
+    vec4 v1 =  translateMatrix * rotateMatrix *  flipMatrix * scaleMatrix * vec4(vertexPosition.xy, 0.0, 1.0);
     vec4 v2 = proj * v1;
 
     gl_Position = v2;
 
     fragmentColor = vertexColor;
     fragmentUV = vertexUV;
-
-    //if (flip == 1)
-        //fragmentUV = vec2(vertexUV.x, flip - vertexUV.y);
 }

@@ -7,25 +7,30 @@
 #include <gtx/transform.hpp>
 
 namespace SDLFramework {
+	
 	void GLGraphics::DrawSprite(GLTexture* texture, SDL_Rect* srcRect, SDL_Rect* dstRect, float angle, SDL_RendererFlip flip) {
+		
 		float rad = angle * DEG_TO_RAD;
+		
 		Vector2 pos = texture->Position(GameEntity::Space::World);
-
+		
 		InitRenderData(texture, srcRect, texture->ID);
-
 		shaderUtil.Use();
+		
 		glBindTexture(GL_TEXTURE_2D, texture->ID);
-
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
+		
+		glm::mat4 flipMatrix = glm::scale(glm::vec3((flip == SDL_FLIP_HORIZONTAL) ? -1.0f : 1.0f, 1.0f, 1.0f));
 		glm::mat4 scaleMatrix = glm::scale(glm::vec3(dstRect->w, dstRect->h, 1.0f));
 		glm::mat4 rotateMatrix = glm::rotate(rad, glm::vec3(0.0f, 0.0f, 1.0f));
 		glm::mat4 translateMatrix = glm::translate(glm::vec3(pos.x, pos.y, 0.0f));
-
+		
 		GLint loc = shaderUtil.GetUniformLocation("tSampler");
 		glUniform1i(loc, 0);
 
+		loc = shaderUtil.GetUniformLocation("flipMatrix");
+		glUniformMatrix4fv(loc, 1, GL_FALSE, &(flipMatrix[0][0]));
 		loc = shaderUtil.GetUniformLocation("scaleMatrix");
 		glUniformMatrix4fv(loc, 1, GL_FALSE, &(scaleMatrix[0][0]));
 		loc = shaderUtil.GetUniformLocation("rotateMatrix");
@@ -35,22 +40,22 @@ namespace SDLFramework {
 
 		loc = shaderUtil.GetUniformLocation("proj");
 		glUniformMatrix4fv(loc, 1, GL_FALSE, &(orthoMatrix[0][0]));
-
+		
 		glBindBuffer(GL_ARRAY_BUFFER, texture->ID);
 		glEnableVertexAttribArray(0);
 		glEnableVertexAttribArray(1);
 		glEnableVertexAttribArray(2);
-
+		
 		glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, position));
 		glVertexAttribPointer(1, 4, GL_FLOAT, GL_TRUE, sizeof(Vertex), (void*)offsetof(Vertex, color));
 		glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, uv));
-
+		
 		glDrawArrays(GL_TRIANGLES, 0, 6);
-
+		
 		glDisableVertexAttribArray(0);
 		glDisableVertexAttribArray(1);
 		glDisableVertexAttribArray(2);
-
+		
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
