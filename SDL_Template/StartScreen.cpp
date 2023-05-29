@@ -60,9 +60,9 @@ StartScreen::StartScreen() {
 	mDates->Parent(mBottomBar);
 	mRights->Parent(mBottomBar);
 
-	mNamco->Position(Vec2_Zero);
-	mDates->Position(0.0f, 45.0f);
-	mRights->Position(0.0f, 80.0f);
+	mNamco->Position(0.0f,26.0f);
+	mDates->Position(0.0f, 75.0f);
+	mRights->Position(0.0f, 110.0f);
 
 	// screen animation variables
 	ResetAnimation();
@@ -120,7 +120,7 @@ int StartScreen::SelectedMode() {
 
 void StartScreen::ChangeSelectedMode(int change) {
 	mSelectedMode += change;
-
+	mAudio->PlaySFX("SFX/menu.mp3", 0);
 	if (mSelectedMode < 0) {
 		mSelectedMode = 1;
 		
