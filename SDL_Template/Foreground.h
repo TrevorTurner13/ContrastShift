@@ -2,6 +2,8 @@
 #define __FOREGROUND_H
 #include "GLTexture.h"
 #include "AnimatedGLTexture.h"
+#include "Player.h"
+#include "ScreenManager.h"
 
 using namespace SDLFramework;
 
@@ -11,11 +13,13 @@ private:
 	GLTexture* mPillar;
 	GLTexture* mBlock;
 	GLTexture* mLedge;
+	//GLTexture* mLedge1;
 	GLTexture* mSword1;
 	GLTexture* mSword2;
 	GLTexture* mSword3;
 
 	AnimatedGLTexture* mGuy;
+	Player* mPlayer;
 
 public:
 

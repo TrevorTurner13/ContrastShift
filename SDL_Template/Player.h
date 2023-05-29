@@ -16,11 +16,15 @@ private:
 	bool mVisible;
 	bool mAnimating;
 	bool mWasHit;
+	bool mMovingRight;
+	bool mMovingLeft;
+	bool mIsJumping;
 
 	int mScore;
 	int mLives;
 
-	Texture* mShip;
+	AnimatedGLTexture* mGuy;
+	AnimatedGLTexture* mGuyRunning;
 	AnimatedGLTexture* mDeathAnimation;
 
 	float mMoveSpeed;

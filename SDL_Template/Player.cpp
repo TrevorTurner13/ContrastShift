@@ -5,9 +5,17 @@
 void Player::HandleMovement() {
 	if (mInput->KeyDown(SDL_SCANCODE_RIGHT)) {
 		Translate(Vec2_Right * mMoveSpeed * mTimer->DeltaTime(), World);
+		mMovingLeft = false;
+		mMovingRight = true;
 	}
 	else if (mInput->KeyDown(SDL_SCANCODE_LEFT)) {
 		Translate(-Vec2_Right * mMoveSpeed * mTimer->DeltaTime(), World);
+		mMovingLeft = true; 
+		mMovingRight = false;
+	}
+	else {
+		mMovingLeft = false;
+		mMovingRight = false;
 	}
 
 	Vector2 pos = Position(Local);
@@ -41,13 +49,24 @@ Player::Player() {
 	mVisible = false;
 	mAnimating = false;
 	mWasHit = false;
+	mMovingRight = false;
+	mMovingLeft = false;
+	mIsJumping = false;
 
 	mScore = 0;
 	mLives = 2;
 
-	mShip = new GLTexture("PlayerShips.png", 0, 0, 60, 64);
-	mShip->Parent(this);
-	mShip->Position(Vec2_Zero);
+	mGuy = new AnimatedGLTexture("Character Sprite.png", 0, 2560, 320, 320, 6, 1.0f, Animation::Layouts::Horizontal);
+	mGuy->Parent(this);
+	mGuy->Position(Vector2(-150.0f, -222.0f));
+	mGuy->Scale(Vector2(0.5f, 0.5f));
+	mGuy->SetWrapMode(Animation::WrapModes::Loop);
+
+	mGuyRunning = new AnimatedGLTexture("Character Sprite.png", 0, 2240, 320, 320, 6, 0.5f, Animation::Layouts::Horizontal);
+	mGuyRunning->Parent(this);
+	mGuyRunning->Position(Vector2(-150.0f, -230.0f));
+	mGuyRunning->Scale(Vector2(0.5f, 0.5f));
+	mGuyRunning->SetWrapMode(Animation::WrapModes::Loop);
 
 	mMoveSpeed = 300.0f;
 	mMoveBounds = Vector2(0.0f, 800.0f);
@@ -75,8 +94,8 @@ Player::~Player() {
 	mInput = nullptr;
 	mAudio = nullptr;
 
-	delete mShip;
-	mShip = nullptr;
+	delete mGuy;
+	mGuy = nullptr;
 
 	delete mDeathAnimation;
 	mDeathAnimation = nullptr;
@@ -135,8 +154,18 @@ void Player::Update() {
 	}
 	else {
 		if (Active()) {
+			if (!mMovingLeft && !mMovingRight) {
+				mGuy->Update();
+			}
+			else if (mMovingRight) {
+				mGuyRunning->Update();
+			}
+			else if (mMovingLeft) {
+				mGuyRunning->Update();
+			}
 			HandleMovement();
 			HandleFiring();
+			
 		}
 	}
 
@@ -150,8 +179,14 @@ void Player::Render() {
 		if (mAnimating) {
 			mDeathAnimation->Render();
 		}
-		else {
-			mShip->Render();
+		else if (!mMovingLeft && !mMovingRight) {
+			mGuy->Render();
+		}
+		else if (mMovingRight) {
+			mGuyRunning->Render();
+		}
+		else if (mMovingLeft) {
+			mGuyRunning->Render();
 		}
 	}
 
