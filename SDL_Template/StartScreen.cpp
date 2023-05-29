@@ -3,6 +3,7 @@
 StartScreen::StartScreen() {
 	mTimer = Timer::Instance();
 	mInput = InputManager::Instance();
+	mAudio = AudioManager::Instance();
 
 
 	// logo entities
@@ -68,6 +69,7 @@ StartScreen::StartScreen() {
 
 	/*mStars = BackgroundStars::Instance();
 	mStars->Scroll(true);*/
+	mAudio->PlayMusic("MUS/NewTitleSong.mp3", 100);
 }
 
 

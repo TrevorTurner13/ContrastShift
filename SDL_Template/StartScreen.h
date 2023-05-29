@@ -4,6 +4,7 @@
 #include "InputManager.h"
 //#include "BackgroundStars.h"
 #include "Scoreboard.h"
+#include "AudioManager.h"
 
 using namespace SDLFramework;
 
@@ -12,6 +13,7 @@ class StartScreen : public GameEntity {
 private:
 	Timer* mTimer;
 	InputManager* mInput;
+	AudioManager* mAudio;
 	
 
 	// Top Bar Entities
