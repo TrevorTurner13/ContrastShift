@@ -52,12 +52,6 @@ Foreground::Foreground() {
 	mSword3->Position(900, 705);
 	mSword3 ->Scale(Vector2(0.4f, 0.4f));
 
-	mGuy = new AnimatedGLTexture("Character Sprite.png", 0, 1936, 320, 320, 6, 1.0f, Animation::Layouts::Horizontal);
-	mGuy->Parent(this);
-	mGuy->Position(300.0f, 496.0f);
-	mGuy->Scale(Vector2(0.5f, 0.5f));
-	mGuy->SetWrapMode(Animation::WrapModes::Loop);
-
 }
 
 Foreground::~Foreground() {
@@ -76,8 +70,7 @@ Foreground::~Foreground() {
 	mSword2 = nullptr;
 	delete mSword3;
 	mSword3 = nullptr;
-	delete mGuy;
-	mGuy = nullptr;
+	
 }
 
 void Foreground::Update() {
@@ -88,7 +81,7 @@ void Foreground::Update() {
 	mSword1->Update();
 	mSword2->Update();
 	mSword3->Update();
-	mGuy->Update();
+	
 }
 
 void Foreground::Render() {
@@ -99,6 +92,6 @@ void Foreground::Render() {
 	mSword1->Render();
 	mSword2->Render();
 	mSword3->Render();
-	mGuy->Render();
+	
 }
 

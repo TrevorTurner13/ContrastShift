@@ -20,6 +20,7 @@ void ScreenManager::Update() {
 	switch (mCurrentScreen) {
 	case Start:
 		mStartScreen->Update();
+		mGuy->Update();
 
 		if (mInput->KeyPressed(SDL_SCANCODE_RETURN)) {
 			mCurrentScreen = Play;
@@ -37,6 +38,7 @@ void ScreenManager::Render() {
 	switch (mCurrentScreen) {
 	case Start:
 		mStartScreen->Render();
+		mGuy->Render();
 		break;
 	case Play:
 		mPlayScreen->Render();
@@ -51,6 +53,11 @@ ScreenManager::ScreenManager() {
 	mStartScreen = new StartScreen();
 	mPlayScreen = new PlayScreen();
 
+	mGuy = new AnimatedGLTexture("Character Sprite.png", 0, 1936, 320, 320, 6, 1.0f, Animation::Layouts::Horizontal);
+	mGuy->Position(300.0f, 496.0f);
+	mGuy->Scale(Vector2(0.5f, 0.5f));
+	mGuy->SetWrapMode(Animation::WrapModes::Loop);
+
 	mCurrentScreen = Start;
 }
 
@@ -62,4 +69,7 @@ ScreenManager::~ScreenManager() {
 
 	delete mPlayScreen;
 	mPlayScreen = nullptr;
+
+	delete mGuy;
+	mGuy = nullptr;
 }

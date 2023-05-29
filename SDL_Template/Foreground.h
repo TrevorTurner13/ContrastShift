@@ -18,7 +18,6 @@ private:
 	GLTexture* mSword2;
 	GLTexture* mSword3;
 
-	AnimatedGLTexture* mGuy;
 	Player* mPlayer;
 
 public:

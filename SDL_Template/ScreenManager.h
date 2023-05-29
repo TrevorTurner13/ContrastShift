@@ -14,6 +14,7 @@ private:
 
 	StartScreen * mStartScreen;
 	PlayScreen * mPlayScreen;
+	AnimatedGLTexture* mGuy;
 
 public:
 	static ScreenManager * Instance();
