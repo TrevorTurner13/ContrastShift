@@ -22,9 +22,9 @@ Foreground::Foreground() {
 	mPillar1->Position(0.0f, 450.0f);
 	mPillar1->Scale(Vector2(0.75f, 1.0f));
 
-	mPillar2 = new GLTexture("PillarPlatform.png", 370, 80, 70, 399);
+	mPillar2 = new GLTexture("PillarPlatform.png", 370, 80, 70, 398);
 	mPillar2->Parent(this);
-	mPillar2->Position(1500.0f, 720.0f);
+	mPillar2->Position(1500.0f, 721.0f);
 	mPillar2->Scale(Vector2(0.90f, 0.90f));
 	
 	mBlock = new GLTexture("Sprite-0015.png", 0, 0, 494, 330);
