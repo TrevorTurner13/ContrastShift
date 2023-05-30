@@ -19,12 +19,12 @@ void Player::HandleMovement() {
 	}
 
 	Vector2 pos = Position(Local);
-	if (pos.x < mMoveBounds.x) {
+	/*if (pos.x < mMoveBounds.x) {
 		pos.x = mMoveBounds.x;
 	}
 	else if (pos.x > mMoveBounds.y) {
 		pos.x = mMoveBounds.y;
-	}
+	}*/
 
 	Position(pos);
 }
