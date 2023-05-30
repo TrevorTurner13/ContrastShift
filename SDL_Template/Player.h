@@ -20,6 +20,12 @@ private:
 	bool mMovingLeft;
 	bool mIsJumping;
 	bool mIsWhite;
+	bool mIsGrounded;
+
+	//mAcceleration;
+	Vector2 mVelocity;
+	Vector2 mGravity;
+	Vector2 mJumpPower;
 
 	int mScore;
 	int mLives;
@@ -37,6 +43,7 @@ private:
 private:
 	void HandleMovement();
 	void HandleFiring();
+	void HandleJumping();
 
 public:
 	Player();

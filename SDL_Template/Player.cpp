@@ -65,6 +65,9 @@ Player::Player() {
 	mMovingLeft = false;
 	mIsJumping = false;
 	mIsWhite = false;
+	mIsGrounded = true;
+	mGravity = Vector2(0.0, 20);
+	mJumpPower = Vector2(0.0, -6);
 
 	mScore = 0;
 	mLives = 2;
@@ -156,6 +159,18 @@ bool Player::WasHit() {
 }
 
 void Player::Update() {
+	if (!mIsGrounded) {
+		mVelocity.y += mGravity.y * mTimer->DeltaTime();
+	}
+
+	Position(Position() + mVelocity);
+
+	std::cout << mVelocity.y << std::endl;
+
+	//Check for lNDING ON GROUND
+
+
+
 	if (mAnimating) {
 
 		if (mWasHit) {
@@ -178,6 +193,7 @@ void Player::Update() {
 			}
 			HandleMovement();
 			HandleFiring();
+			HandleJumping();
 			
 		}
 	}
@@ -209,4 +225,13 @@ void Player::Render() {
 	}*/
 
 	PhysEntity::Render();
+}
+
+void Player::HandleJumping() {
+	if (mInput->KeyDown(SDL_SCANCODE_SPACE)) {
+		mVelocity.y = mJumpPower.y;
+		mIsGrounded = false;
+
+	}
+
 }
