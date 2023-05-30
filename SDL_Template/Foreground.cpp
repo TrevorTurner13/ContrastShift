@@ -57,6 +57,11 @@ Foreground::Foreground() {
 	mSword3->Position(900, 805);
 	mSword3 ->Scale(Vector2(0.4f, 0.4f));
 
+	mFlag1 = new AnimatedGLTexture("flag.png", 0, 0, 320, 320, 12, 1.5f, Animation::Layouts::Horizontal);
+	mFlag1->Parent(this);
+	mFlag1->Position(1670, 450);
+	mFlag1->Scale(Vector2(0.3f, 0.3f));
+
 }
 
 Foreground::~Foreground() {
@@ -77,6 +82,9 @@ Foreground::~Foreground() {
 	mSword2 = nullptr;
 	delete mSword3;
 	mSword3 = nullptr;
+
+	delete mFlag1;
+	mFlag1 = nullptr;
 	
 }
 
@@ -89,7 +97,7 @@ void Foreground::Update() {
 	mSword1->Update();
 	mSword2->Update();
 	mSword3->Update();
-	
+	mFlag1->Update();
 }
 
 void Foreground::Render() {
@@ -101,6 +109,7 @@ void Foreground::Render() {
 	mSword1->Render();
 	mSword2->Render();
 	mSword3->Render();
+	mFlag1->Render();
 	
 }
 

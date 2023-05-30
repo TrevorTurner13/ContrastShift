@@ -12,14 +12,18 @@ private:
 	static Foreground* sInstance;
 	GLTexture* mPillar1;
 	GLTexture* mPillar2;
+
 	GLTexture* mBlock;
 	
 	GLTexture* mLedge1;
 	GLTexture* mLedge2;
+
 	GLTexture* mSword1;
 	GLTexture* mSword2;
 	GLTexture* mSword3;
-	
+
+	AnimatedGLTexture* mFlag1;
+
 	Player* mPlayer;
 
 public:
