@@ -167,6 +167,7 @@ xcopy "$(ProjectDir)..\Data\*" "$(OutDir)Data\" /y /s</Command>
     <ClCompile Include="CloudLayer.cpp" />
     <ClCompile Include="Clouds.cpp" />
     <ClCompile Include="Collider.cpp" />
+    <ClCompile Include="ColourShifter.cpp" />
     <ClCompile Include="Foreground.cpp" />
     <ClCompile Include="GameEntity.cpp" />
     <ClCompile Include="GameManager.cpp" />
@@ -199,6 +200,7 @@ xcopy "$(ProjectDir)..\Data\*" "$(OutDir)Data\" /y /s</Command>
     <ClInclude Include="CloudLayer.h" />
     <ClInclude Include="Clouds.h" />
     <ClInclude Include="Collider.h" />
+    <ClInclude Include="ColourShifter.h" />
     <ClInclude Include="Foreground.h" />
     <ClInclude Include="GameEntity.h" />
     <ClInclude Include="GameManager.h" />

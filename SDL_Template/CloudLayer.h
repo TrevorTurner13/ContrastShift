@@ -3,6 +3,7 @@
 
 #include "Clouds.h"
 
+
 class CloudLayer {
 private:
 	static const int CLOUD_COUNT = 3;

@@ -3,6 +3,7 @@
 #include "GLTexture.h"
 #include "Timer.h"
 #include "Random.h"
+#include "ColourShifter.h"
 
 using namespace SDLFramework;
 

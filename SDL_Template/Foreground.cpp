@@ -17,6 +17,9 @@ void Foreground::Release() {
 
 Foreground::Foreground() {
 
+	mShifter = new ColourShifter();
+	
+	// white elements
 	mPillar1 = new GLTexture("Pillarlarge.png", 0, 0, 480, 960);
 	mPillar1->Parent(this);
 	mPillar1->Position(0.0f, 450.0f);
@@ -62,6 +65,52 @@ Foreground::Foreground() {
 	mFlag1->Position(1670, 450);
 	mFlag1->Scale(Vector2(0.3f, 0.3f));
 
+	// Black Elements
+	mBlackPillar1 = new GLTexture("BlackPillarlarge.png", 0, 0, 480, 960);
+	mBlackPillar1->Parent(this);
+	mBlackPillar1->Position(0.0f, 450.0f);
+	mBlackPillar1->Scale(Vector2(0.75f, 1.0f));
+
+	mBlackPillar2 = new GLTexture("BlackPillarPlatformt.png", 370, 80, 70, 398);
+	mBlackPillar2->Parent(this);
+	mBlackPillar2->Position(800.0f, 721.0f);
+	mBlackPillar2->Scale(Vector2(0.65f, 0.65f));
+
+	mBlackBlock = new GLTexture("BlackPlatform1.png", 0, 0, 494, 330);
+	mBlackBlock->Parent(this);
+	mBlackBlock->Position(265.0f, 793.0f);
+	mBlackBlock->Scale(Vector2(0.65f, 0.65f));
+
+	mBlackLedge1 = new GLTexture("BlackPillarPlatformt.png", 0, 0, 800, 70);
+	mBlackLedge1->Parent(this);
+	mBlackLedge1->Position(250.0f, 665.0f);
+	mBlackLedge1->Scale(Vector2(0.65f, 0.65f));
+
+	mBlackLedge2 = new GLTexture("BlackPillarPlatformt.png", 0, 0, 800, 70);
+	mBlackLedge2->Parent(this);
+	mBlackLedge2->Position(1500.0f, 520.0f);
+	mBlackLedge2->Scale(Vector2(0.65f, 0.65f));
+
+	mBlackSword1 = new GLTexture("BlackSwords.png", 0, 0, 320, 480);
+	mBlackSword1->Parent(this);
+	mBlackSword1->Position(160, 250);
+	mBlackSword1->Scale(Vector2(0.4f, 0.4f));
+
+	mBlackSword2 = new GLTexture("swords.png", 640, 0, 320, 480);
+	mBlackSword2->Parent(this);
+	mBlackSword2->Position(750, 805);
+	mBlackSword2->Scale(Vector2(0.4f, 0.4f));
+
+	mBlackSword3 = new GLTexture("swords.png", 1280, 0, 160, 480);
+	mBlackSword3->Parent(this);
+	mBlackSword3->Position(900, 805);
+	mBlackSword3->Scale(Vector2(0.4f, 0.4f));
+
+	mBlackFlag1 = new AnimatedGLTexture("flag.png", 0, 0, 320, 320, 12, 1.5f, Animation::Layouts::Horizontal);
+	mBlackFlag1->Parent(this);
+	mBlackFlag1->Position(1670, 450);
+	mBlackFlag1->Scale(Vector2(0.3f, 0.3f));
+
 }
 
 Foreground::~Foreground() {
@@ -82,6 +131,25 @@ Foreground::~Foreground() {
 	mSword2 = nullptr;
 	delete mSword3;
 	mSword3 = nullptr;
+	delete mFlag1;
+	mFlag1 = nullptr;
+
+	delete mBlackPillar1;
+	mBlackPillar1 = nullptr;
+	delete mBlackPillar2;
+	mBlackPillar2 = nullptr;
+	delete mBlackBlock;
+	mBlock = nullptr;
+	delete mLedge1;
+	mLedge1 = nullptr;
+	delete mLedge2;
+	mLedge2 = nullptr;
+	delete mSword1;
+	mSword1 = nullptr;
+	delete mSword2;
+	mSword2 = nullptr;
+	delete mSword3;
+	mSword3 = nullptr;
 
 	delete mFlag1;
 	mFlag1 = nullptr;
@@ -89,27 +157,25 @@ Foreground::~Foreground() {
 }
 
 void Foreground::Update() {
-	mPillar1->Update();
-	mPillar2->Update();
-	mBlock->Update();
-	mLedge1->Update();
-	mLedge2->Update();
-	mSword1->Update();
-	mSword2->Update();
-	mSword3->Update();
+
 	mFlag1->Update();
 }
 
 void Foreground::Render() {
-	mPillar1->Render();
-	mPillar2->Render();
-	mBlock->Render();
-	mLedge1->Render();
-	mLedge2->Render();
-	mSword1->Render();
-	mSword2->Render();
-	mSword3->Render();
-	mFlag1->Render();
-	
+	if (!mShifter->GetIsWhite()) {
+		mPillar1->Render();
+		mPillar2->Render();
+		mBlock->Render();
+		mLedge1->Render();
+		mLedge2->Render();
+		mSword1->Render();
+		mSword2->Render();
+		mSword3->Render();
+		mFlag1->Render();
+	}
+	else {
+		mBlackPillar1->Render();
+		mBlackPillar2->Render();
+	}
 }
 
