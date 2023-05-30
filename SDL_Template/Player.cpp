@@ -2,6 +2,7 @@
 #include "BoxCollider.h"
 #include "PhysicsManager.h"
 
+
 void Player::HandleMovement() {
 	if (mInput->KeyDown(SDL_SCANCODE_D)) {
 		Translate(Vec2_Right * mMoveSpeed * mTimer->DeltaTime(), World);
@@ -16,6 +17,17 @@ void Player::HandleMovement() {
 	else {
 		mMovingLeft = false;
 		mMovingRight = false;
+	}
+	if (mInput->KeyPressed(SDL_SCANCODE_LSHIFT)) {
+		if (mIsWhite == true) {
+			glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+			mIsWhite = false;
+		}
+		else {
+			glClearColor(250.0f, 250.0f, 250.0f, 1.0f);
+			mIsWhite = true;
+		}
+
 	}
 
 	Vector2 pos = Position(Local);
@@ -52,6 +64,7 @@ Player::Player() {
 	mMovingRight = false;
 	mMovingLeft = false;
 	mIsJumping = false;
+	mIsWhite = false;
 
 	mScore = 0;
 	mLives = 2;

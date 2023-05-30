@@ -19,6 +19,7 @@ private:
 	bool mMovingRight;
 	bool mMovingLeft;
 	bool mIsJumping;
+	bool mIsWhite;
 
 	int mScore;
 	int mLives;

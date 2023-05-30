@@ -171,7 +171,7 @@ namespace SDLFramework {
 				std::cerr << "Unable to create GL context! SDL Error: " << SDL_GetError() << std::endl;
 				return false;
 			}
-
+			
 			GLenum error = glewInit();
 			if (error != GLEW_OK) {
 				std::cerr << "Unable to initialize GLEW! GLEW Error: " << glewGetErrorString(error) << std::endl;
@@ -181,6 +181,7 @@ namespace SDLFramework {
 			SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 			glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 			glEnable(GL_TEXTURE_2D);
+			
 		}
 		break;
 		default:
@@ -206,4 +207,5 @@ namespace SDLFramework {
 
 		return true;
 	}
+	
 }
