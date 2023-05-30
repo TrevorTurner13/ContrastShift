@@ -11,7 +11,7 @@ void Player::HandleMovement() {
 	else if (mInput->KeyDown(SDL_SCANCODE_LEFT)) {
 		Translate(-Vec2_Right * mMoveSpeed * mTimer->DeltaTime(), World);
 		mMovingLeft = true; 
-
+		mMovingRight = false;
 	}
 	else {
 		mMovingLeft = false;

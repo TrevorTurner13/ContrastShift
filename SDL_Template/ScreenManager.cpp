@@ -19,8 +19,9 @@ void ScreenManager::Update() {
 
 	switch (mCurrentScreen) {
 	case Start:
-		mStartScreen->Update();
 		mGuy->Update();
+		mStartScreen->Update();
+		
 
 		if (mInput->KeyPressed(SDL_SCANCODE_RETURN)) {
 			mCurrentScreen = Play;
@@ -37,8 +38,9 @@ void ScreenManager::Render() {
 
 	switch (mCurrentScreen) {
 	case Start:
-		mStartScreen->Render();
 		mGuy->Render();
+		mStartScreen->Render();
+		
 		break;
 	case Play:
 		mPlayScreen->Render();
