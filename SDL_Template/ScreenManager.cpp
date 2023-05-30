@@ -17,6 +17,9 @@ void ScreenManager::Release() {
 
 void ScreenManager::Update() {
 
+	mClouds->Update();
+	mForeground->Update();
+
 	switch (mCurrentScreen) {
 	case Start:
 		mGuy->Update();
@@ -35,6 +38,8 @@ void ScreenManager::Update() {
 
 void ScreenManager::Render() { 
 
+	mClouds->Render();
+	mForeground->Render();
 
 	switch (mCurrentScreen) {
 	case Start:
@@ -60,11 +65,20 @@ ScreenManager::ScreenManager() {
 	mGuy->Scale(Vector2(0.5f, 0.5f));
 	mGuy->SetWrapMode(Animation::WrapModes::Loop);
 
+	mClouds = BackgroundClouds::Instance();
+	mForeground = Foreground::Instance();
+
 	mCurrentScreen = Start;
 }
 
 ScreenManager::~ScreenManager() {
 	mInput = nullptr;
+
+	BackgroundClouds::Release();
+	mClouds = nullptr;
+
+	Foreground::Release();
+	mForeground = nullptr;
 
 	delete mStartScreen;
 	mStartScreen = nullptr;

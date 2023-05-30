@@ -2,7 +2,9 @@
 #define __SCREENMANAGER_H
 #include "StartScreen.h"
 #include "PlayScreen.h"
-#include "ColourShifter.h"
+#include "BackgroundClouds.h"
+#include "Foreground.h"
+
 
 class ScreenManager {
 private:
@@ -16,6 +18,8 @@ private:
 	StartScreen * mStartScreen;
 	PlayScreen * mPlayScreen;
 	AnimatedGLTexture* mGuy;
+	BackgroundClouds* mClouds;
+	Foreground* mForeground;
 
 public:
 	static ScreenManager * Instance();

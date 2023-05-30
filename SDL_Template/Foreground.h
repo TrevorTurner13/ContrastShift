@@ -3,16 +3,12 @@
 #include "GLTexture.h"
 #include "AnimatedGLTexture.h"
 #include "Player.h"
-#include "ScreenManager.h"
-#include "ColourShifter.h"
 
 using namespace SDLFramework;
 
 class Foreground : public GameEntity {
 private:
 	static Foreground* sInstance;
-
-	ColourShifter* mShifter;
 	//white elements
 	GLTexture* mPillar1;
 	GLTexture* mPillar2;

@@ -17,7 +17,6 @@ void Foreground::Release() {
 
 Foreground::Foreground() {
 
-	mShifter = new ColourShifter();
 	
 	// white elements
 	mPillar1 = new GLTexture("Pillarlarge.png", 0, 0, 480, 960);
@@ -139,20 +138,20 @@ Foreground::~Foreground() {
 	delete mBlackPillar2;
 	mBlackPillar2 = nullptr;
 	delete mBlackBlock;
-	mBlock = nullptr;
-	delete mLedge1;
-	mLedge1 = nullptr;
-	delete mLedge2;
-	mLedge2 = nullptr;
-	delete mSword1;
-	mSword1 = nullptr;
-	delete mSword2;
-	mSword2 = nullptr;
-	delete mSword3;
-	mSword3 = nullptr;
+	mBlackBlock = nullptr;
+	delete mBlackLedge1;
+	mBlackLedge1 = nullptr;
+	delete mBlackLedge2;
+	mBlackLedge2 = nullptr;
+	delete mBlackSword1;
+	mBlackSword1 = nullptr;
+	delete mBlackSword2;
+	mBlackSword2 = nullptr;
+	delete mBlackSword3;
+	mBlackSword3 = nullptr;
 
-	delete mFlag1;
-	mFlag1 = nullptr;
+	delete mBlackFlag1;
+	mBlackFlag1 = nullptr;
 	
 }
 
@@ -162,7 +161,7 @@ void Foreground::Update() {
 }
 
 void Foreground::Render() {
-	if (!mShifter->GetIsWhite()) {
+	//if (!mShifter->GetIsWhite()) {
 		mPillar1->Render();
 		mPillar2->Render();
 		mBlock->Render();
@@ -172,10 +171,10 @@ void Foreground::Render() {
 		mSword2->Render();
 		mSword3->Render();
 		mFlag1->Render();
-	}
+	/*}
 	else {
 		mBlackPillar1->Render();
 		mBlackPillar2->Render();
-	}
+	}*/
 }
 

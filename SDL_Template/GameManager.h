@@ -4,8 +4,7 @@
 #include "AudioManager.h"
 #include "ScreenManager.h"
 #include "PhysicsManager.h"
-#include "BackgroundClouds.h"
-#include "Foreground.h"
+
 
 namespace SDLFramework {
 
@@ -16,8 +15,7 @@ namespace SDLFramework {
 		const int FRAME_RATE = 60;
 
 		bool mQuit;
-		BackgroundClouds* mClouds;
-		Foreground* mForeground;
+		
 		Graphics * mGraphics;
 		AssetManager * mAssetManager;
 		InputManager * mInputManager;

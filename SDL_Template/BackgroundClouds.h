@@ -6,9 +6,6 @@ class BackgroundClouds {
 private:
 	static BackgroundClouds* sInstance;
 	static const int LAYER_COUNT = 3;
-
-	ColourShifter* mShifter;
-
 	CloudLayer* mLayers[LAYER_COUNT];
 	GLTexture* mMoon;
 	GLTexture* mGround;

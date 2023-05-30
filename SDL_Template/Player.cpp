@@ -169,8 +169,6 @@ void Player::Update() {
 
 	//Check for lNDING ON GROUND
 
-
-
 	if (mAnimating) {
 
 		if (mWasHit) {
@@ -194,7 +192,7 @@ void Player::Update() {
 			HandleMovement();
 			HandleFiring();
 			HandleJumping();
-			
+
 		}
 	}
 
@@ -231,7 +229,5 @@ void Player::HandleJumping() {
 	if (mInput->KeyDown(SDL_SCANCODE_SPACE)) {
 		mVelocity.y = mJumpPower.y;
 		mIsGrounded = false;
-
 	}
-
 }

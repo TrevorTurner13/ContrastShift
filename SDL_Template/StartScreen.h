@@ -5,7 +5,6 @@
 //#include "BackgroundStars.h"
 #include "Scoreboard.h"
 #include "AudioManager.h"
-#include "ColourShifter.h"
 
 using namespace SDLFramework;
 

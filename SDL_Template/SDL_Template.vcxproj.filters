@@ -141,9 +141,6 @@
     <ClCompile Include="Foreground.cpp">
       <Filter>Source Files\Galaga</Filter>
     </ClCompile>
-    <ClCompile Include="ColourShifter.cpp">
-      <Filter>Source Files\Galaga</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameEntity.h">
@@ -240,9 +237,6 @@
       <Filter>Header Files\Galaga</Filter>
     </ClInclude>
     <ClInclude Include="Foreground.h">
-      <Filter>Header Files\Galaga</Filter>
-    </ClInclude>
-    <ClInclude Include="ColourShifter.h">
       <Filter>Header Files\Galaga</Filter>
     </ClInclude>
   </ItemGroup>

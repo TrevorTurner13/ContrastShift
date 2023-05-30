@@ -26,18 +26,14 @@ void BackgroundClouds::Update() {
 }
 
 void BackgroundClouds::Render() {
-	if (!mShifter->GetIsWhite()) {
-		mMoon->Render();
-		for (int i = LAYER_COUNT - 1; i > -1; i--) {
-			mLayers[i]->Render();
-		}
-		mGround->Render();
+	mMoon->Render();
+	for (int i = LAYER_COUNT - 1; i > -1; i--) {
+		mLayers[i]->Render();
 	}
+	mGround->Render();
 }
 
 BackgroundClouds::BackgroundClouds() {
-	mShifter = new ColourShifter();
-
 	mMoon = new GLTexture("Moon.png", 0, 0, 640, 640);
 	mMoon->Position(1550.0f, 200.0f);
 	mMoon->Scale(Vector2(0.5f, 0.5f));
