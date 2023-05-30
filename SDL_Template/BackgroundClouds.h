@@ -2,6 +2,7 @@
 #define __BACKGROUNDCLOUDS_H
 #include "CloudLayer.h"
 
+
 class BackgroundClouds {
 private:
 	static BackgroundClouds* sInstance;
@@ -9,6 +10,8 @@ private:
 	CloudLayer* mLayers[LAYER_COUNT];
 	GLTexture* mMoon;
 	GLTexture* mGround;
+	GLTexture* mMoonBlack;
+	GLTexture* mGroundBlack;
 
 public:
 	static BackgroundClouds* Instance();
@@ -17,6 +20,7 @@ public:
 
 	void Update();
 	void Render();
+	void RenderBlack();
 
 private:
 	BackgroundClouds();

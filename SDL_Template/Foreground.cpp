@@ -178,3 +178,11 @@ void Foreground::Render() {
 	}*/
 }
 
+
+void Foreground::RenderWhite() {
+
+	mBlackPillar1->Render();
+	mBlackPillar2->Render();
+	
+}
+

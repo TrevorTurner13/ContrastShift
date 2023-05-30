@@ -18,17 +18,6 @@ void Player::HandleMovement() {
 		mMovingLeft = false;
 		mMovingRight = false;
 	}
-	if (mInput->KeyPressed(SDL_SCANCODE_LSHIFT)) {
-		if (mIsWhite == true) {
-			glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-			mIsWhite = false;
-		}
-		else {
-			glClearColor(250.0f, 250.0f, 250.0f, 1.0f);
-			mIsWhite = true;
-		}
-
-	}
 
 	Vector2 pos = Position(Local);
 	/*if (pos.x < mMoveBounds.x) {

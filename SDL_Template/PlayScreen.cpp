@@ -1,16 +1,17 @@
 #include "PlayScreen.h"
 
-
-
 PlayScreen::PlayScreen() {
 	mTimer = Timer::Instance();
 	mAudio = AudioManager::Instance();
+	mInput = InputManager::Instance();
 
 	delete mPlayer;
 	mPlayer = new Player();
 	mPlayer->Parent(this);
 	mPlayer->Position(Graphics::SCREEN_WIDTH * 0.4f, Graphics::SCREEN_HEIGHT * 0.8f);
 	mPlayer->Active(true);
+
+	mIsWhite = false;
 }
 
 PlayScreen::~PlayScreen() {
@@ -27,4 +28,8 @@ void PlayScreen::Update() {
 
 void PlayScreen::Render() {
 	mPlayer->Render();
+}
+
+void PlayScreen::SetIsWhite(bool shift) {
+	mIsWhite = shift;
 }

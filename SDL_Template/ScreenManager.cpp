@@ -32,15 +32,31 @@ void ScreenManager::Update() {
 		break;
 	case Play:
 		mPlayScreen->Update();
+
+		if (mInput->KeyPressed(SDL_SCANCODE_LSHIFT)) {
+			if (mPlayScreen->GetIsWhite()) {
+				glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+				mPlayScreen->SetIsWhite(false);
+			}
+			else {
+				glClearColor(250.0f, 250.0f, 250.0f, 1.0f);
+				mPlayScreen->SetIsWhite(true);
+			}
+
+		}
 		break;
 	}
 }
 
 void ScreenManager::Render() { 
-
-	mClouds->Render();
-	mForeground->Render();
-
+	if (mPlayScreen->GetIsWhite()) {
+		mClouds->RenderBlack();
+		mForeground->RenderWhite();
+	}
+	else {
+		mClouds->Render();
+		mForeground->Render();
+	}
 	switch (mCurrentScreen) {
 	case Start:
 		mGuy->Render();
