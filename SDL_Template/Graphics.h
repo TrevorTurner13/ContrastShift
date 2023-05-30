@@ -26,9 +26,9 @@ namespace SDLFramework {
 			GL
 		};
 
-		static const short SCREEN_WIDTH = 1024;
-		static const short SCREEN_HEIGHT = 896;
-		const char* WINDOW_TITLE = "Galaga";
+		static const short SCREEN_WIDTH = 1920;
+		static const short SCREEN_HEIGHT = 1080;
+		const char* WINDOW_TITLE = "Contrast Shift";
 
 	protected:
 		static Graphics* sInstance;

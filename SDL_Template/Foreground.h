@@ -10,14 +10,16 @@ using namespace SDLFramework;
 class Foreground : public GameEntity {
 private:
 	static Foreground* sInstance;
-	GLTexture* mPillar;
+	GLTexture* mPillar1;
+	GLTexture* mPillar2;
 	GLTexture* mBlock;
-	GLTexture* mLedge;
-	//GLTexture* mLedge1;
+	
+	GLTexture* mLedge1;
+	GLTexture* mLedge2;
 	GLTexture* mSword1;
 	GLTexture* mSword2;
 	GLTexture* mSword3;
-
+	
 	Player* mPlayer;
 
 public:

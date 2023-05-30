@@ -56,7 +56,7 @@ ScreenManager::ScreenManager() {
 	mPlayScreen = new PlayScreen();
 
 	mGuy = new AnimatedGLTexture("Character Sprite.png", 0, 1936, 320, 320, 6, 1.0f, Animation::Layouts::Horizontal);
-	mGuy->Position(300.0f, 496.0f);
+	mGuy->Position(300.0f, 596.0f);
 	mGuy->Scale(Vector2(0.5f, 0.5f));
 	mGuy->SetWrapMode(Animation::WrapModes::Loop);
 

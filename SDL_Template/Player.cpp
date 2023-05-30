@@ -3,12 +3,12 @@
 #include "PhysicsManager.h"
 
 void Player::HandleMovement() {
-	if (mInput->KeyDown(SDL_SCANCODE_RIGHT)) {
+	if (mInput->KeyDown(SDL_SCANCODE_D)) {
 		Translate(Vec2_Right * mMoveSpeed * mTimer->DeltaTime(), World);
 		mMovingLeft = false;
 		mMovingRight = true;
 	}
-	else if (mInput->KeyDown(SDL_SCANCODE_LEFT)) {
+	else if (mInput->KeyDown(SDL_SCANCODE_A)) {
 		Translate(-Vec2_Right * mMoveSpeed * mTimer->DeltaTime(), World);
 		mMovingLeft = true; 
 		mMovingRight = false;
@@ -58,13 +58,13 @@ Player::Player() {
 
 	mGuy = new AnimatedGLTexture("Character Sprite.png", 0, 2560, 320, 320, 6, 1.0f, Animation::Layouts::Horizontal);
 	mGuy->Parent(this);
-	mGuy->Position(Vector2(-110.0f, -222.0f));
+	mGuy->Position(-478.0f, -268.0f);
 	mGuy->Scale(Vector2(0.5f, 0.5f));
 	mGuy->SetWrapMode(Animation::WrapModes::Loop);
 
 	mGuyRunning = new AnimatedGLTexture("Character Sprite.png", 0, 2240, 320, 310, 6, 0.5f, Animation::Layouts::Horizontal);
 	mGuyRunning->Parent(this);
-	mGuyRunning->Position(Vector2(-110.0f, -230.0f));
+	mGuyRunning->Position(Vector2(-478.0f, -280.0f));
 	mGuyRunning->Scale(Vector2(0.5f, 0.5f));
 	mGuyRunning->SetWrapMode(Animation::WrapModes::Loop);
 
