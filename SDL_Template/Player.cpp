@@ -67,11 +67,23 @@ Player::Player() {
 	mGuy->Scale(Vector2(0.5f, 0.5f));
 	mGuy->SetWrapMode(Animation::WrapModes::Loop);
 
+	mGuyDark = new AnimatedGLTexture("Character Sprite.png", 0, 640, 320, 320, 6, 1.0f, Animation::Layouts::Horizontal);
+	mGuyDark->Parent(this);
+	mGuyDark->Position(mGuy->Position().x, mGuy->Position().y);
+	mGuyDark->Scale(Vector2(0.5f, 0.5f));
+	mGuyDark->SetWrapMode(Animation::WrapModes::Loop);
+
 	mGuyRunning = new AnimatedGLTexture("Character Sprite.png", 0, 2240, 320, 310, 6, 0.5f, Animation::Layouts::Horizontal);
 	mGuyRunning->Parent(this);
 	mGuyRunning->Position(Vector2(-478.0f, -280.0f));
 	mGuyRunning->Scale(Vector2(0.5f, 0.5f));
 	mGuyRunning->SetWrapMode(Animation::WrapModes::Loop);
+
+	mGuyRunningDark = new AnimatedGLTexture("Character Sprite.png", 0, 1280, 320, 310, 6, 0.5f, Animation::Layouts::Horizontal);
+	mGuyRunningDark->Parent(this);
+	mGuyRunningDark->Position(Vector2(mGuyRunning->Position().x, mGuyRunning->Position().y));
+	mGuyRunningDark->Scale(Vector2(0.5f, 0.5f));
+	mGuyRunningDark->SetWrapMode(Animation::WrapModes::Loop);
 
 	mMoveSpeed = 300.0f;
 	mMoveBounds = Vector2(0.0f, 800.0f);
@@ -171,14 +183,17 @@ void Player::Update() {
 		if (Active()) {
 			if (!mMovingLeft && !mMovingRight) {
 				mGuy->Update();
+				mGuyDark->Update();
 			}
 			else if (mMovingRight) {
 				mGuyRunning->Update();
+				mGuyRunningDark->Update();
 			}
 			else if (mMovingLeft) {
 				mGuyRunning->Update();
+				mGuyRunningDark->Update();
 			}
-			HandleMovement();
+			HandleMovement();   
 			HandleFiring();
 			HandleJumping();
 
@@ -203,6 +218,30 @@ void Player::Render() {
 		}
 		else if (mMovingLeft) {
 			mGuyRunning->RenderFlip();
+
+		}
+	}
+
+	/*for (int i = 0; i < MAX_BULLETS; ++i) {
+		mBullets[i]->Render();
+	}*/
+
+	PhysEntity::Render();
+}
+
+void Player::RenderDark() {
+	if (mVisible) {
+		if (mAnimating) {
+			mDeathAnimation->Render();
+		}
+		else if (!mMovingLeft && !mMovingRight) {
+			mGuyDark->Render();
+		}
+		else if (mMovingRight) {
+			mGuyRunningDark->Render();
+		}
+		else if (mMovingLeft) {
+			mGuyRunningDark->RenderFlip();
 
 		}
 	}

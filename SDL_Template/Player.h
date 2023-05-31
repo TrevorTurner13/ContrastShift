@@ -31,7 +31,11 @@ private:
 	int mLives;
 
 	AnimatedGLTexture* mGuy;
+	AnimatedGLTexture* mGuyDark;
+
 	AnimatedGLTexture* mGuyRunning;
+	AnimatedGLTexture* mGuyRunningDark;
+
 	AnimatedGLTexture* mDeathAnimation;
 
 	float mMoveSpeed;
@@ -65,5 +69,6 @@ public:
 
 	void Update() override;
 	void Render() override;
+	void RenderDark();
 };
 #endif

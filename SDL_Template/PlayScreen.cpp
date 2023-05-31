@@ -27,7 +27,12 @@ void PlayScreen::Update() {
 }
 
 void PlayScreen::Render() {
-	mPlayer->Render();
+	if (!mIsWhite) {
+		mPlayer->Render();
+	}
+	else {
+		mPlayer->RenderDark();
+	}
 }
 
 void PlayScreen::SetIsWhite(bool shift) {
