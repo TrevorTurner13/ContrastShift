@@ -8,6 +8,16 @@ namespace SDLFramework {
 #define DEG_TO_RAD PI / 180.0f
 #define RAD_TO_DEG 180.0f / PI
 
+	struct Rect {
+		float x;
+		float y;
+		float w;
+		float h;
+
+		Rect(float _x = 0.0f, float _y = 0.0f, float _w = 0.0f, float _h = 0.0f)
+			: x{ _x }, y{ _y }, w{ _w }, h{ _h } {}
+	};
+
 	struct Vector2 {
 		float x;
 		float y;

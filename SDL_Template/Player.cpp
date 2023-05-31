@@ -2,6 +2,9 @@
 #include "BoxCollider.h"
 #include "PhysicsManager.h"
 
+Rect ledge1(400.0f, 945.0f, 520.0f, 45.5f);
+Rect ledge2(1500.0f, 550.0f, 440.0f, 38.5f);
+Rect block1(265.0f, 793.0f, 321.1f, 214.5f);
 
 void Player::HandleMovement() {
 	if (mInput->KeyDown(SDL_SCANCODE_D)) {
@@ -204,6 +207,17 @@ void Player::Update() {
 	/*for (int i = 0; i < MAX_BULLETS; ++i) {
 		mBullets[i]->Update();
 	}*/
+	
+	if (mIsGrounded &&
+		!CheckCollision(ledge1.x, ledge1.y, ledge1.w, ledge1.h, Position().x - mGuy->ScaledDimensions().x / 2, Position().y - mGuy->ScaledDimensions().y / 2, 160, 160)) {
+		mIsGrounded = false;
+	}
+	//ledge 1
+	if (CheckCollision(ledge1.x, ledge1.y, ledge1.w, ledge1.h, Position().x - mGuy->ScaledDimensions().x / 2, Position().y - mGuy->ScaledDimensions().y / 2, 160, 160) && (!mInput->KeyDown(SDL_SCANCODE_SPACE))) {
+		//Position(Position().x,(ledge1.x) - mGuy->ScaledDimensions().y / 2 + 1);
+		mIsGrounded = true;
+		mVelocity.y = 0;
+	}
 }
 
 void Player::Render() {
@@ -259,4 +273,18 @@ void Player::HandleJumping() {
 		mVelocity.y = mJumpPower.y;
 		mIsGrounded = false;
 	}
+}
+bool Player::CheckCollision(float x1, float y1, float w1, float h1, float x2, float y2, float w2, float h2) {
+	float obj1_left = x1;
+	float obj1_right = x1 + w1;
+	float obj1_top = y1;
+	float obj1_bottom = y1 + h1;
+
+
+
+	float obj2_left = x2;
+	float obj2_right = x2 + w2;
+	float obj2_top = y2;
+	float obj2_bottom = y2 + h2;
+	return obj1_right > obj2_left && obj1_left < obj2_right&& obj1_bottom > obj2_top && obj1_top < obj2_bottom;
 }
