@@ -13,7 +13,8 @@ private:
 	GLTexture* mPillar1;
 	GLTexture* mPillar2;
 
-	GLTexture* mBlock;
+	GLTexture* mBlock1;
+	GLTexture* mBlock2;
 	
 	GLTexture* mLedge1;
 	GLTexture* mLedge2;
@@ -28,6 +29,7 @@ private:
 	GLTexture* mBlackPillar2;
 
 	GLTexture* mBlackBlock;
+	GLTexture* mBlackBlock2;
 
 	GLTexture* mBlackLedge1;
 	GLTexture* mBlackLedge2;
