@@ -6,7 +6,7 @@
 
 using namespace SDLFramework;
 
-class Foreground : public GameEntity {
+class Foreground : public PhysEntity {
 private:
 	static Foreground* sInstance;
 	//white elements

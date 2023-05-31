@@ -1,4 +1,7 @@
 #include "Foreground.h"
+#include "PhysEntity.h"
+#include "BoxCollider.h"
+#include "PhysicsManager.h"
 
 Foreground* Foreground::sInstance = nullptr;
 
@@ -43,7 +46,9 @@ Foreground::Foreground() {
 	mLedge1->Parent(this);
 	mLedge1->Position(250.0f, 665.0f);
 	mLedge1->Scale(Vector2(0.65f, 0.65f));
-
+	AddCollider(new BoxCollider(Vector2(520.0f, 45.5f)), Vector2(250.0f, 665.0f));
+	mId = PhysicsManager::Instance()->RegisterEntity(this, PhysicsManager::CollisionLayers::Friendly);
+	
 	mLedge2 = new GLTexture("PillarPlatform.png", 0, 0, 800, 70);
 	mLedge2->Parent(this);
 	mLedge2->Position(1500.0f, 550.0f);
