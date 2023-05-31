@@ -66,7 +66,7 @@ Player::Player() {
 
 	mGuy = new AnimatedGLTexture("Character Sprite.png", 0, 2560, 320, 320, 6, 1.0f, Animation::Layouts::Horizontal);
 	mGuy->Parent(this);
-	mGuy->Position(-478.0f, -268.0f);
+	mGuy->Position(-478.0f, -275.0f);
 	mGuy->Scale(Vector2(0.5f, 0.5f));
 	mGuy->SetWrapMode(Animation::WrapModes::Loop);
 
@@ -87,6 +87,12 @@ Player::Player() {
 	mGuyRunningDark->Position(Vector2(mGuyRunning->Position().x, mGuyRunning->Position().y));
 	mGuyRunningDark->Scale(Vector2(0.5f, 0.5f));
 	mGuyRunningDark->SetWrapMode(Animation::WrapModes::Loop);
+	
+	mGuyJumpingDark = new AnimatedGLTexture("Character Sprite.png", 0, 2880, 320, 310, 6, 2.0f, Animation::Layouts::Horizontal);
+	mGuyJumpingDark->Parent(this);
+	mGuyJumpingDark->Position(Vector2(mGuyRunning->Position().x, mGuyRunning->Position().y));
+	mGuyJumpingDark->Scale(Vector2(0.5f, 0.5f));
+	mGuyJumpingDark->SetWrapMode(Animation::WrapModes::Loop);
 
 	mMoveSpeed = 300.0f;
 	mMoveBounds = Vector2(0.0f, 800.0f);
@@ -185,7 +191,7 @@ void Player::Update() {
 	}
 	else {
 		if (Active()) {
-			if (!mMovingLeft && !mMovingRight) {
+			if (!mMovingLeft && !mMovingRight && mIsGrounded) {
 				mGuy->Update();
 				mGuyDark->Update();
 			}
@@ -197,6 +203,8 @@ void Player::Update() {
 				mGuyRunning->Update();
 				mGuyRunningDark->Update();
 			}
+			
+
 			HandleMovement();   
 			HandleFiring();
 			HandleJumping();
@@ -259,6 +267,8 @@ void Player::RenderDark() {
 			mGuyRunningDark->RenderFlip();
 
 		}
+		
+		
 	}
 
 	/*for (int i = 0; i < MAX_BULLETS; ++i) {
