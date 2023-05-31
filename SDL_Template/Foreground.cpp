@@ -188,13 +188,17 @@ void Foreground::Update() {
 void Foreground::Render() {
 		mPillar1->Render();
 		mPillar2->Render();
+
 		mBlock1->Render();
 		mBlock2->Render();
+
 		mLedge1->Render();
 		mLedge2->Render();
+
 		mSword1->Render();
 		mSword2->Render();
 		mSword3->Render();
+
 		mFlag1->Render();
 		
 }
