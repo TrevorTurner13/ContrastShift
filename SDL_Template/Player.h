@@ -32,9 +32,11 @@ private:
 
 	AnimatedGLTexture* mGuy;
 	AnimatedGLTexture* mGuyDark;
+	AnimatedGLTexture* mGuyJumping;
 
 	AnimatedGLTexture* mGuyRunning;
 	AnimatedGLTexture* mGuyRunningDark;
+	AnimatedGLTexture* mGuyJumpingDark;
 
 	AnimatedGLTexture* mDeathAnimation;
 
