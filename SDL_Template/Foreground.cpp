@@ -46,8 +46,7 @@ Foreground::Foreground() {
 	mLedge1->Parent(this);
 	mLedge1->Position(250.0f, 665.0f);
 	mLedge1->Scale(Vector2(0.65f, 0.65f));
-	AddCollider(new BoxCollider(Vector2(520.0f, 45.5f)), Vector2(250.0f, 665.0f));
-	mId = PhysicsManager::Instance()->RegisterEntity(this, PhysicsManager::CollisionLayers::Friendly);
+	AddCollider(new BoxCollider(mLedge1->ScaledDimensions()));
 	
 	mLedge2 = new GLTexture("PillarPlatform.png", 0, 0, 800, 70);
 	mLedge2->Parent(this);
@@ -201,6 +200,7 @@ void Foreground::Render() {
 		mSword3->Render();
 
 		mFlag1->Render();
+		
 }
 
 
