@@ -224,7 +224,7 @@ void Player::Update() {
 	}
 	//ledge 1
 	if (CheckCollision(ledge1.x, ledge1.y, ledge1.w, ledge1.h, Position().x - mGuy->ScaledDimensions().x / 2, Position().y - mGuy->ScaledDimensions().y / 2, 160, 160) && (!mInput->KeyDown(SDL_SCANCODE_SPACE))) {
-		//Position(Position().x,(ledge1.x) - mGuy->ScaledDimensions().y / 2 + 1);
+		Position(Position().x, ledge1.y - mGuy->ScaledDimensions().y / 2 + 1);
 		mIsGrounded = true;
 		mVelocity.y = 0;
 	}
