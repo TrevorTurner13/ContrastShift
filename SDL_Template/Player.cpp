@@ -66,8 +66,8 @@ Player::Player() {
 	mIsJumping = false;
 	mIsWhite = false;
 	mIsGrounded = true;
-	mGravity = Vector2(0.0, 15);
-	mJumpPower = Vector2(0.0, -10);
+	mGravity = Vector2(0.0, 200);
+	mJumpPower = Vector2(0.0, -45);
 
 	mScore = 0;
 	mLives = 2;
