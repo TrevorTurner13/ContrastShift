@@ -2,7 +2,7 @@
 #include "BoxCollider.h"
 #include "PhysicsManager.h"
 
-Rect ledge1(400.0f, 945.0f, 520.0f, 45.5f);
+Rect ledge1(400.0f, 945.0f, 520.0f, 6.0f);
 Rect ledge2(1500.0f, 550.0f, 440.0f, 38.5f);
 Rect block1(265.0f, 793.0f, 321.1f, 214.5f);
 
