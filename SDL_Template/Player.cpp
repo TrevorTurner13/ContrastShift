@@ -3,8 +3,9 @@
 #include "PhysicsManager.h"
 
 Rect ledge1(400.0f, 945.0f, 520.0f, 6.0f);
-Rect ledge2(1500.0f, 550.0f, 440.0f, 38.5f);
+Rect ledge2(1500.0f, 550.0f, 440.0f, 5.f);
 Rect block1(265.0f, 793.0f, 321.1f, 214.5f);
+Rect ground(300, 1200, 4000, 400);
 
 void Player::HandleMovement() {
 	if (mInput->KeyDown(SDL_SCANCODE_D)) {
@@ -217,11 +218,18 @@ void Player::Update() {
 	}*/
 	
 	if (mIsGrounded &&
-		!CheckCollision(ledge1.x, ledge1.y, ledge1.w, ledge1.h, Position().x - mGuy->ScaledDimensions().x / 2, Position().y - mGuy->ScaledDimensions().y / 2, 160, 160)) {
+		!CheckCollision(ledge1.x, ledge1.y, ledge1.w, ledge1.h, Position().x - mGuy->ScaledDimensions().x / 2, Position().y - mGuy->ScaledDimensions().y / 2, 160, 160)&& 
+		!CheckCollision(ground.x, ground.y, ground.w, ground.h, Position().x - mGuy->ScaledDimensions().x / 2, Position().y - mGuy->ScaledDimensions().y / 2, 160, 160)) {
 		mIsGrounded = false;
 	}
 	//ledge 1
 	if (CheckCollision(ledge1.x, ledge1.y, ledge1.w, ledge1.h, Position().x - mGuy->ScaledDimensions().x / 2, Position().y - mGuy->ScaledDimensions().y / 2, 160, 160) && (!mInput->KeyDown(SDL_SCANCODE_SPACE))) {
+		//Position(Position().x,(ledge1.x) - mGuy->ScaledDimensions().y / 2 + 1);
+		mIsGrounded = true;
+		mVelocity.y = 0;
+	}
+	//ground
+	if (CheckCollision(ground.x, ground.y, ground.w, ground.h, Position().x - mGuy->ScaledDimensions().x / 2, Position().y - mGuy->ScaledDimensions().y / 2, 160, 160) && (!mInput->KeyDown(SDL_SCANCODE_SPACE))) {
 		//Position(Position().x,(ledge1.x) - mGuy->ScaledDimensions().y / 2 + 1);
 		mIsGrounded = true;
 		mVelocity.y = 0;
