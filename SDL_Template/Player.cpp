@@ -243,18 +243,37 @@ void Player::Update() {
 		!CheckCollision(ledge1.x, ledge1.y, ledge1.w, ledge1.h, Position().x - mGuy->ScaledDimensions().x / 2, Position().y - mGuy->ScaledDimensions().y / 2, 160, 160)&& 
 		!CheckCollision(ground.x, ground.y, ground.w, ground.h, Position().x - mGuy->ScaledDimensions().x / 2, Position().y - mGuy->ScaledDimensions().y / 2, 160, 160)) {
 		mIsGrounded = false;
+		
 	}
 	//ledge 1
+
+	Vector2 prevPosition = Position() - mVelocity;
 	if (CheckCollision(ledge1.x, ledge1.y, ledge1.w, ledge1.h, Position().x - mGuy->ScaledDimensions().x / 2, Position().y - mGuy->ScaledDimensions().y / 2, 160, 160) && (!mInput->KeyDown(SDL_SCANCODE_SPACE))) {
-		Position(Position().x, ledge1.y - mGuy->ScaledDimensions().y / 2 + 1);
-		mIsGrounded = true;
-		mVelocity.y = 0;
+		// Check if the player hits the bottom of the platform
+		if (Position().y + mGuy->ScaledDimensions().y / 2 > ledge1.y + ledge1.h) {
+			float bounceForce = -mVelocity.y * 0.5; // Adjust the bounce factor as needed
+			mVelocity.y = bounceForce;
+			Position(Position().x, ledge1.y + ledge1.h + mGuy->ScaledDimensions().y / 2 + 1);
+			mIsGrounded = true;
+		}
+		// Check if the player hits the top of the platform
+		else if (Position().y - mGuy->ScaledDimensions().y / 2 < ledge1.y) {
+			mIsGrounded = true;
+			mVelocity.y = 0;
+			if (prevPosition.y + mGuy->ScaledDimensions().y / 2 > ledge1.y + ledge1.h) {
+				Position(Position().x, ledge1.y - mGuy->ScaledDimensions().y / 2 - 1 );
+			}
+		}
 	}
+	
 	//ground
 	if (CheckCollision(ground.x, ground.y, ground.w, ground.h, Position().x - mGuy->ScaledDimensions().x / 2, Position().y - mGuy->ScaledDimensions().y / 2, 160, 160) && (!mInput->KeyDown(SDL_SCANCODE_SPACE))) {
 		//Position(Position().x,(ledge1.x) - mGuy->ScaledDimensions().y / 2 + 1);
 		mIsGrounded = true;
 		mVelocity.y = 0;
+	}
+	if (mVelocity.y > 7.0f) {
+		mVelocity.y = 7.0f;
 	}
 }
 
