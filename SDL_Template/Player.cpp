@@ -11,12 +11,16 @@ void Player::HandleMovement() {
 	if (mInput->KeyDown(SDL_SCANCODE_D)) {
 		Translate(Vec2_Right * mMoveSpeed * mTimer->DeltaTime(), World);
 		mMovingLeft = false;
+		mIsFacingLeft = false;
 		mMovingRight = true;
+		mIsFacingRight = true;
 	}
 	else if (mInput->KeyDown(SDL_SCANCODE_A)) {
 		Translate(-Vec2_Right * mMoveSpeed * mTimer->DeltaTime(), World);
-		mMovingLeft = true; 
 		mMovingRight = false;
+		mIsFacingRight = false;
+		mMovingLeft = true;
+		mIsFacingLeft = true;
 	}
 	else {
 		mMovingLeft = false;
@@ -27,8 +31,9 @@ void Player::HandleMovement() {
 	/*if (pos.x < mMoveBounds.x) {
 		pos.x = mMoveBounds.x;
 	}
-	else if (pos.x > mMoveBounds.y) {
-		pos.x = mMoveBounds.y;
+	else if (pos.y >= mMoveBounds.y) {
+		pos.y = mMoveBounds.y;
+		mIsGrounded = true;
 	}*/
 
 	Position(pos);
@@ -55,12 +60,14 @@ Player::Player() {
 	mAnimating = false;
 	mWasHit = false;
 	mMovingRight = false;
+	mIsFacingRight = true;
+	mIsFacingLeft = false;
 	mMovingLeft = false;
 	mIsJumping = false;
 	mIsWhite = false;
 	mIsGrounded = true;
-	mGravity = Vector2(0.0, 20);
-	mJumpPower = Vector2(0.0, -6);
+	mGravity = Vector2(0.0, 15);
+	mJumpPower = Vector2(0.0, -10);
 
 	mScore = 0;
 	mLives = 2;
@@ -77,26 +84,32 @@ Player::Player() {
 	mGuyDark->Scale(Vector2(0.5f, 0.5f));
 	mGuyDark->SetWrapMode(Animation::WrapModes::Loop);
 
-	mGuyRunning = new AnimatedGLTexture("Character Sprite.png", 0, 2240, 320, 310, 6, 0.5f, Animation::Layouts::Horizontal);
+	mGuyRunning = new AnimatedGLTexture("Character Sprite.png", 0, 2240, 320, 320, 6, 0.5f, Animation::Layouts::Horizontal);
 	mGuyRunning->Parent(this);
 	mGuyRunning->Position(Vector2(-478.0f, -280.0f));
 	mGuyRunning->Scale(Vector2(0.5f, 0.5f));
 	mGuyRunning->SetWrapMode(Animation::WrapModes::Loop);
 
-	mGuyRunningDark = new AnimatedGLTexture("Character Sprite.png", 0, 1280, 320, 310, 6, 0.5f, Animation::Layouts::Horizontal);
+	mGuyRunningDark = new AnimatedGLTexture("Character Sprite.png", 0, 1280, 320, 320, 6, 0.5f, Animation::Layouts::Horizontal);
 	mGuyRunningDark->Parent(this);
 	mGuyRunningDark->Position(Vector2(mGuyRunning->Position().x, mGuyRunning->Position().y));
 	mGuyRunningDark->Scale(Vector2(0.5f, 0.5f));
 	mGuyRunningDark->SetWrapMode(Animation::WrapModes::Loop);
+
+	mGuyJumping = new AnimatedGLTexture("Character Sprite.png", 0, 3200, 320, 320, 6, 1.0f, Animation::Layouts::Horizontal);
+	mGuyJumping->Parent(this);
+	mGuyJumping->Position(Vector2(mGuyRunning->Position().x, mGuyRunning->Position().y));
+	mGuyJumping->Scale(Vector2(0.5f, 0.5f));
+	mGuyJumping->SetWrapMode(Animation::WrapModes::Once);
 	
-	mGuyJumpingDark = new AnimatedGLTexture("Character Sprite.png", 0, 2880, 320, 310, 6, 2.0f, Animation::Layouts::Horizontal);
+	mGuyJumpingDark = new AnimatedGLTexture("Character Sprite.png", 0, 2880, 320, 320, 6, 1.0f, Animation::Layouts::Horizontal);
 	mGuyJumpingDark->Parent(this);
 	mGuyJumpingDark->Position(Vector2(mGuyRunning->Position().x, mGuyRunning->Position().y));
 	mGuyJumpingDark->Scale(Vector2(0.5f, 0.5f));
-	mGuyJumpingDark->SetWrapMode(Animation::WrapModes::Loop);
+	mGuyJumpingDark->SetWrapMode(Animation::WrapModes::Once);
 
-	mMoveSpeed = 300.0f;
-	mMoveBounds = Vector2(0.0f, 800.0f);
+	mMoveSpeed = 400.0f;
+	mMoveBounds = Vector2(600.0f, 1100.0f);
 
 	mDeathAnimation = new AnimatedGLTexture("PlayerExplosion.png", 0, 0, 128, 128, 4, 1.0f, Animation::Layouts::Horizontal);
 	mDeathAnimation->Parent(this);
@@ -204,6 +217,15 @@ void Player::Update() {
 				mGuyRunning->Update();
 				mGuyRunningDark->Update();
 			}
+			if (!mIsGrounded) {
+				mGuyJumping->Update();
+				mGuyJumpingDark->Update();
+			}
+		
+			if (mIsGrounded) {
+				mGuyJumping->ResetAnimation();
+				mGuyJumpingDark->ResetAnimation();
+			}
 			
 
 			HandleMovement();   
@@ -241,16 +263,27 @@ void Player::Render() {
 		if (mAnimating) {
 			mDeathAnimation->Render();
 		}
-		else if (!mMovingLeft && !mMovingRight) {
+		else if (!mMovingLeft && !mMovingRight && mIsGrounded && mIsFacingRight) {
 			mGuy->Render();
 		}
-		else if (mMovingRight) {
+		else if (!mMovingLeft && !mMovingRight && mIsGrounded && mIsFacingLeft) {
+			mGuy->RenderFlip();
+		}
+		else if (mMovingRight && mIsGrounded) {
 			mGuyRunning->Render();
 		}
-		else if (mMovingLeft) {
+		else if (mMovingLeft && mIsGrounded) {
 			mGuyRunning->RenderFlip();
 
 		}
+		else if (!mIsGrounded && mIsFacingLeft) {
+			mGuyJumping->RenderFlip();
+		}
+		else {
+			mGuyJumping->Render();
+		}
+
+		
 	}
 
 	/*for (int i = 0; i < MAX_BULLETS; ++i) {
@@ -265,16 +298,27 @@ void Player::RenderDark() {
 		if (mAnimating) {
 			mDeathAnimation->Render();
 		}
-		else if (!mMovingLeft && !mMovingRight) {
+		else if (!mMovingLeft && !mMovingRight && mIsGrounded && mIsFacingRight) {
 			mGuyDark->Render();
 		}
-		else if (mMovingRight) {
+		else if (!mMovingLeft && !mMovingRight && mIsGrounded && mIsFacingLeft) {
+			mGuyDark->RenderFlip();
+		}
+		else if (mMovingRight && mIsGrounded) {
 			mGuyRunningDark->Render();
 		}
-		else if (mMovingLeft) {
+		else if (mMovingLeft && mIsGrounded) {
 			mGuyRunningDark->RenderFlip();
 
 		}
+		else if (!mIsGrounded && mIsFacingLeft) {
+			mGuyJumpingDark->RenderFlip();
+		}
+		else {
+			mGuyJumpingDark->Render();
+		}
+		 
+		
 		
 		
 	}
@@ -287,7 +331,7 @@ void Player::RenderDark() {
 }
 
 void Player::HandleJumping() {
-	if (mInput->KeyDown(SDL_SCANCODE_SPACE)) {
+	if (mInput->KeyPressed(SDL_SCANCODE_SPACE)) {
 		mVelocity.y = mJumpPower.y;
 		mIsGrounded = false;
 	}

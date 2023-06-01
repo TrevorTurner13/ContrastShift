@@ -17,7 +17,9 @@ private:
 	bool mAnimating;
 	bool mWasHit;
 	bool mMovingRight;
+	bool mIsFacingRight;
 	bool mMovingLeft;
+	bool mIsFacingLeft;
 	bool mIsJumping;
 	bool mIsWhite;
 	bool mIsGrounded;
