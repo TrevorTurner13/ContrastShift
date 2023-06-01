@@ -25,6 +25,7 @@ public:
 	static ScreenManager * Instance();
 	static void Release();
 
+
 	void Update();
 	void Render();
 

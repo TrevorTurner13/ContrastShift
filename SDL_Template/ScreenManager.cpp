@@ -18,14 +18,13 @@ void ScreenManager::Release() {
 void ScreenManager::Update() {
 
 	mClouds->Update();
-	mForeground->Update();
-
+	
 	switch (mCurrentScreen) {
 	case Start:
 		mGuy->Update();
+		mForeground->Update();
 		mStartScreen->Update();
 		
-
 		if (mInput->KeyPressed(SDL_SCANCODE_RETURN)) {
 			mCurrentScreen = Play;
 		}
@@ -51,17 +50,17 @@ void ScreenManager::Update() {
 void ScreenManager::Render() { 
 	if (mPlayScreen->GetIsWhite()) {
 		mClouds->RenderBlack();
-		mForeground->RenderWhite();
+		//mForeground->RenderWhite();
 	}
 	else {
 		mClouds->Render();
-		mForeground->Render();
+		//mForeground->Render();
 	}
 	switch (mCurrentScreen) {
 	case Start:
+		mForeground->Render();
 		mGuy->Render();
 		mStartScreen->Render();
-		
 		break;
 	case Play:
 		mPlayScreen->Render();

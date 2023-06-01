@@ -20,6 +20,14 @@ void Foreground::Release() {
 
 Foreground::Foreground() {
 
+	mGround = new GLTexture("Sprite-0017.png", 0, 0, 1000, 400);
+	mGround->Position(300.0f, 1100.0f);
+	mGround->Scale(Vector2(4.0f, 1.0f));
+
+	mGroundBlack = new GLTexture("Black.png", 0, 0, 1000, 400);
+	mGroundBlack->Position(300.0f, 1100.0f);
+	mGroundBlack->Scale(Vector2(4.0f, 1.0f));
+
 	
 	// white elements
 	mPillar1 = new GLTexture("Pillarlarge.png", 0, 0, 480, 960);
@@ -177,43 +185,48 @@ Foreground::~Foreground() {
 
 	delete mBlackFlag1;
 	mBlackFlag1 = nullptr;
+
+	delete mGround;
+	mGround = nullptr;
 	
 }
 
 void Foreground::Update() {
-
 	mFlag1->Update();
 }
 
 void Foreground::Render() {
-		mPillar1->Render();
-		mPillar2->Render();
+	mGround->Render();
 
-		mBlock1->Render();
-		mBlock2->Render();
+	mPillar1->Render();
+	mPillar2->Render();
 
-		mLedge1->Render();
-		mLedge2->Render();
+	mBlock1->Render();
+	mBlock2->Render();
 
-		mSword1->Render();
-		mSword2->Render();
-		mSword3->Render();
+	mLedge1->Render();
+	mLedge2->Render();
 
-		mFlag1->Render();
-		
+	mSword1->Render();
+	mSword2->Render();
+	mSword3->Render();
+
+	mFlag1->Render();	
 }
 
 
 void Foreground::RenderWhite() {
+	mGroundBlack->Render();
 
 	mBlackPillar1->Render();
 	mBlackPillar2->Render();
+
 	mBlackBlock2->Render();
+
 	mBlackLedge1->Render();
 
 	mBlackSword1->Render();
 	mBlackSword2->Render();
-	mBlackSword3->Render();
-	
+	mBlackSword3->Render();	
 }
 

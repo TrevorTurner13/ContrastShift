@@ -28,6 +28,7 @@ private:
 	Vector2 mVelocity;
 	Vector2 mGravity;
 	Vector2 mJumpPower;
+	Vector2 mLastPosition;
 
 	int mScore;
 	int mLives;
@@ -40,10 +41,14 @@ private:
 	AnimatedGLTexture* mGuyRunningDark;
 	AnimatedGLTexture* mGuyJumpingDark;
 
+	AnimatedGLTexture* mCurrentTexture;
+	AnimatedGLTexture* mCurrentDarkTexture;
+
 	AnimatedGLTexture* mDeathAnimation;
 
 	float mMoveSpeed;
-	Vector2 mMoveBounds;
+	Vector2 mMoveBoundsLeft;
+	Vector2 mMoveBoundsRight;
 
 	static const int MAX_BULLETS = 2;
 	//Bullet* mBullets[MAX_BULLETS];
@@ -70,8 +75,13 @@ public:
 	void Hit(PhysEntity* other) override;
 
 	bool WasHit();
+	bool GetIsGrounded() { return mIsGrounded; }
+	void SetIsGrounded(bool isGrounded);
+	void SetVelocity(Vector2 velocity);
 
-	bool CheckCollision(float x1, float y1, float w1, float h1, float x2, float y2, float w2, float h2);
+	AnimatedGLTexture* GetCurrentTexture() { return mCurrentTexture; }
+	AnimatedGLTexture* GetCurrentDarkTexture() { return mCurrentDarkTexture; }
+	Vector2 GetLastPostion() { return mLastPosition; }
 
 	void Update() override;
 	void Render() override;

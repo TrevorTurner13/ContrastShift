@@ -2,10 +2,10 @@
 #include "BoxCollider.h"
 #include "PhysicsManager.h"
 
-Rect ledge1(400.0f, 945.0f, 520.0f, 6.0f);
-Rect ledge2(1500.0f, 550.0f, 440.0f, 5.f);
-Rect block1(265.0f, 793.0f, 321.1f, 214.5f);
-Rect ground(300, 1200, 4000, 400);
+//Rect ledge1(400.0f, 945.0f, 520.0f, 6.0f);
+//Rect ledge2(1500.0f, 550.0f, 440.0f, 5.f);
+//Rect block1(265.0f, 793.0f, 321.1f, 214.5f);
+//Rect ground(300, 1200, 4000, 400);
 
 void Player::HandleMovement() {
 	if (mInput->KeyDown(SDL_SCANCODE_D)) {
@@ -28,15 +28,25 @@ void Player::HandleMovement() {
 	}
 
 	Vector2 pos = Position(Local);
-	/*if (pos.x < mMoveBounds.x) {
-		pos.x = mMoveBounds.x;
+	
+	/*if (pos.x < mMoveBoundsLeft.x) {
+		pos.x = mMoveBoundsLeft.x;
 	}
-	else if (pos.y >= mMoveBounds.y) {
-		pos.y = mMoveBounds.y;
-		mIsGrounded = true;
+	else if (pos.x >= mMoveBoundsRight.x && pos.y > mMoveBoundsRight.y) {
+		pos.x = mMoveBoundsRight.x;		
 	}*/
+	
 
 	Position(pos);
+	mLastPosition = Position(Local);
+}
+
+void Player::SetIsGrounded(bool isGrounded) {
+	mIsGrounded = isGrounded;
+}
+
+void Player::SetVelocity(Vector2 velocity) {
+	mVelocity = velocity;
 }
 
 void Player::HandleFiring() {
@@ -66,8 +76,8 @@ Player::Player() {
 	mIsJumping = false;
 	mIsWhite = false;
 	mIsGrounded = true;
-	mGravity = Vector2(0.0, 200);
-	mJumpPower = Vector2(0.0, -45);
+	mGravity = Vector2(0.0, 25);
+	mJumpPower = Vector2(0.0, -15);
 
 	mScore = 0;
 	mLives = 2;
@@ -109,20 +119,15 @@ Player::Player() {
 	mGuyJumpingDark->SetWrapMode(Animation::WrapModes::Once);
 
 	mMoveSpeed = 400.0f;
-	mMoveBounds = Vector2(600.0f, 1100.0f);
+	mMoveBoundsLeft = Vector2(600.0f, 1100.0f);
+	mMoveBoundsRight = Vector2(2260.0f, 720.0f);
 
 	mDeathAnimation = new AnimatedGLTexture("PlayerExplosion.png", 0, 0, 128, 128, 4, 1.0f, Animation::Layouts::Horizontal);
 	mDeathAnimation->Parent(this);
 	mDeathAnimation->Position(Vec2_Zero);
 	mDeathAnimation->SetWrapMode(Animation::WrapModes::Once);
 
-	/*for (int i = 0; i < MAX_BULLETS; ++i) {
-		mBullets[i] = new Bullet(true);
-	}*/
-
-	//AddCollider(new BoxCollider(Vector2(16.0f, 67.0f)));
-	//AddCollider(new BoxCollider(Vector2(20.0f, 37.0f)), Vector2(18.0f, 10.0f));
-	//AddCollider(new BoxCollider(Vector2(20.0f, 37.0f)), Vector2(-18.0f, 10.0f));
+	mCurrentTexture = mGuy;
 	AddCollider(new BoxCollider(mGuy->Position()), mGuy->Scale());
 
 	mId = PhysicsManager::Instance()->RegisterEntity(this, PhysicsManager::CollisionLayers::Friendly);
@@ -192,6 +197,19 @@ void Player::Update() {
 
 	std::cout << mVelocity.y << std::endl;
 
+	if (!mMovingLeft && !mMovingRight && mIsGrounded && mIsFacingRight || !mMovingLeft && !mMovingRight && mIsGrounded && mIsFacingLeft) {
+		mCurrentTexture = mGuy;
+		mCurrentDarkTexture = mGuyDark;
+	}
+	else if (mMovingRight && mIsGrounded || mMovingLeft && mIsGrounded) {
+		mCurrentTexture = mGuyRunning;
+		mCurrentDarkTexture = mGuyRunningDark;
+	}
+	else if (!mIsGrounded && mIsFacingLeft || !mIsGrounded && mIsFacingRight) {
+		mCurrentTexture = mGuyJumping;
+		mCurrentDarkTexture = mGuyJumpingDark;
+	}
+
 	//Check for lNDING ON GROUND
 
 	if (mAnimating) {
@@ -205,30 +223,15 @@ void Player::Update() {
 	}
 	else {
 		if (Active()) {
-			if (!mMovingLeft && !mMovingRight && mIsGrounded) {
-				mGuy->Update();
-				mGuyDark->Update();
-			}
-			else if (mMovingRight) {
-				mGuyRunning->Update();
-				mGuyRunningDark->Update();
-			}
-			else if (mMovingLeft) {
-				mGuyRunning->Update();
-				mGuyRunningDark->Update();
-			}
-			if (!mIsGrounded) {
-				mGuyJumping->Update();
-				mGuyJumpingDark->Update();
-			}
-		
 			if (mIsGrounded) {
 				mGuyJumping->ResetAnimation();
 				mGuyJumpingDark->ResetAnimation();
 			}
-			
+			mCurrentTexture->Update();
+			mCurrentDarkTexture->Update();
 
-			HandleMovement();   
+
+			HandleMovement();
 			HandleFiring();
 			HandleJumping();
 
@@ -238,43 +241,24 @@ void Player::Update() {
 	/*for (int i = 0; i < MAX_BULLETS; ++i) {
 		mBullets[i]->Update();
 	}*/
-	
-	if (mIsGrounded &&
-		!CheckCollision(ledge1.x, ledge1.y, ledge1.w, ledge1.h, Position().x - mGuy->ScaledDimensions().x / 2, Position().y - mGuy->ScaledDimensions().y / 2, 160, 160)&& 
-		!CheckCollision(ground.x, ground.y, ground.w, ground.h, Position().x - mGuy->ScaledDimensions().x / 2, Position().y - mGuy->ScaledDimensions().y / 2, 160, 160)) {
-		mIsGrounded = false;
-		
-	}
-	//ledge 1
 
-	Vector2 prevPosition = Position() - mVelocity;
-	if (CheckCollision(ledge1.x, ledge1.y, ledge1.w, ledge1.h, Position().x - mGuy->ScaledDimensions().x / 2, Position().y - mGuy->ScaledDimensions().y / 2, 160, 160) && (!mInput->KeyDown(SDL_SCANCODE_SPACE))) {
-		// Check if the player hits the bottom of the platform
-		if (Position().y + mGuy->ScaledDimensions().y / 2 > ledge1.y + ledge1.h) {
-			float bounceForce = -mVelocity.y * 0.5; // Adjust the bounce factor as needed
-			mVelocity.y = bounceForce;
-			Position(Position().x, ledge1.y + ledge1.h + mGuy->ScaledDimensions().y / 2 + 1);
-			mIsGrounded = true;
-		}
-		// Check if the player hits the top of the platform
-		else if (Position().y - mGuy->ScaledDimensions().y / 2 < ledge1.y) {
-			mIsGrounded = true;
-			mVelocity.y = 0;
-			if (prevPosition.y + mGuy->ScaledDimensions().y / 2 > ledge1.y + ledge1.h) {
-				Position(Position().x, ledge1.y - mGuy->ScaledDimensions().y / 2 - 1 );
-			}
-		}
-	}
-	
-	//ground
-	if (CheckCollision(ground.x, ground.y, ground.w, ground.h, Position().x - mGuy->ScaledDimensions().x / 2, Position().y - mGuy->ScaledDimensions().y / 2, 160, 160) && (!mInput->KeyDown(SDL_SCANCODE_SPACE))) {
-		//Position(Position().x,(ledge1.x) - mGuy->ScaledDimensions().y / 2 + 1);
-		mIsGrounded = true;
-		mVelocity.y = 0;
-	}
-	if (mVelocity.y > 7.0f) {
-		mVelocity.y = 7.0f;
-	}
+	//if (mIsGrounded &&
+	//	!CheckCollision(ledge1.x, ledge1.y, ledge1.w, ledge1.h, Position().x - mGuy->ScaledDimensions().x / 2, Position().y - mGuy->ScaledDimensions().y / 2, 160, 160)&& 
+	//	!CheckCollision(ground.x, ground.y, ground.w, ground.h, Position().x - mGuy->ScaledDimensions().x / 2, Position().y - mGuy->ScaledDimensions().y / 2, 160, 160)) {
+	//	mIsGrounded = false;
+	//}
+	////ledge 1
+	//if (CheckCollision(ledge1.x, ledge1.y, ledge1.w, ledge1.h, Position().x - mGuy->ScaledDimensions().x / 2, Position().y - mGuy->ScaledDimensions().y / 2, 160, 160) && (!mInput->KeyDown(SDL_SCANCODE_SPACE))) {
+	//	//Position(Position().x,(ledge1.x) - mGuy->ScaledDimensions().y / 2 + 1);
+	//	mIsGrounded = true;
+	//	mVelocity.y = 0;
+	//}
+	////ground
+	//if (CheckCollision(ground.x, ground.y, ground.w, ground.h, Position().x - mGuy->ScaledDimensions().x / 2, Position().y - mGuy->ScaledDimensions().y / 2, 160, 160) && (!mInput->KeyDown(SDL_SCANCODE_SPACE))) {
+	//	//Position(Position().x,(ledge1.x) - mGuy->ScaledDimensions().y / 2 + 1);
+	//	mIsGrounded = true;
+	//	mVelocity.y = 0;
+	//}
 }
 
 void Player::Render() {
@@ -282,32 +266,17 @@ void Player::Render() {
 		if (mAnimating) {
 			mDeathAnimation->Render();
 		}
-		else if (!mMovingLeft && !mMovingRight && mIsGrounded && mIsFacingRight) {
-			mGuy->Render();
-		}
-		else if (!mMovingLeft && !mMovingRight && mIsGrounded && mIsFacingLeft) {
-			mGuy->RenderFlip();
-		}
-		else if (mMovingRight && mIsGrounded) {
-			mGuyRunning->Render();
-		}
-		else if (mMovingLeft && mIsGrounded) {
-			mGuyRunning->RenderFlip();
-
-		}
-		else if (!mIsGrounded && mIsFacingLeft) {
-			mGuyJumping->RenderFlip();
-		}
 		else {
-			mGuyJumping->Render();
+			if (mIsFacingRight) {
+				mCurrentTexture->Render();
+			}
+			else {
+				mCurrentTexture->RenderFlip();
+			}
 		}
 
 		
 	}
-
-	/*for (int i = 0; i < MAX_BULLETS; ++i) {
-		mBullets[i]->Render();
-	}*/
 
 	PhysEntity::Render();
 }
@@ -317,55 +286,24 @@ void Player::RenderDark() {
 		if (mAnimating) {
 			mDeathAnimation->Render();
 		}
-		else if (!mMovingLeft && !mMovingRight && mIsGrounded && mIsFacingRight) {
-			mGuyDark->Render();
-		}
-		else if (!mMovingLeft && !mMovingRight && mIsGrounded && mIsFacingLeft) {
-			mGuyDark->RenderFlip();
-		}
-		else if (mMovingRight && mIsGrounded) {
-			mGuyRunningDark->Render();
-		}
-		else if (mMovingLeft && mIsGrounded) {
-			mGuyRunningDark->RenderFlip();
-
-		}
-		else if (!mIsGrounded && mIsFacingLeft) {
-			mGuyJumpingDark->RenderFlip();
-		}
 		else {
-			mGuyJumpingDark->Render();
+			if (mIsFacingRight) {
+				mCurrentDarkTexture->Render();
+			}
+			else {
+				mCurrentDarkTexture->RenderFlip();
+			}
 		}
-		 
-		
-		
-		
-	}
 
-	/*for (int i = 0; i < MAX_BULLETS; ++i) {
-		mBullets[i]->Render();
-	}*/
+
+	}
 
 	PhysEntity::Render();
 }
 
 void Player::HandleJumping() {
-	if (mInput->KeyPressed(SDL_SCANCODE_SPACE)) {
+	if (mInput->KeyPressed(SDL_SCANCODE_SPACE)) {// && mIsGrounded) {
 		mVelocity.y = mJumpPower.y;
 		mIsGrounded = false;
 	}
-}
-bool Player::CheckCollision(float x1, float y1, float w1, float h1, float x2, float y2, float w2, float h2) {
-	float obj1_left = x1;
-	float obj1_right = x1 + w1;
-	float obj1_top = y1;
-	float obj1_bottom = y1 + h1;
-
-
-
-	float obj2_left = x2;
-	float obj2_right = x2 + w2;
-	float obj2_top = y2;
-	float obj2_bottom = y2 + h2;
-	return obj1_right > obj2_left && obj1_left < obj2_right&& obj1_bottom > obj2_top && obj1_top < obj2_bottom;
 }

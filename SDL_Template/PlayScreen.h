@@ -4,6 +4,7 @@
 #include "AudioManager.h"
 #include "InputManager.h"
 #include "Player.h"
+#include "Foreground.h"
 
 class PlayScreen : public GameEntity {
 private:
@@ -11,6 +12,7 @@ private:
 	AudioManager * mAudio;
 	InputManager* mInput;
 
+	Foreground* mForeground;
 	Player * mPlayer;
 
 	bool mIsWhite;
@@ -21,6 +23,8 @@ public:
 
 	bool GetIsWhite() { return mIsWhite; }
 	void SetIsWhite(bool shift);
+
+	bool CheckCollision(AnimatedGLTexture* currentTexture, GLTexture* object);
 
 	void Update() override;
 	void Render() override;

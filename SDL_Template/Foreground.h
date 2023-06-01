@@ -4,18 +4,23 @@
 #include "AnimatedGLTexture.h"
 #include "Player.h"
 
+
 using namespace SDLFramework;
 
 class Foreground : public PhysEntity {
 private:
 	static Foreground* sInstance;
+
+	GLTexture* mGround;
+	GLTexture* mGroundBlack;
+
 	//white elements
 	GLTexture* mPillar1;
 	GLTexture* mPillar2;
 
 	GLTexture* mBlock1;
 	GLTexture* mBlock2;
-	
+
 	GLTexture* mLedge1;
 	GLTexture* mLedge2;
 
@@ -40,7 +45,7 @@ private:
 
 	AnimatedGLTexture* mBlackFlag1;
 	// player
-	Player* mPlayer;
+
 
 public:
 
@@ -52,6 +57,18 @@ public:
 	void Update();
 	void Render();
 	void RenderWhite();
+
+	GLTexture* GetGroundTexture() { return mGround; }
+	GLTexture* GetDarkGroundTexture() { return mGroundBlack; }
+
+	GLTexture* GetPillarTexture() { return mPillar1; }
+	GLTexture* GetBlock1Texture() { return mBlock1; }
+	GLTexture* GetBlock2Texture() { return mBlock2; }
+
+	GLTexture* GetLedge1Texture() { return mLedge1; }
+	GLTexture* GetLedge2Texture() { return mLedge2; }
+
+	GLTexture* GetBlackLedge1Texture() { return mBlackLedge1; }
 
 };
 
