@@ -69,6 +69,8 @@ public:
 	GLTexture* GetLedge2Texture() { return mLedge2; }
 
 	GLTexture* GetBlackLedge1Texture() { return mBlackLedge1; }
+	GLTexture* GetBlackBlockTexture() { return mBlackBlock; }
+	GLTexture* GetBlackBlock2Texture() { return mBlackBlock2; }
 
 };
 

@@ -27,11 +27,24 @@ PlayScreen::~PlayScreen() {
 
 void PlayScreen::Update() {
 	mPlayer->Update();
+	mForeground->Update();
 	if (!mPlayer->GetIsGrounded()) {
 		if (!mIsWhite) {
 			if (CheckCollision(mPlayer->GetCurrentTexture(), mForeground->GetLedge1Texture())) {
 				std::cout << "Collision!" << std::endl;
 				mPlayer->Position(mPlayer->Position().x, mForeground->GetLedge1Texture()->Position().y + mForeground->GetLedge1Texture()->ScaledDimensions().y / 2 + mPlayer->GetCurrentTexture()->ScaledDimensions().y / 2 + 95);
+				mPlayer->SetIsGrounded(true);
+				mPlayer->SetVelocity(0);
+			}
+			if (CheckCollision(mPlayer->GetCurrentTexture(), mForeground->GetLedge2Texture())) {
+				std::cout << "Collision!" << std::endl;
+				mPlayer->Position(mPlayer->Position().x, mForeground->GetLedge2Texture()->Position().y + mForeground->GetLedge2Texture()->ScaledDimensions().y / 2 + mPlayer->GetCurrentTexture()->ScaledDimensions().y / 2 + 95);
+				mPlayer->SetIsGrounded(true);
+				mPlayer->SetVelocity(0);
+			}
+			if (CheckCollision(mPlayer->GetCurrentTexture(), mForeground->GetBlock2Texture())) {
+				std::cout << "Collision!" << std::endl;
+				mPlayer->Position(mPlayer->Position().x, mForeground->GetBlock2Texture()->Position().y - mForeground->GetBlock2Texture()->ScaledDimensions().y / 2 + mPlayer->GetCurrentTexture()->ScaledDimensions().y / 2 + 135);
 				mPlayer->SetIsGrounded(true);
 				mPlayer->SetVelocity(0);
 			}
@@ -42,17 +55,15 @@ void PlayScreen::Update() {
 				mPlayer->Position(mPlayer->Position().x, mForeground->GetBlackLedge1Texture()->Position().y + mForeground->GetBlackLedge1Texture()->ScaledDimensions().y / 2 + mPlayer->GetCurrentTexture()->ScaledDimensions().y / 2 + 95);
 				mPlayer->SetIsGrounded(true);
 				mPlayer->SetVelocity(0);
-
 			}
-			
+			if (CheckCollision(mPlayer->GetCurrentTexture(), mForeground->GetBlackBlock2Texture())) {
+				std::cout << "Collision!" << std::endl;
+				mPlayer->Position(mPlayer->Position().x, mForeground->GetBlackBlock2Texture()->Position().y - mForeground->GetBlackBlock2Texture()->ScaledDimensions().y / 2 + mPlayer->GetCurrentTexture()->ScaledDimensions().y / 2 + 135);
+				mPlayer->SetIsGrounded(true);
+				mPlayer->SetVelocity(0);
+			}
 		}
-
 	}
-
-	
-	
-	
-	
 	
 	if (CheckCollision(mPlayer->GetCurrentTexture(), mForeground->GetGroundTexture()) && !mPlayer->GetIsGrounded()) {
 		std::cout << "Collision!" << std::endl;
