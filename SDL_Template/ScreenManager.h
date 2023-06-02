@@ -4,7 +4,7 @@
 #include "PlayScreen.h"
 #include "BackgroundClouds.h"
 #include "Foreground.h"
-
+#include "AudioManager.h"
 
 class ScreenManager {
 private:
@@ -14,6 +14,7 @@ private:
 	Screens mCurrentScreen;
 
 	InputManager * mInput;
+	AudioManager* mAudio;
 
 	StartScreen * mStartScreen;
 	PlayScreen * mPlayScreen;

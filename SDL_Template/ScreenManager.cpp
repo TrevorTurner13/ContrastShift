@@ -15,6 +15,8 @@ void ScreenManager::Release() {
 	sInstance = nullptr;
 }
 
+
+
 void ScreenManager::Update() {
 
 	mClouds->Update();
@@ -24,7 +26,6 @@ void ScreenManager::Update() {
 		mGuy->Update();
 		mForeground->Update();
 		mStartScreen->Update();
-		
 		if (mInput->KeyPressed(SDL_SCANCODE_RETURN)) {
 			mCurrentScreen = Play;
 		}
@@ -35,10 +36,12 @@ void ScreenManager::Update() {
 		if (mInput->KeyPressed(SDL_SCANCODE_LSHIFT)) {
 			if (mPlayScreen->GetIsWhite()) {
 				glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+				mAudio->PlaySFX("SFX/ShiftLight.wav", 0);
 				mPlayScreen->SetIsWhite(false);
 			}
 			else {
 				glClearColor(250.0f, 250.0f, 250.0f, 1.0f);
+				mAudio->PlaySFX("SFX/ShiftDark.wav", 0);
 				mPlayScreen->SetIsWhite(true);
 			}
 
@@ -70,7 +73,7 @@ void ScreenManager::Render() {
 
 ScreenManager::ScreenManager() {
 	mInput = InputManager::Instance();
-
+	mAudio = AudioManager::Instance();
 
 	mStartScreen = new StartScreen();
 	mPlayScreen = new PlayScreen();
