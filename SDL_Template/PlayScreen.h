@@ -25,6 +25,7 @@ public:
 	void SetIsWhite(bool shift);
 
 	bool CheckCollision(AnimatedGLTexture* currentTexture, GLTexture* object);
+	void ResolveCollision(Player* player, GLTexture* object);
 
 	void Update() override;
 	void Render() override;

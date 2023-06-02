@@ -105,7 +105,7 @@ Foreground::Foreground() {
 	mBlackLedge1 = new GLTexture("BlackPillarPlatformt.png", 0, 0, 800, 70);
 	mBlackLedge1->Parent(this);
 	mBlackLedge1->Position(850.0f, 575.0f);
-	mBlackLedge1->Scale(Vector2(0.65f, 0.65f));
+	mBlackLedge1->Scale(Vector2(0.55f, 0.55f));
 
 	mBlackLedge2 = new GLTexture("BlackPillarPlatformt.png", 0, 0, 800, 70);
 	mBlackLedge2->Parent(this);

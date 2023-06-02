@@ -38,15 +38,28 @@ void Player::HandleMovement() {
 	
 
 	Position(pos);
-	mLastPosition = Position(Local);
+	
 }
 
 void Player::SetIsGrounded(bool isGrounded) {
 	mIsGrounded = isGrounded;
 }
 
+void Player::SetIsJumping(bool isJumping) {
+	mIsJumping = isJumping;
+}
+
 void Player::SetVelocity(Vector2 velocity) {
 	mVelocity = velocity;
+}
+
+bool Player::GetVelocity() {
+	if (mVelocity.y < 0) {
+		return false;
+	}
+	else {
+		return true;
+	}
 }
 
 void Player::HandleFiring() {
@@ -84,7 +97,7 @@ Player::Player() {
 
 	mGuy = new AnimatedGLTexture("Character Sprite.png", 0, 2560, 320, 320, 6, 1.0f, Animation::Layouts::Horizontal);
 	mGuy->Parent(this);
-	mGuy->Position(-478.0f, -275.0f);
+	mGuy->Position(300.0f, 590.0f);
 	mGuy->Scale(Vector2(0.5f, 0.5f));
 	mGuy->SetWrapMode(Animation::WrapModes::Loop);
 
@@ -96,7 +109,7 @@ Player::Player() {
 
 	mGuyRunning = new AnimatedGLTexture("Character Sprite.png", 0, 2240, 320, 320, 6, 0.5f, Animation::Layouts::Horizontal);
 	mGuyRunning->Parent(this);
-	mGuyRunning->Position(Vector2(-478.0f, -280.0f));
+	mGuyRunning->Position(Vector2(mGuy->Position().x, mGuy->Position().y));
 	mGuyRunning->Scale(Vector2(0.5f, 0.5f));
 	mGuyRunning->SetWrapMode(Animation::WrapModes::Loop);
 
@@ -128,7 +141,6 @@ Player::Player() {
 	mDeathAnimation->SetWrapMode(Animation::WrapModes::Once);
 
 	mCurrentTexture = mGuy;
-	AddCollider(new BoxCollider(mGuy->Position()), mGuy->Scale());
 
 	mId = PhysicsManager::Instance()->RegisterEntity(this, PhysicsManager::CollisionLayers::Friendly);
 
@@ -171,8 +183,7 @@ void Player::AddScore(int change) {
 	mScore += change;
 }
 
-bool Player::IgnoreCollisions()
-{
+bool Player::IgnoreCollisions() {
 	return !mVisible || mAnimating;
 }
 
@@ -189,6 +200,7 @@ bool Player::WasHit() {
 }
 
 void Player::Update() {
+	mLastPosition = Vector2(Position().x, Position().y);
 	if (!mIsGrounded) {
 		mVelocity.y += mGravity.y * mTimer->DeltaTime();
 	}
@@ -226,6 +238,7 @@ void Player::Update() {
 			if (mIsGrounded) {
 				mGuyJumping->ResetAnimation();
 				mGuyJumpingDark->ResetAnimation();
+				mIsJumping = false;
 			}
 			mCurrentTexture->Update();
 			mCurrentDarkTexture->Update();
@@ -306,5 +319,6 @@ void Player::HandleJumping() {
 		mAudio->PlaySFX("SFX/Jump.wav", 0);
 		mVelocity.y = mJumpPower.y;
 		mIsGrounded = false;
+		mIsJumping = true;
 	}
 }

@@ -75,13 +75,17 @@ public:
 	void Hit(PhysEntity* other) override;
 
 	bool WasHit();
-	bool GetIsGrounded() { return mIsGrounded; }
-	void SetIsGrounded(bool isGrounded);
-	void SetVelocity(Vector2 velocity);
 
 	AnimatedGLTexture* GetCurrentTexture() { return mCurrentTexture; }
 	AnimatedGLTexture* GetCurrentDarkTexture() { return mCurrentDarkTexture; }
-	Vector2 GetLastPostion() { return mLastPosition; }
+	Vector2 GetLastPosition() { return mLastPosition; }
+	bool GetIsGrounded() { return mIsGrounded; }
+	bool GetIsJumping() { return mIsJumping; }
+	bool GetVelocity();
+
+	void SetIsGrounded(bool isGrounded);
+	void SetIsJumping(bool isJumping);
+	void SetVelocity(Vector2 velocity);
 
 	void Update() override;
 	void Render() override;
