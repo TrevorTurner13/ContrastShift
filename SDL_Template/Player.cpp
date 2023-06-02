@@ -302,7 +302,8 @@ void Player::RenderDark() {
 }
 
 void Player::HandleJumping() {
-	if (mInput->KeyPressed(SDL_SCANCODE_SPACE)) {// && mIsGrounded) {
+	if (mInput->KeyPressed(SDL_SCANCODE_SPACE) && (mIsGrounded)) { 
+		mAudio->PlaySFX("SFX/Jump.wav", 0);
 		mVelocity.y = mJumpPower.y;
 		mIsGrounded = false;
 	}
