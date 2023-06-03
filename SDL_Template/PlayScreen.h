@@ -4,7 +4,7 @@
 #include "AudioManager.h"
 #include "InputManager.h"
 #include "Player.h"
-#include "Foreground.h"
+#include "Level1.h"
 
 class PlayScreen : public GameEntity {
 private:
@@ -12,10 +12,12 @@ private:
 	AudioManager * mAudio;
 	InputManager* mInput;
 
-	Foreground* mForeground;
+	Level1* mLevel1;
 	Player * mPlayer;
 
 	bool mIsWhite;
+	
+	int level;
 
 public:
 	PlayScreen();
@@ -31,5 +33,7 @@ public:
 
 	void Update() override;
 	void Render() override;
+
+	void level1Update();
 };
 #endif

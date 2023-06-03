@@ -24,7 +24,7 @@ void ScreenManager::Update() {
 	switch (mCurrentScreen) {
 	case Start:
 		mGuy->Update();
-		mForeground->Update();
+		mLevel1->Update();
 		mStartScreen->Update();
 		if (mInput->KeyPressed(SDL_SCANCODE_RETURN)) {
 			mCurrentScreen = Play;
@@ -53,15 +53,15 @@ void ScreenManager::Update() {
 void ScreenManager::Render() { 
 	if (mPlayScreen->GetIsWhite()) {
 		mClouds->RenderBlack();
-		//mForeground->RenderWhite();
+		//mLevel1->RenderWhite();
 	}
 	else {
 		mClouds->Render();
-		//mForeground->Render();
+		//mLevel1->Render();
 	}
 	switch (mCurrentScreen) {
 	case Start:
-		mForeground->Render();
+		mLevel1->Render();
 		mGuy->Render();
 		mStartScreen->Render();
 		break;
@@ -84,7 +84,7 @@ ScreenManager::ScreenManager() {
 	mGuy->SetWrapMode(Animation::WrapModes::Loop);
 
 	mClouds = BackgroundClouds::Instance();
-	mForeground = Foreground::Instance();
+	mLevel1 = Level1::Instance();
 
 	mCurrentScreen = Start;
 }
@@ -95,8 +95,8 @@ ScreenManager::~ScreenManager() {
 	BackgroundClouds::Release();
 	mClouds = nullptr;
 
-	Foreground::Release();
-	mForeground = nullptr;
+	Level1::Release();
+	mLevel1 = nullptr;
 
 	delete mStartScreen;
 	mStartScreen = nullptr;

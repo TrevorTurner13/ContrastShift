@@ -211,7 +211,7 @@ void Player::Update() {
 
 	Position(Position() + mVelocity);
 
-	std::cout << mVelocity.y << std::endl;
+	//std::cout << mVelocity.y << std::endl;
 
 	if (!mMovingLeft && !mMovingRight && mIsGrounded && mIsFacingRight || !mMovingLeft && !mMovingRight && mIsGrounded && mIsFacingLeft) {
 		mCurrentTexture = mGuy;
