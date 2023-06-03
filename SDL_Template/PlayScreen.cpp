@@ -24,7 +24,7 @@ PlayScreen::~PlayScreen() {
 	mPlayer = nullptr;
 }
 
-void PlayScreen::Update() {
+void PlayScreen::Update() { 
 	mPlayer->Update();
 	switch (level) {
 	case 1:
@@ -52,6 +52,7 @@ void PlayScreen::Render() {
 			}
 			break;
 		case 2:
+			Level1::Release();
 			break;
 		case 3:
 			break;	
