@@ -24,8 +24,10 @@ public:
 	bool GetIsWhite() { return mIsWhite; }
 	void SetIsWhite(bool shift);
 
-	bool CheckCollision(AnimatedGLTexture* currentTexture, GLTexture* object);
+	bool CheckCollision(AnimatedGLTexture* player, GLTexture* object);
 	void ResolveCollision(Player* player, GLTexture* object);
+	bool VerticallyAligned(AnimatedGLTexture* player, GLTexture* object);
+	bool HorizontallyAligned(AnimatedGLTexture* player, GLTexture* object);
 
 	void Update() override;
 	void Render() override;

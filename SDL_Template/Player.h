@@ -86,6 +86,7 @@ public:
 	void SetIsGrounded(bool isGrounded);
 	void SetIsJumping(bool isJumping);
 	void SetVelocity(Vector2 velocity);
+	void SetMoveSpeed(float moveSpeed);
 
 	void Update() override;
 	void Render() override;

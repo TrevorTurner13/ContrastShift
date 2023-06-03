@@ -53,6 +53,10 @@ void Player::SetVelocity(Vector2 velocity) {
 	mVelocity = velocity;
 }
 
+void Player::SetMoveSpeed(float moveSpeed) {
+	mMoveSpeed = moveSpeed;
+}
+
 bool Player::GetVelocity() {
 	if (mVelocity.y < 0) {
 		return false;
