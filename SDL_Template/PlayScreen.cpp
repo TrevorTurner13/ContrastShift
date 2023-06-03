@@ -5,13 +5,15 @@ PlayScreen::PlayScreen() {
 	mAudio = AudioManager::Instance();
 	mInput = InputManager::Instance();
 
-	delete mForeground;
-	mForeground = new Foreground();
+	delete mLevel1;
+	mLevel1 = new Level1();
 
 	delete mPlayer;
 	mPlayer = new Player();
 
 	mIsWhite = false;
+	
+	level = 1;
 }
 
 PlayScreen::~PlayScreen() {
@@ -24,55 +26,40 @@ PlayScreen::~PlayScreen() {
 
 void PlayScreen::Update() {
 	mPlayer->Update();
-	mForeground->Update();
-	if (mPlayer->GetIsGrounded() && !mPlayer->GetIsJumping()) {
-		if (!CheckCollision(mPlayer->GetCurrentTexture(), mForeground->GetLedge1Texture())
-			&& !CheckCollision(mPlayer->GetCurrentTexture(), mForeground->GetLedge2Texture())
-			&& !CheckCollision(mPlayer->GetCurrentTexture(), mForeground->GetBlock2Texture())
-			&& !CheckCollision(mPlayer->GetCurrentTexture(), mForeground->GetBlackLedge1Texture())
-			&& !CheckCollision(mPlayer->GetCurrentTexture(), mForeground->GetBlackBlock2Texture())
-			&& !CheckCollision(mPlayer->GetCurrentTexture(), mForeground->GetGroundTexture())) {
-			mPlayer->SetIsGrounded(false);
-		}
+	switch (level) {
+	case 1:
+		level1Update();
+		mLevel1->Update();
+		break;
+	case 2:
+		break;
+	case 3:
+		break;
 	}
-	else if (mPlayer->GetIsJumping() && !mPlayer->GetIsGrounded()) {
-		mPlayer->SetIsJumping(false);
-	}
-	else if (!mIsWhite) {
-		if (CheckCollision(mPlayer->GetCurrentTexture(), mForeground->GetLedge1Texture())) {
-			ResolveCollision(mPlayer, mForeground->GetLedge1Texture());
-		}
-		else if (CheckCollision(mPlayer->GetCurrentTexture(), mForeground->GetLedge2Texture())) {
-			ResolveCollision(mPlayer, mForeground->GetLedge2Texture());
-		}
-		else if (CheckCollision(mPlayer->GetCurrentTexture(), mForeground->GetBlock2Texture())) {
-			ResolveCollision(mPlayer, mForeground->GetBlock2Texture());
-		}
-		if (CheckCollision(mPlayer->GetCurrentTexture(), mForeground->GetGroundTexture())) {
-			ResolveCollision(mPlayer, mForeground->GetGroundTexture());
-		}
-	}
-	else if (mIsWhite) {
-		if (CheckCollision(mPlayer->GetCurrentTexture(), mForeground->GetBlackLedge1Texture())) {
-			ResolveCollision(mPlayer, mForeground->GetBlackLedge1Texture());
-		}
-		if (CheckCollision(mPlayer->GetCurrentTexture(), mForeground->GetBlackBlock2Texture())) {
-			ResolveCollision(mPlayer, mForeground->GetBlackBlock2Texture());
-		}
-		if (CheckCollision(mPlayer->GetCurrentTexture(), mForeground->GetGroundTexture())) {
-			ResolveCollision(mPlayer, mForeground->GetGroundTexture());
-		}
-	}
-	
+	//std::cout << mPlayer->Position().x << std::endl;
 }
 
 void PlayScreen::Render() {
+	switch (level) {
+		case 1:
+			if (!mIsWhite) {
+				mLevel1->Render();
+				
+			}
+			else {
+				mLevel1->RenderWhite();
+				
+			}
+			break;
+		case 2:
+			break;
+		case 3:
+			break;	
+	}
 	if (!mIsWhite) {
-		mForeground->Render();
 		mPlayer->Render();
 	}
 	else {
-		mForeground->RenderWhite();
 		mPlayer->RenderDark();
 	}
 }
@@ -119,7 +106,52 @@ void PlayScreen::ResolveCollision(Player* player, GLTexture* object) {
 	}
 }
 
+void PlayScreen::level1Update(){
+	if (mPlayer->GetIsGrounded() && !mPlayer->GetIsJumping()) {
+		if (!CheckCollision(mPlayer->GetCurrentTexture(), mLevel1->GetLedge1Texture())
+			&& !CheckCollision(mPlayer->GetCurrentTexture(), mLevel1->GetLedge2Texture())
+			&& !CheckCollision(mPlayer->GetCurrentTexture(), mLevel1->GetBlock2Texture())
+			&& !CheckCollision(mPlayer->GetCurrentTexture(), mLevel1->GetBlackLedge1Texture())
+			&& !CheckCollision(mPlayer->GetCurrentTexture(), mLevel1->GetBlackBlock2Texture())
+			&& !CheckCollision(mPlayer->GetCurrentTexture(), mLevel1->GetGroundTexture())) {
+			mPlayer->SetIsGrounded(false);
+		}
+	}
+	else if (mPlayer->GetIsJumping() && !mPlayer->GetIsGrounded()) {
+		mPlayer->SetIsJumping(false);
+	}
+	else if (!mIsWhite) {
+		if (CheckCollision(mPlayer->GetCurrentTexture(), mLevel1->GetLedge1Texture())) {
+			ResolveCollision(mPlayer, mLevel1->GetLedge1Texture());
+		}
+		else if (CheckCollision(mPlayer->GetCurrentTexture(), mLevel1->GetLedge2Texture())) {
+			ResolveCollision(mPlayer, mLevel1->GetLedge2Texture());
+		}
+		else if (CheckCollision(mPlayer->GetCurrentTexture(), mLevel1->GetBlock2Texture())) {
+			ResolveCollision(mPlayer, mLevel1->GetBlock2Texture());
+		}
+		if (CheckCollision(mPlayer->GetCurrentTexture(), mLevel1->GetGroundTexture())) {
+			ResolveCollision(mPlayer, mLevel1->GetGroundTexture());
+		}
+	}
+	else if (mIsWhite) {
+		if (CheckCollision(mPlayer->GetCurrentTexture(), mLevel1->GetBlackLedge1Texture())) {
+			ResolveCollision(mPlayer, mLevel1->GetBlackLedge1Texture());
+		}
+		if (CheckCollision(mPlayer->GetCurrentTexture(), mLevel1->GetBlackBlock2Texture())) {
+			ResolveCollision(mPlayer, mLevel1->GetBlackBlock2Texture());
+		}
+		if (CheckCollision(mPlayer->GetCurrentTexture(), mLevel1->GetGroundTexture())) {
+			ResolveCollision(mPlayer, mLevel1->GetGroundTexture());
+		}
+	}
+	//if player exits right side of screen the level is incremented up 1 and player position is set
+	//where we want it to be on next level.
+	if (mPlayer->Position().x > 1660){
+		level += 1;
+		mPlayer->Position(500, 500);
+	}
+}
 
 
 	
-

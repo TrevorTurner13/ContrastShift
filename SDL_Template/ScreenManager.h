@@ -3,7 +3,7 @@
 #include "StartScreen.h"
 #include "PlayScreen.h"
 #include "BackgroundClouds.h"
-#include "Foreground.h"
+#include "Level1.h"
 #include "AudioManager.h"
 
 class ScreenManager {
@@ -20,7 +20,7 @@ private:
 	PlayScreen * mPlayScreen;
 	AnimatedGLTexture* mGuy;
 	BackgroundClouds* mClouds;
-	Foreground* mForeground;
+	Level1* mLevel1;
 
 public:
 	static ScreenManager * Instance();

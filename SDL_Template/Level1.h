@@ -7,9 +7,9 @@
 
 using namespace SDLFramework;
 
-class Foreground : public PhysEntity {
+class Level1 : public PhysEntity {
 private:
-	static Foreground* sInstance;
+	static Level1* sInstance;
 
 	GLTexture* mGround;
 	GLTexture* mGroundBlack;
@@ -49,10 +49,10 @@ private:
 
 public:
 
-	static Foreground* Instance();
+	static Level1* Instance();
 	static void Release();
-	Foreground();
-	~Foreground();
+	Level1();
+	~Level1();
 
 	void Update();
 	void Render();

@@ -138,7 +138,7 @@
     <ClCompile Include="BackgroundClouds.cpp">
       <Filter>Source Files\Galaga</Filter>
     </ClCompile>
-    <ClCompile Include="Foreground.cpp">
+    <ClCompile Include="Level1.cpp">
       <Filter>Source Files\Galaga</Filter>
     </ClCompile>
     <ClCompile Include="CloudsBlack.cpp">
@@ -239,7 +239,7 @@
     <ClInclude Include="CloudLayer.h">
       <Filter>Header Files\Galaga</Filter>
     </ClInclude>
-    <ClInclude Include="Foreground.h">
+    <ClInclude Include="Level1.h">
       <Filter>Header Files\Galaga</Filter>
     </ClInclude>
     <ClInclude Include="CloudsBlack.h">

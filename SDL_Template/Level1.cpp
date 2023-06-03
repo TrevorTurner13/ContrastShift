@@ -1,24 +1,24 @@
-#include "Foreground.h"
+#include "Level1.h"
 #include "PhysEntity.h"
 #include "BoxCollider.h"
 #include "PhysicsManager.h"
 
-Foreground* Foreground::sInstance = nullptr;
+Level1* Level1::sInstance = nullptr;
 
-Foreground* Foreground::Instance() {
+Level1* Level1::Instance() {
 	if (sInstance == nullptr) {
-		sInstance = new Foreground();
+		sInstance = new Level1();
 	}
 
 	return sInstance;
 }
 
-void Foreground::Release() {
+void Level1::Release() {
 	delete sInstance;
 	sInstance = nullptr;
 }
 
-Foreground::Foreground() {
+Level1::Level1() {
 
 	mGround = new GLTexture("Sprite-0017.png", 0, 0, 1000, 400);
 	mGround->Position(300.0f, 1100.0f);
@@ -134,7 +134,7 @@ Foreground::Foreground() {
 
 }
 
-Foreground::~Foreground() {
+Level1::~Level1() {
 	// white entities
 	delete mPillar1;
 	mPillar1 = nullptr;
@@ -191,11 +191,12 @@ Foreground::~Foreground() {
 	
 }
 
-void Foreground::Update() {
+void Level1::Update() {
 	mFlag1->Update();
 }
 
-void Foreground::Render() {
+void Level1::Render() {
+	
 	mGround->Render();
 
 	mPillar1->Render();
@@ -214,8 +215,7 @@ void Foreground::Render() {
 	mFlag1->Render();	
 }
 
-
-void Foreground::RenderWhite() {
+void Level1::RenderWhite() {
 	mGroundBlack->Render();
 
 	mBlackPillar1->Render();
@@ -229,4 +229,5 @@ void Foreground::RenderWhite() {
 	mBlackSword2->Render();
 	mBlackSword3->Render();	
 }
+
 
