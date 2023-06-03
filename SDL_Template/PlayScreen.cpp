@@ -24,8 +24,9 @@ PlayScreen::~PlayScreen() {
 	mPlayer = nullptr;
 }
 
-void PlayScreen::Update() { 
+void PlayScreen::Update() {
 	mPlayer->Update();
+
 	switch (level) {
 	case 1:
 		level1Update();
@@ -148,15 +149,24 @@ bool PlayScreen::HorizontallyAligned(AnimatedGLTexture* player, GLTexture* objec
 	}
 }
 
-void PlayScreen::level1Update(){
+void PlayScreen::level1Update() {
 	if (mPlayer->GetIsGrounded() && !mPlayer->GetIsJumping()) {
-		if (!CheckCollision(mPlayer->GetCurrentTexture(), mLevel1->GetLedge1Texture())
-			&& !CheckCollision(mPlayer->GetCurrentTexture(), mLevel1->GetLedge2Texture())
-			&& !CheckCollision(mPlayer->GetCurrentTexture(), mLevel1->GetBlock2Texture())
-			&& !CheckCollision(mPlayer->GetCurrentTexture(), mLevel1->GetBlackLedge1Texture())
-			&& !CheckCollision(mPlayer->GetCurrentTexture(), mLevel1->GetBlackBlock2Texture())
-			&& !CheckCollision(mPlayer->GetCurrentTexture(), mLevel1->GetGroundTexture())) {
-			mPlayer->SetIsGrounded(false);
+		if (!mIsWhite) {
+			if (!CheckCollision(mPlayer->GetCurrentTexture(), mLevel1->GetLedge1Texture())
+				&& !CheckCollision(mPlayer->GetCurrentTexture(), mLevel1->GetLedge2Texture())
+				&& !CheckCollision(mPlayer->GetCurrentTexture(), mLevel1->GetBlock2Texture())
+				&& !CheckCollision(mPlayer->GetCurrentTexture(), mLevel1->GetGroundTexture())) {
+
+				mPlayer->SetIsGrounded(false);
+			}
+		}
+		else {
+			if (!CheckCollision(mPlayer->GetCurrentTexture(), mLevel1->GetBlackLedge1Texture())
+				&& !CheckCollision(mPlayer->GetCurrentTexture(), mLevel1->GetBlackBlock2Texture())
+				&& !CheckCollision(mPlayer->GetCurrentTexture(), mLevel1->GetGroundTexture())) {
+
+				mPlayer->SetIsGrounded(false);
+			}
 		}
 	}
 	else if (mPlayer->GetIsJumping() && !mPlayer->GetIsGrounded()) {
@@ -186,14 +196,11 @@ void PlayScreen::level1Update(){
 		if (CheckCollision(mPlayer->GetCurrentTexture(), mLevel1->GetGroundTexture())) {
 			ResolveCollision(mPlayer, mLevel1->GetGroundTexture());
 		}
-	}
-	//if player exits right side of screen the level is incremented up 1 and player position is set
-	//where we want it to be on next level.
-	if (mPlayer->Position().x > 1660){
-		level += 1;
-		mPlayer->Position(500, 500);
+		//if player exits right side of screen the level is incremented up 1 and player position is set
+		//where we want it to be on next level.
+		if (mPlayer->Position().x > 1660) {
+			level += 1;
+			mPlayer->Position(500, 500);
+		}
 	}
 }
-
-
-	
