@@ -29,12 +29,12 @@ void Player::HandleMovement() {
 
 	Vector2 pos = Position(Local);
 	
-	/*if (pos.x < mMoveBoundsLeft.x) {
+	if (pos.x < mMoveBoundsLeft.x) {
 		pos.x = mMoveBoundsLeft.x;
 	}
-	else if (pos.x >= mMoveBoundsRight.x && pos.y > mMoveBoundsRight.y) {
-		pos.x = mMoveBoundsRight.x;		
-	}*/
+	else if (pos.x >= mMoveBoundsLeft.y) {
+		pos.x = mMoveBoundsLeft.y;		
+	}
 	
 
 	Position(pos);
@@ -82,6 +82,8 @@ Player::Player() {
 	mTimer = Timer::Instance();
 	mInput = InputManager::Instance();
 	mAudio = AudioManager::Instance();
+
+	mMoveBoundsLeft = Vector2(130.0f, 1920.0f);
 
 	mVisible = false;
 	mAnimating = false;
@@ -136,7 +138,6 @@ Player::Player() {
 	mGuyJumpingDark->SetWrapMode(Animation::WrapModes::Once);
 
 	mMoveSpeed = 400.0f;
-	mMoveBoundsLeft = Vector2(600.0f, 1100.0f);
 	mMoveBoundsRight = Vector2(2260.0f, 720.0f);
 
 	mDeathAnimation = new AnimatedGLTexture("PlayerExplosion.png", 0, 0, 128, 128, 4, 1.0f, Animation::Layouts::Horizontal);
@@ -297,7 +298,7 @@ void Player::RenderDark() {
 }
 
 void Player::HandleJumping() {
-	if (mInput->KeyPressed(SDL_SCANCODE_SPACE) && (mIsGrounded)) { 
+ 	if (mInput->KeyPressed(SDL_SCANCODE_SPACE) && (mIsGrounded)) { 
 		mAudio->PlaySFX("SFX/Jump.wav", 0);
 		mVelocity.y = mJumpPower.y;
 		mIsGrounded = false;

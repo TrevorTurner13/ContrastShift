@@ -20,6 +20,7 @@ void Level1::Release() {
 
 Level1::Level1() {
 
+
 	mGround = new GLTexture("Sprite-0017.png", 0, 0, 1000, 400);
 	mGround->Position(960.0f, 1100.0f);
 	mGround->Scale(Vector2(2.0f, 1.0f));
