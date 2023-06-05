@@ -254,28 +254,6 @@ void Player::Update() {
 
 		}
 	}
-
-	/*for (int i = 0; i < MAX_BULLETS; ++i) {
-		mBullets[i]->Update();
-	}*/
-
-	//if (mIsGrounded &&
-	//	!CheckCollision(ledge1.x, ledge1.y, ledge1.w, ledge1.h, Position().x - mGuy->ScaledDimensions().x / 2, Position().y - mGuy->ScaledDimensions().y / 2, 160, 160)&& 
-	//	!CheckCollision(ground.x, ground.y, ground.w, ground.h, Position().x - mGuy->ScaledDimensions().x / 2, Position().y - mGuy->ScaledDimensions().y / 2, 160, 160)) {
-	//	mIsGrounded = false;
-	//}
-	////ledge 1
-	//if (CheckCollision(ledge1.x, ledge1.y, ledge1.w, ledge1.h, Position().x - mGuy->ScaledDimensions().x / 2, Position().y - mGuy->ScaledDimensions().y / 2, 160, 160) && (!mInput->KeyDown(SDL_SCANCODE_SPACE))) {
-	//	//Position(Position().x,(ledge1.x) - mGuy->ScaledDimensions().y / 2 + 1);
-	//	mIsGrounded = true;
-	//	mVelocity.y = 0;
-	//}
-	////ground
-	//if (CheckCollision(ground.x, ground.y, ground.w, ground.h, Position().x - mGuy->ScaledDimensions().x / 2, Position().y - mGuy->ScaledDimensions().y / 2, 160, 160) && (!mInput->KeyDown(SDL_SCANCODE_SPACE))) {
-	//	//Position(Position().x,(ledge1.x) - mGuy->ScaledDimensions().y / 2 + 1);
-	//	mIsGrounded = true;
-	//	mVelocity.y = 0;
-	//}
 }
 
 void Player::Render() {
