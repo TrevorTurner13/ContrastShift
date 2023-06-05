@@ -47,11 +47,9 @@ void PlayScreen::Render() {
 		case 1:
 			if (!mIsWhite) {
 				mLevel1->Render();
-				
 			}
 			else {
 				mLevel1->RenderWhite();
-				
 			}
 			break;
 		case 2:
@@ -99,9 +97,7 @@ bool PlayScreen::CheckCollision(Player* player, GLTexture* object) {
 	}
 }
 
-void PlayScreen::ResolveCollision(Player* player, GLTexture* object) {
-	
-	
+void PlayScreen::ResolvePlatformCollision(Player* player, GLTexture* object) {
    	if (HorizontallyAligned(player, object)) {
 		if (player->Position().y + 60
 			< object->Position().y && player->GetVelocity() > 0) {

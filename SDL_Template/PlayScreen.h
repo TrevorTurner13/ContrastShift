@@ -29,7 +29,7 @@ public:
 	void SetIsWhite(bool shift);
 
 	bool CheckCollision(Player* player, GLTexture* object);
-	void ResolveCollision(Player* player, GLTexture* object);
+	void ResolvePlatformCollision(Player* player, GLTexture* object);
 	bool VerticallyAligned(Player* player, GLTexture* object);
 	bool HorizontallyAligned(Player* player, GLTexture* object);
 
