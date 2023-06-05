@@ -101,37 +101,37 @@ Player::Player() {
 
 	mGuy = new AnimatedGLTexture("Character Sprite.png", 0, 2560, 320, 320, 6, 1.0f, Animation::Layouts::Horizontal);
 	mGuy->Parent(this);
-	mGuy->Position(300.0f, 590.0f);
+	mGuy->Position(Vec2_Zero);
 	mGuy->Scale(Vector2(0.5f, 0.5f));
 	mGuy->SetWrapMode(Animation::WrapModes::Loop);
 
 	mGuyDark = new AnimatedGLTexture("Character Sprite.png", 0, 640, 320, 320, 6, 1.0f, Animation::Layouts::Horizontal);
 	mGuyDark->Parent(this);
-	mGuyDark->Position(mGuy->Position().x, mGuy->Position().y);
+	mGuyDark->Position(Vec2_Zero);
 	mGuyDark->Scale(Vector2(0.5f, 0.5f));
 	mGuyDark->SetWrapMode(Animation::WrapModes::Loop);
 
 	mGuyRunning = new AnimatedGLTexture("Character Sprite.png", 0, 2240, 320, 320, 6, 0.5f, Animation::Layouts::Horizontal);
 	mGuyRunning->Parent(this);
-	mGuyRunning->Position(Vector2(mGuy->Position().x, mGuy->Position().y));
+	mGuyRunning->Position(Vec2_Zero);
 	mGuyRunning->Scale(Vector2(0.5f, 0.5f));
 	mGuyRunning->SetWrapMode(Animation::WrapModes::Loop);
 
 	mGuyRunningDark = new AnimatedGLTexture("Character Sprite.png", 0, 1280, 320, 320, 6, 0.5f, Animation::Layouts::Horizontal);
 	mGuyRunningDark->Parent(this);
-	mGuyRunningDark->Position(Vector2(mGuyRunning->Position().x, mGuyRunning->Position().y));
+	mGuyRunningDark->Position(Vec2_Zero);
 	mGuyRunningDark->Scale(Vector2(0.5f, 0.5f));
 	mGuyRunningDark->SetWrapMode(Animation::WrapModes::Loop);
 
 	mGuyJumping = new AnimatedGLTexture("Character Sprite.png", 0, 3200, 320, 320, 6, 1.0f, Animation::Layouts::Horizontal);
 	mGuyJumping->Parent(this);
-	mGuyJumping->Position(Vector2(mGuyRunning->Position().x, mGuyRunning->Position().y));
+	mGuyJumping->Position(Vec2_Zero);
 	mGuyJumping->Scale(Vector2(0.5f, 0.5f));
 	mGuyJumping->SetWrapMode(Animation::WrapModes::Once);
 	
 	mGuyJumpingDark = new AnimatedGLTexture("Character Sprite.png", 0, 2880, 320, 320, 6, 1.0f, Animation::Layouts::Horizontal);
 	mGuyJumpingDark->Parent(this);
-	mGuyJumpingDark->Position(Vector2(mGuyRunning->Position().x, mGuyRunning->Position().y));
+	mGuyJumpingDark->Position(Vec2_Zero);
 	mGuyJumpingDark->Scale(Vector2(0.5f, 0.5f));
 	mGuyJumpingDark->SetWrapMode(Animation::WrapModes::Once);
 

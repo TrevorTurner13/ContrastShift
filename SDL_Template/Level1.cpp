@@ -55,7 +55,6 @@ Level1::Level1() {
 	mLedge1->Position(250.0f, 665.0f);
 	mLedge1->Scale(Vector2(0.65f, 0.65f));
 	
-	
 	mLedge2 = new GLTexture("PillarPlatform.png", 0, 0, 800, 70);
 	mLedge2->Parent(this);
 	mLedge2->Position(1500.0f, 550.0f);
@@ -92,11 +91,6 @@ Level1::Level1() {
 	mBlackPillar2->Position(850.0f, 750.0f);
 	mBlackPillar2->Scale(Vector2(0.8f, 0.8f));
 
-	mBlackBlock = new GLTexture("BlackPlatform1.png", 0, 0, 494, 330);
-	mBlackBlock->Parent(this);
-	mBlackBlock->Position(265.0f, 793.0f);
-	mBlackBlock->Scale(Vector2(0.65f, 0.65f));
-
 	mBlackBlock2 = new GLTexture("BlackRuins.png", 650, 160, 310, 480);
 	mBlackBlock2->Parent(this);
 	mBlackBlock2->Position(1900.0f, 705.0f);
@@ -106,11 +100,6 @@ Level1::Level1() {
 	mBlackLedge1->Parent(this);
 	mBlackLedge1->Position(850.0f, 575.0f);
 	mBlackLedge1->Scale(Vector2(0.55f, 0.55f));
-
-	mBlackLedge2 = new GLTexture("BlackPillarPlatformt.png", 0, 0, 800, 70);
-	mBlackLedge2->Parent(this);
-	mBlackLedge2->Position(1500.0f, 520.0f);
-	mBlackLedge2->Scale(Vector2(0.65f, 0.65f));
 
 	mBlackSword1 = new GLTexture("BlackSwords.png", 0, 0, 320, 480);
 	mBlackSword1->Parent(this);
@@ -166,15 +155,11 @@ Level1::~Level1() {
 	delete mBlackPillar2;
 	mBlackPillar2 = nullptr;
 	
-	delete mBlackBlock;
-	mBlackBlock = nullptr;
 	delete mBlackBlock2;
 	mBlackBlock2 = nullptr;
 	
 	delete mBlackLedge1;
 	mBlackLedge1 = nullptr;
-	delete mBlackLedge2;
-	mBlackLedge2 = nullptr;
 	
 	delete mBlackSword1;
 	mBlackSword1 = nullptr;

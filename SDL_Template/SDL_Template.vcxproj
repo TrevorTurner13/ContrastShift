@@ -168,13 +168,13 @@ xcopy "$(ProjectDir)..\Data\*" "$(OutDir)Data\" /y /s</Command>
     <ClCompile Include="Clouds.cpp" />
     <ClCompile Include="CloudsBlack.cpp" />
     <ClCompile Include="Collider.cpp" />
-    <ClCompile Include="Level1.cpp" />
     <ClCompile Include="GameEntity.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GLGraphics.cpp" />
     <ClCompile Include="GLTexture.cpp" />
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="InputManager.cpp" />
+    <ClCompile Include="Level1.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PhysEntity.cpp" />
     <ClCompile Include="PhysicsManager.cpp" />
@@ -201,7 +201,6 @@ xcopy "$(ProjectDir)..\Data\*" "$(OutDir)Data\" /y /s</Command>
     <ClInclude Include="Clouds.h" />
     <ClInclude Include="CloudsBlack.h" />
     <ClInclude Include="Collider.h" />
-    <ClInclude Include="Level1.h" />
     <ClInclude Include="GameEntity.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="GLGraphics.h" />
@@ -209,6 +208,7 @@ xcopy "$(ProjectDir)..\Data\*" "$(OutDir)Data\" /y /s</Command>
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="BezierPath.h" />
     <ClInclude Include="InputManager.h" />
+    <ClInclude Include="Level1.h" />
     <ClInclude Include="MathHelper.h" />
     <ClInclude Include="PhysEntity.h" />
     <ClInclude Include="PhysicsHelper.h" />
