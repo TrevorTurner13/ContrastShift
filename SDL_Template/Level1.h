@@ -11,7 +11,7 @@ class Level1 : public PhysEntity {
 private:
 	static Level1* sInstance;
 
-
+	GLTexture* mCollider;
 	GLTexture* mGround;
 	GLTexture* mGroundBlack;
 
@@ -21,7 +21,7 @@ private:
 
 	GLTexture* mBlock1;
 	GLTexture* mBlock2;
-
+	
 	GLTexture* mLedge1;
 	GLTexture* mLedge2;
 
@@ -33,7 +33,6 @@ private:
 	// black elemets
 	GLTexture* mBlackPillar1;
 	GLTexture* mBlackPillar2;
-
 
 	GLTexture* mBlackBlock2;
 
@@ -62,17 +61,15 @@ public:
 	GLTexture* GetGroundTexture() { return mGround; }
 	GLTexture* GetDarkGroundTexture() { return mGroundBlack; }
 
-	GLTexture* GetPillarTexture() { return mPillar1; }
 	GLTexture* GetBlock1Texture() { return mBlock1; }
 	GLTexture* GetBlock2Texture() { return mBlock2; }
+	GLTexture* GetColliderTexture() { return mCollider; }
 
 	GLTexture* GetLedge1Texture() { return mLedge1; }
 	GLTexture* GetLedge2Texture() { return mLedge2; }
 
 	GLTexture* GetBlackPillarTexture() { return mBlackPillar1; }
 	GLTexture* GetBlackLedge1Texture() { return mBlackLedge1; }
-	
-	GLTexture* GetBlackBlock2Texture() { return mBlackBlock2; }
 
 };
 

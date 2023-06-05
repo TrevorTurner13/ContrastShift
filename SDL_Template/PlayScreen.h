@@ -15,6 +15,8 @@ private:
 	Level1* mLevel1;
 	Player * mPlayer;
 
+	Vector2 mMoveBoundsLeft;
+
 	bool mIsWhite;
 	
 	int level;

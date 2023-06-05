@@ -12,6 +12,7 @@ PlayScreen::PlayScreen() {
 	mPlayer = new Player();
 	mPlayer->Position(300.0f, 590.0f);
 
+	mMoveBoundsLeft = Vector2(130.0f, 1920.0f);
 	mIsWhite = false;
 	
 	level = 1;
@@ -99,50 +100,40 @@ bool PlayScreen::CheckCollision(Player* player, GLTexture* object) {
 }
 
 void PlayScreen::ResolveCollision(Player* player, GLTexture* object) {
-
-
-
-
-	if (VerticallyAligned(player, object)) {
-		if (player->Position().x
-			< object->Position().x) {
-			float pushback = (player->Position().x + player->GetCurrentTexture()->ScaledDimensions().x / 2 - 20) - (object->Position().x - object->ScaledDimensions().x / 2);
-			player->Position(player->GetLastPosition().x + pushback, player->GetLastPosition().y);
-		}
-		else {
-
-			float pushback = (object->Position().x + object->ScaledDimensions().x / 2) - (player->Position().x - player->GetCurrentTexture()->ScaledDimensions().x / 2 + 50);
-			player->Position(player->GetLastPosition().x - pushback, player->GetLastPosition().y);
-
-
-		}
-	}
-	std::cout << "player->Position().x: " << player->Position().x << std::endl;
-	std::cout << "player->GetCurrentTexture()->ScaledDimensions().x/2: " << player->GetCurrentTexture()->ScaledDimensions().y / 2 << std::endl;
-	std::cout << "object->Position().x: " << object->Position().x << std::endl;
-	std::cout << "object->ScaledDimensions().x / 2: " << object->ScaledDimensions().x / 2 << std::endl;
-
-	if (HorizontallyAligned(player, object)) {
-		if (player->Position().y
-			< object->Position().y) {
+	
+	
+   	if (HorizontallyAligned(player, object)) {
+		if (player->Position().y + 60
+			< object->Position().y && player->GetVelocity() > 0) {
 			float pushback = (player->Position().y + player->GetCurrentTexture()->ScaledDimensions().y / 2. - 30) - (object->Position().y - object->ScaledDimensions().y / 2);
 
 			player->Position(player->GetLastPosition().x, player->GetLastPosition().y - pushback);
 			player->SetIsGrounded(true);
 			player->SetVelocity(0);
 		}
-		else {
-			float pushback = (object->Position().y + object->ScaledDimensions().y / 2) - (player->Position().y - player->GetCurrentTexture()->ScaledDimensions().y / 2);
+		
+	//	else {
+	//		float pushback = (object->Position().y + object->ScaledDimensions().y / 2) - (player->Position().y - player->GetCurrentTexture()->ScaledDimensions().y / 2);
 
-			player->Position(player->GetLastPosition().x, player->GetLastPosition().y + pushback);
-			player->SetVelocity(0);
-		}
+	//		player->Position(player->GetLastPosition().x, player->GetLastPosition().y + pushback);
+	//		player->SetVelocity(0);
+	//	}
+	//}
+	//if (VerticallyAligned(player, object)) {
+	//	if (player->Position().x < object->Position().x) {
+	//		/*float pushback = (player->Position().x + player->GetCurrentTexture()->ScaledDimensions().x / 2 - 50) - (object->Position().x - object->ScaledDimensions().x / 2);
+	//		player->Position(player->GetLastPosition().x - pushback, player->GetLastPosition().y);
+	//	*/
+	//	}
+	//	else {
+
+	//		float pushback = (object->Position().x + object->ScaledDimensions().x / 2) - (player->Position().x - player->GetCurrentTexture()->ScaledDimensions().x / 2 + 50);
+	//		player->Position(player->GetLastPosition().x + pushback, player->GetLastPosition().y);
+
+
+	//	}
 	}
-	std::cout << "player->Position().y: " << player->Position().y << std::endl;
-	std::cout << "player->GetCurrentTexture()->ScaledDimensions().y/2: " << player->GetCurrentTexture()->ScaledDimensions().y / 2 << std::endl;
-	std::cout << "object->Position().y: " << object->Position().y << std::endl;
-	std::cout << "object->ScaledDimensions().y / 2: " << object->ScaledDimensions().y / 2 << std::endl;
-
+	
 	/*player->Position(player->GetLastPosition().x, player->GetLastPosition().y - 2);
 	player->SetIsGrounded(true);
 	player->SetVelocity(0);*/
@@ -178,12 +169,20 @@ bool PlayScreen::HorizontallyAligned(Player* player, GLTexture* object) {
 }
 
 void PlayScreen::level1Update() {
+	Vector2 pos = mPlayer->Position(Local);
+	if (pos.x < mMoveBoundsLeft.x) {
+		pos.x = mMoveBoundsLeft.x;
+	}
+	else if (pos.x >= mMoveBoundsLeft.y) {
+		pos.x = mMoveBoundsLeft.y;
+	}
+	mPlayer->Position(pos);
 
 	if (mPlayer->GetIsGrounded() && !mPlayer->GetIsJumping()) {
 		if (!mIsWhite) {
 			if (!CheckCollision(mPlayer, mLevel1->GetLedge1Texture())
 				&& !CheckCollision(mPlayer, mLevel1->GetLedge2Texture())
-				&& !CheckCollision(mPlayer, mLevel1->GetBlock2Texture())
+				&& !CheckCollision(mPlayer, mLevel1->GetColliderTexture())
 				&& !CheckCollision(mPlayer, mLevel1->GetGroundTexture())) {
 
 				mPlayer->SetIsGrounded(false);
@@ -191,7 +190,7 @@ void PlayScreen::level1Update() {
 		}
 		else {
 			if (!CheckCollision(mPlayer, mLevel1->GetBlackLedge1Texture())
-				&& !CheckCollision(mPlayer, mLevel1->GetBlackBlock2Texture())
+				&& !CheckCollision(mPlayer, mLevel1->GetColliderTexture())
 				&& !CheckCollision(mPlayer, mLevel1->GetGroundTexture())) {
 
 				mPlayer->SetIsGrounded(false);
@@ -210,8 +209,8 @@ void PlayScreen::level1Update() {
 			else if (CheckCollision(mPlayer, mLevel1->GetLedge2Texture())) {
 				ResolveCollision(mPlayer, mLevel1->GetLedge2Texture());
 			}
-			else if (CheckCollision(mPlayer, mLevel1->GetBlock2Texture())) {
-				ResolveCollision(mPlayer, mLevel1->GetBlock2Texture());
+			else if (CheckCollision(mPlayer, mLevel1->GetColliderTexture())) {
+				ResolveCollision(mPlayer, mLevel1->GetColliderTexture());
 			}
 			if (CheckCollision(mPlayer, mLevel1->GetGroundTexture())) {
 				ResolveCollision(mPlayer, mLevel1->GetGroundTexture());
@@ -223,8 +222,8 @@ void PlayScreen::level1Update() {
 			if (CheckCollision(mPlayer, mLevel1->GetBlackLedge1Texture())) {
 				ResolveCollision(mPlayer, mLevel1->GetBlackLedge1Texture());
 			}
-			if (CheckCollision(mPlayer, mLevel1->GetBlackBlock2Texture())) {
-				ResolveCollision(mPlayer, mLevel1->GetBlackBlock2Texture());
+			if (CheckCollision(mPlayer, mLevel1->GetColliderTexture())) {
+				ResolveCollision(mPlayer, mLevel1->GetColliderTexture());
 			}
 			if (CheckCollision(mPlayer, mLevel1->GetGroundTexture())) {
 				ResolveCollision(mPlayer, mLevel1->GetGroundTexture());
@@ -234,9 +233,9 @@ void PlayScreen::level1Update() {
 	
 	//if player exits right side of screen the level is incremented up 1 and player position is set
 	//where we want it to be on next level.
-	if (mPlayer->Position().x > 1920) {
+	if (mPlayer->Position().x > 1900 && mPlayer->Position().y <= 520) {
 		level += 1;
-		mPlayer->Position(500, 500);
+		mPlayer->Position(0.0f, mPlayer->Position().y);
 	}
 }
 

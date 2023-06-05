@@ -47,7 +47,7 @@ private:
 	AnimatedGLTexture* mDeathAnimation;
 
 	float mMoveSpeed;
-	Vector2 mMoveBoundsLeft;
+
 	Vector2 mMoveBoundsRight;
 
 	static const int MAX_BULLETS = 2;
@@ -55,7 +55,6 @@ private:
 
 private:
 	void HandleMovement();
-	void HandleFiring();
 	void HandleJumping();
 
 public:
@@ -81,7 +80,7 @@ public:
 	Vector2 GetLastPosition() { return mLastPosition; }
 	bool GetIsGrounded() { return mIsGrounded; }
 	bool GetIsJumping() { return mIsJumping; }
-	bool GetVelocity();
+	float GetVelocity() { return mVelocity.y; }
 
 	void SetIsGrounded(bool isGrounded);
 	void SetIsJumping(bool isJumping);

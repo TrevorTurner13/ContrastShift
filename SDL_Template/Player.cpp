@@ -2,11 +2,6 @@
 #include "BoxCollider.h"
 #include "PhysicsManager.h"
 
-//Rect ledge1(400.0f, 945.0f, 520.0f, 6.0f);
-//Rect ledge2(1500.0f, 550.0f, 440.0f, 5.f);
-//Rect block1(265.0f, 793.0f, 321.1f, 214.5f);
-//Rect ground(300, 1200, 4000, 400);
-
 void Player::HandleMovement() {
 	if (mInput->KeyDown(SDL_SCANCODE_D)) {
 		Translate(Vec2_Right * mMoveSpeed * mTimer->DeltaTime(), World);
@@ -26,19 +21,6 @@ void Player::HandleMovement() {
 		mMovingLeft = false;
 		mMovingRight = false;
 	}
-
-	Vector2 pos = Position(Local);
-	
-	if (pos.x < mMoveBoundsLeft.x) {
-		pos.x = mMoveBoundsLeft.x;
-	}
-	else if (pos.x >= mMoveBoundsLeft.y) {
-		pos.x = mMoveBoundsLeft.y;		
-	}
-	
-
-	Position(pos);
-	
 }
 
 void Player::SetIsGrounded(bool isGrounded) {
@@ -57,33 +39,12 @@ void Player::SetMoveSpeed(float moveSpeed) {
 	mMoveSpeed = moveSpeed;
 }
 
-bool Player::GetVelocity() {
-	if (mVelocity.y < 0) {
-		return false;
-	}
-	else {
-		return true;
-	}
-}
-
-void Player::HandleFiring() {
-	if (mInput->KeyPressed(SDL_SCANCODE_SPACE)) {
-		/*for (int i = 0; i < MAX_BULLETS; ++i) {
-			if (!mBullets[i]->Active()) {
-				mBullets[i]->Fire(Position());
-				mAudio->PlaySFX("SFX/Fire.wav");
-				break;
-			}
-		}*/
-	}
-}
-
 Player::Player() {
 	mTimer = Timer::Instance();
 	mInput = InputManager::Instance();
 	mAudio = AudioManager::Instance();
 
-	mMoveBoundsLeft = Vector2(130.0f, 1920.0f);
+	
 
 	mVisible = false;
 	mAnimating = false;
@@ -96,7 +57,7 @@ Player::Player() {
 	mIsWhite = false;
 	mIsGrounded = true;
 	mGravity = Vector2(0.0, 25);
-	mJumpPower = Vector2(0.0, -15);
+	mJumpPower = Vector2(0.0, -16);
 
 	mScore = 0;
 	mLives = 2;
@@ -250,7 +211,6 @@ void Player::Update() {
 
 
 			HandleMovement();
-			HandleFiring();
 			HandleJumping();
 
 		}

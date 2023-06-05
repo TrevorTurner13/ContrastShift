@@ -20,6 +20,10 @@ void Level1::Release() {
 
 Level1::Level1() {
 
+	mCollider = new GLTexture("Collider.png", 0, 0, 100, 70);
+	mCollider->Parent(this);
+	mCollider->Position(1900, 520);
+	mCollider->Scale(Vector2(2.0f, 1.0f));
 
 	mGround = new GLTexture("Sprite-0017.png", 0, 0, 1000, 400);
 	mGround->Position(960.0f, 1100.0f);
@@ -50,6 +54,8 @@ Level1::Level1() {
 	mBlock2->Parent(this);
 	mBlock2->Position(1900.0f, 705.0f);
 	mBlock2->Scale(Vector2(0.9f, 0.9f));
+
+	
 
 	mLedge1 = new GLTexture("PillarPlatform.png", 0, 0, 800, 70);
 	mLedge1->Parent(this);
