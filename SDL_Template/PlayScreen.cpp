@@ -101,23 +101,23 @@ bool PlayScreen::CheckCollision(Player* player, GLTexture* object) {
 void PlayScreen::ResolveCollision(Player* player, GLTexture* object) {
 	
 	if (!player->GetIsGrounded() && !player->GetIsJumping()) {
-		if (CheckCollision(player, object)) {
+		
 			
 			if (VerticallyAligned(player, object)) {
 				if (player->Position().x
 					< object->Position().x) {
 					std::cout << "player x position before " << player->GetLastPosition().x << std::endl;
-					float pushback = player->Position().x + player->GetCurrentTexture()->ScaledDimensions().x / 2 - object->Position().x - object->ScaledDimensions().x;
-
+					float pushback = (player->Position().x + player->GetCurrentTexture()->ScaledDimensions().x / 2 - 20) - (object->Position().x - object->ScaledDimensions().x / 2);
+					std::cout << "pushback " << pushback << std::endl;
 					player->Position(player->GetLastPosition().x + pushback, player->GetLastPosition().y);
-					std::cout << "player position after " << player->GetLastPosition().x << std::endl;
+					std::cout << "player position after " << player->Position().x << std::endl;
 				}
 				else { 
 					std::cout << "player x position before " << player->Position().x << std::endl;
-					float pushback = object->Position().x + object->ScaledDimensions().x - player->Position().x - player->GetCurrentTexture()->ScaledDimensions().x / 2;
-					
-					player->Position(player->GetLastPosition().x + pushback, player->GetLastPosition().y);
-					std::cout << "player x position after " << player->GetLastPosition().x << std::endl;
+					float pushback = (object->Position().x + object->ScaledDimensions().x / 2) - (player->Position().x - player->GetCurrentTexture()->ScaledDimensions().x / 2 + 50);
+					std::cout << "pushback " << pushback << std::endl;
+					player->Position(player->GetLastPosition().x - pushback, player->GetLastPosition().y);
+					std::cout << "player x position after " << player->Position().x << std::endl;
 				
 				}
 			}
@@ -128,7 +128,7 @@ void PlayScreen::ResolveCollision(Player* player, GLTexture* object) {
 
 					std::cout << "player y position before " << player->GetLastPosition().y << std::endl;
 
-					float pushback = player->Position().y + player->GetCurrentTexture()->ScaledDimensions().y / 2 - object->Position().y - object->ScaledDimensions().y / 2;
+					float pushback = (player->Position().y + player->GetCurrentTexture()->ScaledDimensions().y / 2. - 30) - (object->Position().y - object->ScaledDimensions().y / 2);
 					
 					std::cout << "pushback top " << pushback << std::endl;
 
@@ -136,17 +136,17 @@ void PlayScreen::ResolveCollision(Player* player, GLTexture* object) {
 					player->SetIsGrounded(true);
 					player->SetVelocity(0);
 
-					std::cout << "player y position after " << player->GetLastPosition().x << std::endl;
+					std::cout << "player y position after " << player->Position().y << std::endl;
 
 				}
 				else {
 					std::cout << "player y position before " << player->GetLastPosition().y << std::endl;
-					float pushback = object->Position().y + object->ScaledDimensions().y / 2 - player->Position().y - player->GetCurrentTexture()->ScaledDimensions().y / 2;
+					float pushback = (object->Position().y + object->ScaledDimensions().y / 2) - (player->Position().y - player->GetCurrentTexture()->ScaledDimensions().y / 2);
 					std::cout << "pushback bottom " << pushback << std::endl;
 
 					player->Position(player->GetLastPosition().x, player->GetLastPosition().y + pushback);
 					player->SetVelocity(0);
-					std::cout << "player y position after " << player->GetLastPosition().x << std::endl;
+					std::cout << "player y position after " << player->Position().y << std::endl;
 
 					
 				}
@@ -155,7 +155,7 @@ void PlayScreen::ResolveCollision(Player* player, GLTexture* object) {
 			player->SetIsGrounded(true);
 			player->SetVelocity(0);*/
 		}
-	}
+	
 }
 
 bool PlayScreen::VerticallyAligned(Player* player, GLTexture* object) {

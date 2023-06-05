@@ -21,12 +21,12 @@ void Level1::Release() {
 Level1::Level1() {
 
 	mGround = new GLTexture("Sprite-0017.png", 0, 0, 1000, 400);
-	mGround->Position(300.0f, 1100.0f);
-	mGround->Scale(Vector2(4.0f, 1.0f));
+	mGround->Position(960.0f, 1100.0f);
+	mGround->Scale(Vector2(2.0f, 1.0f));
 
 	mGroundBlack = new GLTexture("Black.png", 0, 0, 1000, 400);
-	mGroundBlack->Position(300.0f, 1100.0f);
-	mGroundBlack->Scale(Vector2(4.0f, 1.0f));
+	mGroundBlack->Position(960.0f, 1100.0f);
+	mGroundBlack->Scale(Vector2(2.0f, 1.0f));
 
 	
 	// white elements
