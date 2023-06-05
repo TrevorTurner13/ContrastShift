@@ -200,29 +200,29 @@ void PlayScreen::level1Update() {
 	else if (!mIsWhite) {
 		if (!mPlayer->GetIsGrounded() && !mPlayer->GetIsJumping()) {
 			if (CheckCollision(mPlayer, mLevel1->GetLedge1Texture())) {
-				ResolveCollision(mPlayer, mLevel1->GetLedge1Texture());
+				ResolvePlatformCollision(mPlayer, mLevel1->GetLedge1Texture());
 			}
 			else if (CheckCollision(mPlayer, mLevel1->GetLedge2Texture())) {
-				ResolveCollision(mPlayer, mLevel1->GetLedge2Texture());
+				ResolvePlatformCollision(mPlayer, mLevel1->GetLedge2Texture());
 			}
 			else if (CheckCollision(mPlayer, mLevel1->GetColliderTexture())) {
-				ResolveCollision(mPlayer, mLevel1->GetColliderTexture());
+				ResolvePlatformCollision(mPlayer, mLevel1->GetColliderTexture());
 			}
 			if (CheckCollision(mPlayer, mLevel1->GetGroundTexture())) {
-				ResolveCollision(mPlayer, mLevel1->GetGroundTexture());
+				ResolvePlatformCollision(mPlayer, mLevel1->GetGroundTexture());
 			}
 		}
 	}
 	else if (mIsWhite) {
 		if (!mPlayer->GetIsGrounded() && !mPlayer->GetIsJumping()) {
 			if (CheckCollision(mPlayer, mLevel1->GetBlackLedge1Texture())) {
-				ResolveCollision(mPlayer, mLevel1->GetBlackLedge1Texture());
+				ResolvePlatformCollision(mPlayer, mLevel1->GetBlackLedge1Texture());
 			}
 			if (CheckCollision(mPlayer, mLevel1->GetColliderTexture())) {
-				ResolveCollision(mPlayer, mLevel1->GetColliderTexture());
+				ResolvePlatformCollision(mPlayer, mLevel1->GetColliderTexture());
 			}
 			if (CheckCollision(mPlayer, mLevel1->GetGroundTexture())) {
-				ResolveCollision(mPlayer, mLevel1->GetGroundTexture());
+				ResolvePlatformCollision(mPlayer, mLevel1->GetGroundTexture());
 			}
 		}
 	}
