@@ -28,6 +28,9 @@ void ScreenManager::Update() {
 		mStartScreen->Update();
 		if (mInput->KeyPressed(SDL_SCANCODE_RETURN)) {
 			mCurrentScreen = Play;
+			mAudio->PauseMusic();
+			//mAudio->PlaySFX("MUS/DarkSong.mp3", 100);
+			//mAudio->PlaySFX("MUS/White Song.mp3", 100);
 		}
 		break;
 	case Play:
