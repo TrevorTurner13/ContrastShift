@@ -58,7 +58,7 @@ void PlayScreen::Render() {
 			}
 			break;
 		case 2:
-			Level1::Release();
+			//Level1::Release();
 			if (!mIsWhite) {
 				mLevel2->Render();
 			}
