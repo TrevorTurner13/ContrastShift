@@ -23,6 +23,7 @@ private:
 	bool mIsJumping;
 	bool mIsWhite;
 	bool mIsGrounded;
+	bool mIsPushing;
 
 	//mAcceleration;
 	Vector2 mVelocity;
@@ -80,10 +81,16 @@ public:
 	Vector2 GetLastPosition() { return mLastPosition; }
 	bool GetIsGrounded() { return mIsGrounded; }
 	bool GetIsJumping() { return mIsJumping; }
+	bool GetIsPushing() { return mIsPushing; }
+
 	float GetVelocity() { return mVelocity.y; }
+	float GetMovespeed() { return mMoveSpeed; }
+
 
 	void SetIsGrounded(bool isGrounded);
 	void SetIsJumping(bool isJumping);
+	void SetIsPushing(bool isPushing);
+
 	void SetVelocity(Vector2 velocity);
 	void SetMoveSpeed(float moveSpeed);
 

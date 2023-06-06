@@ -31,6 +31,10 @@ void Player::SetIsJumping(bool isJumping) {
 	mIsJumping = isJumping;
 }
 
+void Player::SetIsPushing(bool isPushing) {
+	mIsPushing = isPushing;
+}
+
 void Player::SetVelocity(Vector2 velocity) {
 	mVelocity = velocity;
 }
@@ -56,6 +60,8 @@ Player::Player() {
 	mIsJumping = false;
 	mIsWhite = false;
 	mIsGrounded = true;
+	mIsPushing = false;
+
 	mGravity = Vector2(0.0, 25);
 	mJumpPower = Vector2(0.0, -16);
 
@@ -165,8 +171,17 @@ bool Player::WasHit() {
 	return mWasHit;
 }
 
-void Player::Update() {
+void Player::Update() 
+{
 	mLastPosition = Vector2(Position().x, Position().y);
+
+	if (mIsPushing) {
+		mMoveSpeed = 100.0f; 
+	}
+	else {
+		mMoveSpeed = 400.0f;
+	}
+
 	if (!mIsGrounded) {
 		mVelocity.y += mGravity.y * mTimer->DeltaTime();
 	}

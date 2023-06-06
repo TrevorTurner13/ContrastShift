@@ -8,6 +8,9 @@ PlayScreen::PlayScreen() {
 	delete mLevel1;
 	mLevel1 = new Level1();
 
+	delete mLevel2;
+	mLevel2 = new Level2();
+
 	delete mPlayer;
 	mPlayer = new Player();
 	mPlayer->Position(300.0f, 590.0f);
@@ -35,6 +38,8 @@ void PlayScreen::Update() {
 		mLevel1->Update();
 		break;
 	case 2:
+		level2Update();
+		mLevel2->Update();
 		break;
 	case 3:
 		break;
@@ -54,6 +59,12 @@ void PlayScreen::Render() {
 			break;
 		case 2:
 			Level1::Release();
+			if (!mIsWhite) {
+				mLevel2->Render();
+			}
+			else {
+				mLevel2->RenderWhite();
+			}
 			break;
 		case 3:
 			break;	
@@ -135,6 +146,18 @@ void PlayScreen::ResolvePlatformCollision(Player* player, GLTexture* object) {
 	player->SetVelocity(0);*/
 }
 	
+void PlayScreen::ResolveBlockCollision(Player* player, GLTexture* block) {
+	float mMoveSpeedTemp = 200.0f;
+	if (VerticallyAligned(player, block)) {
+		if (player->Position().x < block->Position().x && mInput->KeyDown(SDL_SCANCODE_D)) {
+			block->Translate(Vec2_Right * mMoveSpeedTemp * mTimer->DeltaTime(), World);
+			player->SetMoveSpeed(100.0f);
+		}
+		else {
+			block->Translate(-Vec2_Right * mMoveSpeedTemp * mTimer->DeltaTime(), World);
+		}
+	}
+}
 
 
 bool PlayScreen::VerticallyAligned(Player* player, GLTexture* object) {
@@ -235,3 +258,87 @@ void PlayScreen::level1Update() {
 	}
 }
 
+void PlayScreen::level2Update() {
+	/*Vector2 pos = mPlayer->Position(Local);
+	if (pos.x < mMoveBoundsLeft.x) {
+		pos.x = mMoveBoundsLeft.x;
+	}
+	else if (pos.x >= mMoveBoundsLeft.y) {
+		pos.x = mMoveBoundsLeft.y;
+	}
+	mPlayer->Position(pos);*/
+
+	if (mPlayer->GetIsGrounded() && !mPlayer->GetIsJumping()) {
+		if (!mIsWhite) {
+			if (!CheckCollision(mPlayer, mLevel2->GetLedge1Texture())
+				&& !CheckCollision(mPlayer, mLevel2->GetBlock1Texture())
+				&& !CheckCollision(mPlayer, mLevel2->GetColliderTexture())
+				&& !CheckCollision(mPlayer, mLevel2->GetGroundTexture())) {
+
+				mPlayer->SetIsGrounded(false);
+			}
+		}
+		else {
+			if (!CheckCollision(mPlayer, mLevel2->GetBlackLedge1Texture())
+				&& !CheckCollision(mPlayer, mLevel2->GetColliderTexture())
+				&& !CheckCollision(mPlayer, mLevel2->GetGroundTexture())) {
+
+				mPlayer->SetIsGrounded(false);
+			}
+		}
+		if (mInput->KeyDown(SDL_SCANCODE_RSHIFT)) {
+			mPlayer->SetIsPushing(true);
+			if (CheckCollision(mPlayer, mLevel2->GetBlock1Texture()) && !HorizontallyAligned(mPlayer, mLevel2->GetBlock1Texture())) {
+				ResolveBlockCollision(mPlayer, mLevel2->GetBlock1Texture());
+			}
+		}
+		else {
+			mPlayer->SetIsPushing(false);
+		}
+		
+	}
+	else if (mPlayer->GetIsJumping() && !mPlayer->GetIsGrounded()) {
+		mPlayer->SetIsJumping(false);
+	}
+
+	else if (!mIsWhite) {
+		if (!mPlayer->GetIsGrounded() && !mPlayer->GetIsJumping()) {
+			if (CheckCollision(mPlayer, mLevel2->GetLedge1Texture())) {
+				ResolvePlatformCollision(mPlayer, mLevel2->GetLedge1Texture());
+			}
+			else if (CheckCollision(mPlayer, mLevel2->GetBlock1Texture())) {
+				ResolvePlatformCollision(mPlayer, mLevel2->GetBlock1Texture());
+			}
+			else if (CheckCollision(mPlayer, mLevel2->GetColliderTexture())) {
+				ResolvePlatformCollision(mPlayer, mLevel2->GetColliderTexture());
+			}
+			if (CheckCollision(mPlayer, mLevel2->GetGroundTexture())) {
+				ResolvePlatformCollision(mPlayer, mLevel2->GetGroundTexture());
+			}
+		}
+	}
+	else if (mIsWhite) {
+		if (!mPlayer->GetIsGrounded() && !mPlayer->GetIsJumping()) {
+			if (CheckCollision(mPlayer, mLevel2->GetBlackLedge1Texture())) {
+				ResolvePlatformCollision(mPlayer, mLevel2->GetBlackLedge1Texture());
+			}
+			if (CheckCollision(mPlayer, mLevel2->GetColliderTexture())) {
+				ResolvePlatformCollision(mPlayer, mLevel2->GetColliderTexture());
+			}
+			if (CheckCollision(mPlayer, mLevel2->GetGroundTexture())) {
+				ResolvePlatformCollision(mPlayer, mLevel2->GetGroundTexture());
+			}
+		}
+	}
+
+	//if player exits right side of screen the level is incremented up 1 and player position is set
+	//where we want it to be on next level.
+	if (mPlayer->Position().x > 1900 && mPlayer->Position().y <= 520) {
+		level += 1;
+		mPlayer->Position(0.0f, mPlayer->Position().y);
+	}
+	if (mPlayer->Position().x < -50 && mPlayer->Position().y <= 520) {
+		level -= 1;
+		mPlayer->Position(1900.0f, mPlayer->Position().y);
+	}
+}

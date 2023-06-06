@@ -5,6 +5,7 @@
 #include "InputManager.h"
 #include "Player.h"
 #include "Level1.h"
+#include "Level2.h"
 
 class PlayScreen : public GameEntity {
 private:
@@ -13,6 +14,7 @@ private:
 	InputManager* mInput;
 
 	Level1* mLevel1;
+	Level2* mLevel2;
 	Player * mPlayer;
 
 	Vector2 mMoveBoundsLeft;
@@ -30,6 +32,7 @@ public:
 
 	bool CheckCollision(Player* player, GLTexture* object);
 	void ResolvePlatformCollision(Player* player, GLTexture* object);
+	void ResolveBlockCollision(Player* player, GLTexture* block);
 	bool VerticallyAligned(Player* player, GLTexture* object);
 	bool HorizontallyAligned(Player* player, GLTexture* object);
 
@@ -37,5 +40,6 @@ public:
 	void Render() override;
 
 	void level1Update();
+	void level2Update();
 };
 #endif
