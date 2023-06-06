@@ -52,10 +52,13 @@ Level2::Level2() {
 
 	mBlock2 = new GLTexture("platforms.png", 640, 0, 480, 480);
 	mBlock2->Parent(this);
-	mBlock2->Position(1400.0f, 743.0f);
+	mBlock2->Position(1400.0f, 745.0f);
 	mBlock2->Scale(Vector2(0.65f, 0.65f));
 
-
+	mColliderBlock2 = new GLTexture("Collider.png", 0, 0, 100, 70);
+	mColliderBlock2->Parent(this);
+	mColliderBlock2->Position(1400.0f, 675.0f);
+	mColliderBlock2->Scale(Vector2(3.12f, 1.0f));
 
 	mLedge1 = new GLTexture("PillarPlatform.png", 0, 0, 800, 70);
 	mLedge1->Parent(this);
@@ -100,7 +103,7 @@ Level2::Level2() {
 
 	mBlackBlock1 = new GLTexture("BlackPlatforms.png", 640, 640, 160, 480);
 	mBlackBlock1->Parent(this);
-	mBlackBlock1->Position(700.0f, 733.0f);
+	mBlackBlock1->Position(700.0f, 700.0f);
 	mBlackBlock1->Scale(Vector2(0.85f, 0.85f));
 
 	mBlackLedge1 = new GLTexture("BlackPillarPlatformt.png", 0, 0, 800, 70);
@@ -196,6 +199,7 @@ void Level2::Render() {
 
 	mBlock1->Render();
 	mBlock2->Render();
+	mColliderBlock2->Render();
 
 	mLedge1->RenderFlip();
 	/*mLedge2->Render();

@@ -21,6 +21,8 @@ private:
 	GLTexture* mBlock1;
 	GLTexture* mBlock2;
 
+	GLTexture* mColliderBlock2;
+
 	GLTexture* mLedge1;
 	/*GLTexture* mLedge2;
 
@@ -28,7 +30,7 @@ private:
 	GLTexture* mSword2;
 	GLTexture* mSword3;*/
 
-	AnimatedGLTexture* mFlag1;
+	//AnimatedGLTexture* mFlag1;
 	// black elemets
 	GLTexture* mBlackPillar1;
 	GLTexture* mBlackPillar2;
@@ -58,14 +60,16 @@ public:
 	GLTexture* GetDarkGroundTexture() { return mGroundBlack; }
 
 	GLTexture* GetBlock1Texture() { return mBlock1; }
+	GLTexture* GetColliderBlock2Texture() { return mColliderBlock2; }
 	GLTexture* GetBlock2Texture() { return mBlock2; }
 	GLTexture* GetColliderTexture() { return mCollider; }
 
 	GLTexture* GetLedge1Texture() { return mLedge1; }
-	/*GLTexture* GetLedge2Texture() { return mLedge2; }
+	//GLTexture* GetLedge2Texture() { return mLedge2; }
 
-	GLTexture* GetBlackPillarTexture() { return mBlackPillar1; }*/
+	//GLTexture* GetBlackPillarTexture() { return mBlackPillar1; }
 	GLTexture* GetBlackLedge1Texture() { return mBlackLedge1; }
+	GLTexture* GetBlackBlock1Texture() { return mBlackBlock1; }
 };
 
 #endif 
