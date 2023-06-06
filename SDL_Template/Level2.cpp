@@ -56,9 +56,9 @@ Level2::Level2() {
 	mBlock2->Scale(Vector2(0.65f, 0.65f));
 
 	mColliderBlock2 = new GLTexture("Collider.png", 0, 0, 100, 70);
-	mColliderBlock2->Parent(this);
-	mColliderBlock2->Position(1400.0f, 675.0f);
-	mColliderBlock2->Scale(Vector2(3.12f, 1.0f));
+	mColliderBlock2->Parent(mBlock2);
+	mColliderBlock2->Position(0.0f, -210.0f);
+	mColliderBlock2->Scale(Vector2(3.5f, 1.0f));
 
 	mLedge1 = new GLTexture("PillarPlatform.png", 0, 0, 800, 70);
 	mLedge1->Parent(this);

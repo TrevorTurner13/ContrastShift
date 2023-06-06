@@ -29,12 +29,17 @@ public:
 
 	bool GetIsWhite() { return mIsWhite; }
 	void SetIsWhite(bool shift);
-
+	// player/object collision
 	bool CheckCollision(Player* player, GLTexture* object);
 	void ResolvePlatformCollision(Player* player, GLTexture* object);
-	void ResolveBlockCollision(Player* player, GLTexture* block);
+	void ResolvePushCollision(Player* player, GLTexture* block);
 	bool VerticallyAligned(Player* player, GLTexture* object);
 	bool HorizontallyAligned(Player* player, GLTexture* object);
+
+	// object/object collision
+	bool CheckBlockCollision(GLTexture* block1, GLTexture* block2);
+	void ResolveBlockCollision(GLTexture* block1, GLTexture* block2);
+	bool VerticallyAlignedBlocks(GLTexture* object1, GLTexture* object2);
 
 	void Update() override;
 	void Render() override;

@@ -146,17 +146,56 @@ void PlayScreen::ResolvePlatformCollision(Player* player, GLTexture* object) {
 	player->SetVelocity(0);*/
 }
 	
-void PlayScreen::ResolveBlockCollision(Player* player, GLTexture* block) {
-	float mMoveSpeedTemp = 200.0f;
+void PlayScreen::ResolvePushCollision(Player* player, GLTexture* block) {
+	float mMoveSpeedTemp = 100.0f;
 	if (VerticallyAligned(player, block)) {
 		if (player->Position().x < block->Position().x && mInput->KeyDown(SDL_SCANCODE_D)) {
 			block->Translate(Vec2_Right * mMoveSpeedTemp * mTimer->DeltaTime(), World);
-			player->SetMoveSpeed(100.0f);
 		}
 		else {
 			block->Translate(-Vec2_Right * mMoveSpeedTemp * mTimer->DeltaTime(), World);
 		}
 	}
+}
+
+bool PlayScreen::CheckBlockCollision(GLTexture* block1, GLTexture* block2) {
+	//With locals it's common usage to use underscores instead of camelCasing
+	float block1Left = block1->Position().x - block1->ScaledDimensions().x / 2;
+	float block1Right = block1->Position().x + block1->ScaledDimensions().x / 2;
+	float block1Top = block1->Position().y - block1->ScaledDimensions().y / 2;
+	float block1Bottom = block1->Position().y + block1->ScaledDimensions().y / 2;
+
+	float block2Left = block2->Position().x - block2->ScaledDimensions().x / 2;
+	float block2Right = block2->Position().x + block2->ScaledDimensions().x / 2;
+	float block2Top = block2->Position().y - block2->ScaledDimensions().y / 2;
+	float block2Bottom = block2->Position().y + block2->ScaledDimensions().y / 2;
+
+	//If Red's right side is further to the right than Blue's left side.
+	//and Red's left side is further to the left than Blue's right side.
+	//and Red's bottom side is further to the bottom than Blue's top side.
+	//and Red's top side is further to the top than Blue's bottom side then..
+	//There is collision!
+	if (block1Right > block2Left && block1Left < block2Right
+		&& block1Bottom > block2Top && block1Top < block2Bottom) {
+		return true;
+	}
+	else {
+		//If one of these statements is false, return false.
+		return false;
+	}
+}
+
+void PlayScreen::ResolveBlockCollision(GLTexture* block1, GLTexture* block2) {
+	float mMoveSpeedTemp = 100.0f;
+		if (block1->Position().x < block2->Position().x && mInput->KeyDown(SDL_SCANCODE_D)) {
+			block1->Translate(Vec2_Right * mMoveSpeedTemp * mTimer->DeltaTime(), World);
+			block2->Translate(Vec2_Right * mMoveSpeedTemp * mTimer->DeltaTime(), World);
+		}
+		else if (block1->Position().x < block2->Position().x && mInput->KeyDown(SDL_SCANCODE_A)) {
+			block1->Translate(-Vec2_Right * mMoveSpeedTemp * mTimer->DeltaTime(), World);
+			block2->Translate(-Vec2_Right * mMoveSpeedTemp * mTimer->DeltaTime(), World);
+		}
+	
 }
 
 
@@ -184,7 +223,19 @@ bool PlayScreen::HorizontallyAligned(Player* player, GLTexture* object) {
 	else {
 		return false;
 	}
-	
+}
+
+bool PlayScreen::VerticallyAlignedBlocks(GLTexture* object1, GLTexture* object2) {
+	float object1Top = object1->Position().y - object1->ScaledDimensions().y / 2;
+	float object1Bottom = object1->Position().y + object1->ScaledDimensions().y / 2;
+	float object2Top = object2->Position().y - object2->ScaledDimensions().y / 2;
+	float object2Bottom = object2->Position().y + object2->ScaledDimensions().y / 2;
+	if (object1Bottom > object2Top && object1Top < object2Bottom) {
+		return true;
+	}
+	else {
+		return false;
+	}
 }
 
 void PlayScreen::level1Update() {
@@ -259,20 +310,21 @@ void PlayScreen::level1Update() {
 }
 
 void PlayScreen::level2Update() {
-	/*Vector2 pos = mPlayer->Position(Local);
-	if (pos.x < mMoveBoundsLeft.x) {
-		pos.x = mMoveBoundsLeft.x;
+	Vector2 pos = mPlayer->Position(Local);
+	if (pos.x < mMoveBoundsLeft.x - 160) {
+		pos.x = mMoveBoundsLeft.x - 160;
 	}
 	else if (pos.x >= mMoveBoundsLeft.y) {
 		pos.x = mMoveBoundsLeft.y;
 	}
-	mPlayer->Position(pos);*/
+	mPlayer->Position(pos);
 
 	if (mPlayer->GetIsGrounded() && !mPlayer->GetIsJumping()) {
 		if (!mIsWhite) {
 			if (!CheckCollision(mPlayer, mLevel2->GetLedge1Texture())
 				&& !CheckCollision(mPlayer, mLevel2->GetBlock1Texture())
 				&& !CheckCollision(mPlayer, mLevel2->GetColliderTexture())
+				&& !CheckCollision(mPlayer, mLevel2->GetColliderBlock2Texture())
 				&& !CheckCollision(mPlayer, mLevel2->GetGroundTexture())) {
 
 				mPlayer->SetIsGrounded(false);
@@ -280,19 +332,36 @@ void PlayScreen::level2Update() {
 		}
 		else {
 			if (!CheckCollision(mPlayer, mLevel2->GetBlackLedge1Texture())
+				&& !CheckCollision(mPlayer, mLevel2->GetBlackBlock1Texture())
 				&& !CheckCollision(mPlayer, mLevel2->GetColliderTexture())
 				&& !CheckCollision(mPlayer, mLevel2->GetGroundTexture())) {
 
 				mPlayer->SetIsGrounded(false);
 			}
 		}
-		if (mInput->KeyDown(SDL_SCANCODE_RSHIFT)) {
+		if (mInput->KeyDown(SDL_SCANCODE_CAPSLOCK)) {
 			mPlayer->SetIsPushing(true);
-			if (CheckCollision(mPlayer, mLevel2->GetBlock1Texture()) && !HorizontallyAligned(mPlayer, mLevel2->GetBlock1Texture())) {
-				ResolveBlockCollision(mPlayer, mLevel2->GetBlock1Texture());
+			if (!mIsWhite) {
+				if (CheckBlockCollision(mLevel2->GetBlock1Texture(), mLevel2->GetBlock2Texture())) {
+					if (CheckCollision(mPlayer, mLevel2->GetBlock1Texture()) && !HorizontallyAligned(mPlayer, mLevel2->GetBlock1Texture()) && !HorizontallyAligned(mPlayer, mLevel2->GetBlock2Texture())) {
+						ResolveBlockCollision(mLevel2->GetBlock1Texture(), mLevel2->GetBlock2Texture());
+					}
+					else if (CheckCollision(mPlayer, mLevel2->GetBlock2Texture()) && !HorizontallyAligned(mPlayer, mLevel2->GetBlock2Texture()) && !HorizontallyAligned(mPlayer, mLevel2->GetBlock1Texture())) {
+						ResolveBlockCollision(mLevel2->GetBlock1Texture(), mLevel2->GetBlock2Texture());
+					}
+				}
+				if (CheckCollision(mPlayer, mLevel2->GetBlock1Texture()) && !HorizontallyAligned(mPlayer, mLevel2->GetBlock1Texture())) {
+					ResolvePushCollision(mPlayer, mLevel2->GetBlock1Texture());
+				}
+				else if (CheckCollision(mPlayer, mLevel2->GetBlock2Texture()) && !HorizontallyAligned(mPlayer, mLevel2->GetBlock2Texture())) {
+					ResolvePushCollision(mPlayer, mLevel2->GetBlock2Texture());
+				}
+				
 			}
-			else if (CheckCollision(mPlayer, mLevel2->GetColliderBlock2Texture()) && !HorizontallyAligned(mPlayer, mLevel2->GetBlock1Texture())) {
-				ResolveBlockCollision(mPlayer, mLevel2->GetColliderBlock2Texture());
+			else {
+				if (CheckCollision(mPlayer, mLevel2->GetBlackBlock1Texture()) && !HorizontallyAligned(mPlayer, mLevel2->GetBlackBlock1Texture())) {
+					ResolvePushCollision(mPlayer, mLevel2->GetBlackBlock1Texture());
+				}
 			}
 		}
 		else {

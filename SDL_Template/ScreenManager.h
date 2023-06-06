@@ -6,6 +6,7 @@
 #include "Level1.h"
 #include "AudioManager.h"
 
+
 class ScreenManager {
 private:
 	static ScreenManager * sInstance;
