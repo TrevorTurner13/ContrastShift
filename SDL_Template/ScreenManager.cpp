@@ -17,6 +17,7 @@ void ScreenManager::Release() {
 
 
 
+
 void ScreenManager::Update() {
 
 	mClouds->Update();

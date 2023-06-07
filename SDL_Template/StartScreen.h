@@ -63,6 +63,7 @@ private:
 
 	float mBackgroundColor;
 
+
 public:
 	StartScreen();
 	~StartScreen();
@@ -75,5 +76,6 @@ public:
 
 	void Update() override;
 	void Render() override;
+	
 };
 #endif
