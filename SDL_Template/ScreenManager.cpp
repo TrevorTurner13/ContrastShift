@@ -51,6 +51,10 @@ void ScreenManager::Update() {
 
 		}
 		break;
+
+	case Tutorial:
+
+		break;
 	}
 }
 
@@ -72,6 +76,9 @@ void ScreenManager::Render() {
 	case Play:
 		mPlayScreen->Render();
 		break;
+	case Tutorial:
+		mTutorialScreen->Render();
+		break;
 	}
 }
 
@@ -91,6 +98,8 @@ ScreenManager::ScreenManager() {
 	mLevel1 = Level1::Instance();
 
 	mCurrentScreen = Start;
+
+	 
 }
 
 ScreenManager::~ScreenManager() {
