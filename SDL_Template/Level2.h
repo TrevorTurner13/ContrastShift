@@ -20,31 +20,32 @@ private:
 
 	GLTexture* mBlock1;
 	GLTexture* mBlock2;
-
+	GLTexture* mColliderBlock1;
 	GLTexture* mColliderBlock2;
 
 	GLTexture* mLedge1;
-	/*GLTexture* mLedge2;
+	//GLTexture* mLedge2;
 
 	GLTexture* mSword1;
 	GLTexture* mSword2;
-	GLTexture* mSword3;*/
-
-	//AnimatedGLTexture* mFlag1;
+	GLTexture* mSword3;
+	GLTexture* mSword4;
+	
 	// black elemets
 	GLTexture* mBlackPillar1;
 	GLTexture* mBlackPillar2;
 
 	GLTexture* mBlackBlock1;
+	GLTexture* mColliderBlackBlock1;
 
 	GLTexture* mBlackLedge1;
-	/*GLTexture* mBlackLedge2;
+	//GLTexture* mBlackLedge2;
 
 	GLTexture* mBlackSword1;
 	GLTexture* mBlackSword2;
-	GLTexture* mBlackSword3;
-
-	AnimatedGLTexture* mBlackFlag1;*/
+	
+	AnimatedGLTexture* mBlackFlag1;
+	AnimatedGLTexture* mBlackFlag2;
 	// player
 public:
 	static Level2* Instance();
@@ -60,6 +61,7 @@ public:
 	GLTexture* GetDarkGroundTexture() { return mGroundBlack; }
 
 	GLTexture* GetBlock1Texture() { return mBlock1; }
+	GLTexture* GetColliderBlock1Texture() { return mColliderBlock1; }
 	GLTexture* GetColliderBlock2Texture() { return mColliderBlock2; }
 	GLTexture* GetBlock2Texture() { return mBlock2; }
 	GLTexture* GetColliderTexture() { return mCollider; }
@@ -70,6 +72,7 @@ public:
 	//GLTexture* GetBlackPillarTexture() { return mBlackPillar1; }
 	GLTexture* GetBlackLedge1Texture() { return mBlackLedge1; }
 	GLTexture* GetBlackBlock1Texture() { return mBlackBlock1; }
+	GLTexture* GetColliderBlackBlock1Texture() { return mColliderBlackBlock1; }
 };
 
 #endif 
