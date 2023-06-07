@@ -295,7 +295,7 @@ void PlayScreen::level2Update() {
 	if (mPlayer->GetIsGrounded() && !mPlayer->GetIsJumping()) {
 		if (!mIsWhite) {
 			if (!CheckCollision(mPlayer, mLevel2->GetLedge1Texture())
-				&& !CheckCollision(mPlayer, mLevel2->GetBlock1Texture())
+				&& !CheckCollision(mPlayer, mLevel2->GetColliderBlock1Texture())
 				&& !CheckCollision(mPlayer, mLevel2->GetColliderTexture())
 				&& !CheckCollision(mPlayer, mLevel2->GetColliderBlock2Texture())
 				&& !CheckCollision(mPlayer, mLevel2->GetGroundTexture())) {
