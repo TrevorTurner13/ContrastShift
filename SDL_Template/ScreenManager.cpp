@@ -32,6 +32,8 @@ void ScreenManager::Update() {
 			mAudio->PauseMusic();
 			mAudio->PlayMusic("MUS/light.wav", 100);
 			int Mix_MusicVolume(0);
+			//mAudio->PlaySFX("MUS/Dark.wav", 100);
+			//mAudio->PlaySFX("MUS/light.wav", 100);
 		}
 		break;
 	case Play:
