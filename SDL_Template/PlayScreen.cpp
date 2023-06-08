@@ -130,6 +130,7 @@ void PlayScreen::ResolvePushCollision(Player* player, GLTexture* block) {
 			block->Translate(-Vec2_Right * mMoveSpeedTemp * mTimer->DeltaTime(), World);
 		}
 	}
+	//mAudio->PlayMusic("SFX/Rock.wav", 2);
 }
 
 bool PlayScreen::CheckBlockCollision(GLTexture* block1, GLTexture* block2) {

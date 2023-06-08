@@ -59,6 +59,8 @@ namespace SDLFramework {
 
 	AudioManager::~AudioManager() {
 		mAssetManager = nullptr;
+		int Mix_MusicVolume(1);
+		int Mix_MasterVolume(30);
 		Mix_CloseAudio();
 		Mix_Quit();
 	}

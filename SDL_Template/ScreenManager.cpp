@@ -30,8 +30,8 @@ void ScreenManager::Update() {
 		if (mInput->KeyPressed(SDL_SCANCODE_RETURN)) {
 			mCurrentScreen = Play;
 			mAudio->PauseMusic();
-			//mAudio->PlaySFX("MUS/Dark.wav", 100);
-			mAudio->PlaySFX("MUS/light.wav", 100);
+			mAudio->PlayMusic("MUS/light.wav", 100);
+			int Mix_MusicVolume(0);
 		}
 		break;
 	case Play:
@@ -42,11 +42,16 @@ void ScreenManager::Update() {
 				glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 				mAudio->PlaySFX("SFX/ShiftLight.wav", 0);
 				mPlayScreen->SetIsWhite(false);
+				mAudio->PlayMusic("MUS/Light.wav", 100);
+				int Mix_MusicVolume(-0.2);
 			}
 			else {
 				glClearColor(250.0f, 250.0f, 250.0f, 1.0f);
 				mAudio->PlaySFX("SFX/ShiftDark.wav", 0);
 				mPlayScreen->SetIsWhite(true);
+				mAudio->PlayMusic("MUS/Dark.wav", 100);
+				int Mix_MusicVolume(-0.2);
+
 			}
 
 		}
