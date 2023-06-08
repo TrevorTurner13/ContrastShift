@@ -15,6 +15,16 @@ private:
 	Texture* mShift;
 	Texture* mPush;
 
+	Texture* mA;
+	Texture* mD;
+	Texture* mSpace;
+	Texture* mShiftKey;
+	Texture* mCaps;
+	GameEntity* mBottomBar;
+	Texture* mNamco;
+	Texture* mDates;
+	Texture* mRights;
+
 public:
 	TutorialScreen();
 	~TutorialScreen();

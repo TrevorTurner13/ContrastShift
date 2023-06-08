@@ -27,11 +27,14 @@ void ScreenManager::Update() {
 		mGuy->Update();
 		mLevel1->Update();
 		mStartScreen->Update();
-		if (mInput->KeyPressed(SDL_SCANCODE_RETURN)) {
+		if (mInput->KeyPressed(SDL_SCANCODE_RETURN)&& mStartScreen->SelectedMode()==0) {
 			mCurrentScreen = Play;
 			mAudio->PauseMusic();
 			//mAudio->PlaySFX("MUS/Dark.wav", 100);
 			mAudio->PlaySFX("MUS/light.wav", 100);
+		}
+		else if (mInput->KeyPressed(SDL_SCANCODE_RETURN) && mStartScreen->SelectedMode() == 1) {
+			mCurrentScreen = Tutorial;
 		}
 		break;
 	case Play:
@@ -53,6 +56,12 @@ void ScreenManager::Update() {
 		break;
 
 	case Tutorial:
+		mGuy->Update();
+		mLevel1->Update();
+		mTutorialScreen->Update();
+		if (mInput->KeyPressed(SDL_SCANCODE_ESCAPE)) {
+			mCurrentScreen = Start;
+		}
 
 		break;
 	}
@@ -77,6 +86,8 @@ void ScreenManager::Render() {
 		mPlayScreen->Render();
 		break;
 	case Tutorial:
+		mLevel1->Render();
+		mGuy->Render();
 		mTutorialScreen->Render();
 		break;
 	}
@@ -88,6 +99,7 @@ ScreenManager::ScreenManager() {
 
 	mStartScreen = new StartScreen();
 	mPlayScreen = new PlayScreen();
+	mTutorialScreen = new TutorialScreen();
 
 	mGuy = new AnimatedGLTexture("Character Sprite.png", 0, 1936, 320, 320, 6, 1.0f, Animation::Layouts::Horizontal);
 	mGuy->Position(300.0f, 596.0f);
@@ -99,7 +111,7 @@ ScreenManager::ScreenManager() {
 
 	mCurrentScreen = Start;
 
-	 
+	
 }
 
 ScreenManager::~ScreenManager() {
