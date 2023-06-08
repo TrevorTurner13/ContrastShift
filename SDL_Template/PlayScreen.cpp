@@ -11,11 +11,14 @@ PlayScreen::PlayScreen() {
 	delete mLevel2;
 	mLevel2 = new Level2();
 
+	delete mLevel3;
+	mLevel3 = new Level3();
+
 	delete mPlayer;
 	mPlayer = new Player();
 	mPlayer->Position(300.0f, 590.0f);
 
-	mMoveBoundsLeft = Vector2(130.0f, 1920.0f);
+	mMoveBoundsLeft = Vector2(130.0f, 1980.0f);
 	mIsWhite = false;
 	
 	level = 1;
@@ -42,6 +45,8 @@ void PlayScreen::Update() {
 		mLevel2->Update();
 		break;
 	case 3:
+		level3Update();
+		mLevel3->Update();
 		break;
 	}
 }
@@ -66,6 +71,12 @@ void PlayScreen::Render() {
 			}
 			break;
 		case 3:
+			if (!mIsWhite) {
+				mLevel3->Render();
+			}
+			else {
+				mLevel3->RenderWhite();
+			}
 			break;	
 	}
 	if (!mIsWhite) {
@@ -383,11 +394,104 @@ void PlayScreen::level2Update() {
 
 	//if player exits right side of screen the level is incremented up 1 and player position is set
 	//where we want it to be on next level.
-	if (mPlayer->Position().x > 1900 && mPlayer->Position().y <= 520) {
+	if (mPlayer->Position().x > 1960 && mPlayer->Position().y <= 225) {
 		level += 1;
 		mPlayer->Position(0.0f, mPlayer->Position().y);
 	}
 	if (mPlayer->Position().x < -10 && mPlayer->Position().y <= 520) {
+		level -= 1;
+		mPlayer->Position(1900.0f, mPlayer->Position().y);
+	}
+}
+
+void PlayScreen::level3Update() {
+	Vector2 pos = mPlayer->Position(Local);
+	if (pos.x < mMoveBoundsLeft.x - 170) {
+		pos.x = mMoveBoundsLeft.x - 170;
+	}
+	else if (pos.x >= mMoveBoundsLeft.y) {
+		pos.x = mMoveBoundsLeft.y;
+	}
+	mPlayer->Position(pos);
+
+	if (mPlayer->GetIsGrounded() && !mPlayer->GetIsJumping()) {
+		if (!mIsWhite) {
+			if (!CheckCollision(mPlayer, mLevel3->GetPillarStartTexture())
+				&& !CheckCollision(mPlayer, mLevel3->GetLedgeStartTexture())
+				&& !CheckCollision(mPlayer, mLevel3->GetGroundTexture())) {
+
+				mPlayer->SetIsGrounded(false);
+			}
+		}
+		else {
+			if (!CheckCollision(mPlayer, mLevel3->GetBlackPillarStartTexture())
+				&& !CheckCollision(mPlayer, mLevel3->GetBlackLedgeStartTexture()) 
+				&& !CheckCollision(mPlayer, mLevel3->GetGroundTexture())) {
+
+				mPlayer->SetIsGrounded(false);
+			}
+		}
+	//	if (mInput->KeyDown(SDL_SCANCODE_CAPSLOCK)) {
+	//		mPlayer->SetIsPushing(true);
+	//		if (!mIsWhite) {
+	//			/*if (CheckBlockCollision(mLevel3->GetBlock1Texture(), mLevel2->GetBlock2Texture())) {
+	//				if (CheckCollision(mPlayer, mLevel2->GetBlock1Texture()) && !HorizontallyAligned(mPlayer, mLevel2->GetBlock1Texture()) && !HorizontallyAligned(mPlayer, mLevel2->GetBlock2Texture())) {
+	//					ResolveBlockCollision(mLevel2->GetBlock1Texture(), mLevel2->GetBlock2Texture());
+	//				}
+	//				else if (CheckCollision(mPlayer, mLevel2->GetBlock2Texture()) && !HorizontallyAligned(mPlayer, mLevel2->GetBlock2Texture()) && !HorizontallyAligned(mPlayer, mLevel2->GetBlock1Texture())) {
+	//					ResolveBlockCollision(mLevel2->GetBlock1Texture(), mLevel2->GetBlock2Texture());
+	//				}
+	//			}*/
+	//			if (CheckCollision(mPlayer, mLevel2->GetBlock1Texture()) && !HorizontallyAligned(mPlayer, mLevel2->GetBlock1Texture())) {
+	//				ResolvePushCollision(mPlayer, mLevel2->GetBlock1Texture());
+	//			}
+	//			else if (CheckCollision(mPlayer, mLevel2->GetBlock2Texture()) && !HorizontallyAligned(mPlayer, mLevel2->GetBlock2Texture())) {
+	//				ResolvePushCollision(mPlayer, mLevel2->GetBlock2Texture());
+	//			}
+	//		}
+	//		else {
+	//			if (CheckCollision(mPlayer, mLevel2->GetBlackBlock1Texture()) && !HorizontallyAligned(mPlayer, mLevel2->GetBlackBlock1Texture())) {
+	//				ResolvePushCollision(mPlayer, mLevel2->GetBlackBlock1Texture());
+	//			}
+	//		}
+	//	}
+	//	else {
+	//		mPlayer->SetIsPushing(false);
+	//	}
+
+	}
+	/*else */if (mPlayer->GetIsJumping() && !mPlayer->GetIsGrounded()) {
+		mPlayer->SetIsJumping(false);
+	}
+
+	else if (!mIsWhite) {
+		if (!mPlayer->GetIsGrounded() && !mPlayer->GetIsJumping()) {
+			if (CheckCollision(mPlayer, mLevel3->GetLedgeStartTexture())) {
+				ResolvePlatformCollision(mPlayer, mLevel3->GetLedgeStartTexture());
+			}
+			if (CheckCollision(mPlayer, mLevel3->GetGroundTexture())) {
+				ResolvePlatformCollision(mPlayer, mLevel3->GetGroundTexture());
+			}
+		}
+	}
+	else if (mIsWhite) {
+		if (!mPlayer->GetIsGrounded() && !mPlayer->GetIsJumping()) {
+			if (CheckCollision(mPlayer, mLevel3->GetBlackLedgeStartTexture())) {
+				ResolvePlatformCollision(mPlayer, mLevel3->GetBlackLedgeStartTexture());
+			}
+			if (CheckCollision(mPlayer, mLevel3->GetGroundTexture())) {
+				ResolvePlatformCollision(mPlayer, mLevel3->GetGroundTexture());
+			}
+		}
+	}
+
+	//if player exits right side of screen the level is incremented up 1 and player position is set
+	//where we want it to be on next level.
+	if (mPlayer->Position().x > 1960 && mPlayer->Position().y <= 225) {
+		level += 1;
+		mPlayer->Position(0.0f, mPlayer->Position().y);
+	}
+	if (mPlayer->Position().x < -10 && mPlayer->Position().y <= 225) {
 		level -= 1;
 		mPlayer->Position(1900.0f, mPlayer->Position().y);
 	}

@@ -31,7 +31,7 @@ void ScreenManager::Update() {
 			mCurrentScreen = Play;
 			mAudio->PauseMusic();
 			//mAudio->PlaySFX("MUS/Dark.wav", 100);
-			mAudio->PlaySFX("MUS/light.wav", 100);
+			//mAudio->PlaySFX("MUS/light.wav", 100);
 		}
 		else if (mInput->KeyPressed(SDL_SCANCODE_RETURN) && mStartScreen->SelectedMode() == 1) {
 			mCurrentScreen = Tutorial;
