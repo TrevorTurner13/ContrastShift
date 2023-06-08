@@ -150,6 +150,9 @@
     <ClCompile Include="Level3.cpp">
       <Filter>Source Files\Galaga</Filter>
     </ClCompile>
+    <ClCompile Include="TutorialScreen.cpp">
+      <Filter>Source Files\Galaga</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameEntity.h">
@@ -255,6 +258,9 @@
       <Filter>Header Files\Galaga</Filter>
     </ClInclude>
     <ClInclude Include="Level3.h">
+      <Filter>Header Files\Galaga</Filter>
+    </ClInclude>
+    <ClInclude Include="TutorialScreen.h">
       <Filter>Header Files\Galaga</Filter>
     </ClInclude>
   </ItemGroup>

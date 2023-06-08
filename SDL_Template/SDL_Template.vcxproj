@@ -190,6 +190,7 @@ xcopy "$(ProjectDir)..\Data\*" "$(OutDir)Data\" /y /s</Command>
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="tinyxml2.cpp" />
+    <ClCompile Include="TutorialScreen.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnimatedGLTexture.h" />
@@ -227,6 +228,7 @@ xcopy "$(ProjectDir)..\Data\*" "$(OutDir)Data\" /y /s</Command>
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="tinyxml2.h" />
+    <ClInclude Include="TutorialScreen.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Assets\Shaders\fs.shader" />
