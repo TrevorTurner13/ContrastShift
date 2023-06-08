@@ -31,7 +31,7 @@ void ScreenManager::Update() {
 			mCurrentScreen = Play;
 			mAudio->PauseMusic();
 			//mAudio->PlaySFX("MUS/Dark.wav", 100);
-			mAudio->PlaySFX("MUS/light.wav", 100);
+			//mAudio->PlaySFX("MUS/light.wav", 100);
 		}
 		break;
 	case Play:
