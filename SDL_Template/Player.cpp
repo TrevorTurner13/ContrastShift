@@ -48,8 +48,6 @@ Player::Player() {
 	mInput = InputManager::Instance();
 	mAudio = AudioManager::Instance();
 
-	
-
 	mVisible = false;
 	mAnimating = false;
 	mWasHit = false;
@@ -64,6 +62,10 @@ Player::Player() {
 
 	mGravity = Vector2(0.0, 25);
 	mJumpPower = Vector2(0.0, -16);
+
+	mMoveSpeed = 400.0f;
+	mMoveBoundsRight = Vector2(2260.0f, 720.0f);
+
 
 	mScore = 0;
 	mLives = 2;
@@ -103,9 +105,6 @@ Player::Player() {
 	mGuyJumpingDark->Position(Vec2_Zero);
 	mGuyJumpingDark->Scale(Vector2(0.5f, 0.5f));
 	mGuyJumpingDark->SetWrapMode(Animation::WrapModes::Once);
-
-	mMoveSpeed = 400.0f;
-	mMoveBoundsRight = Vector2(2260.0f, 720.0f);
 
 	mDeathAnimation = new AnimatedGLTexture("PlayerExplosion.png", 0, 0, 128, 128, 4, 1.0f, Animation::Layouts::Horizontal);
 	mDeathAnimation->Parent(this);

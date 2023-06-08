@@ -21,7 +21,7 @@ PlayScreen::PlayScreen() {
 	mMoveBoundsLeft = Vector2(130.0f, 1980.0f);
 	mIsWhite = false;
 	
-	level = 1;
+	level = 3;
 }
 
 PlayScreen::~PlayScreen() {
@@ -417,16 +417,22 @@ void PlayScreen::level3Update() {
 
 	if (mPlayer->GetIsGrounded() && !mPlayer->GetIsJumping()) {
 		if (!mIsWhite) {
-			if (!CheckCollision(mPlayer, mLevel3->GetPillarStartTexture())
-				&& !CheckCollision(mPlayer, mLevel3->GetLedgeStartTexture())
+			if (!CheckCollision(mPlayer, mLevel3->GetLedgeStartTexture())
+				&& !CheckCollision(mPlayer, mLevel3->GetSmallPillar1Collider())
+				&& !CheckCollision(mPlayer, mLevel3->GetMedPillar1Collider())
+				&& !CheckCollision(mPlayer, mLevel3->GetTallPillar1Collider())
+				&& !CheckCollision(mPlayer, mLevel3->GetTallPillar2Collider())
 				&& !CheckCollision(mPlayer, mLevel3->GetGroundTexture())) {
 
 				mPlayer->SetIsGrounded(false);
 			}
 		}
 		else {
-			if (!CheckCollision(mPlayer, mLevel3->GetBlackPillarStartTexture())
-				&& !CheckCollision(mPlayer, mLevel3->GetBlackLedgeStartTexture()) 
+			if (!CheckCollision(mPlayer, mLevel3->GetBlackLedgeStartTexture()) 
+				&& !CheckCollision(mPlayer, mLevel3->GetMedBlackPillar1Collider())
+				&& !CheckCollision(mPlayer, mLevel3->GetMedBlackPillar2Collider())
+				&& !CheckCollision(mPlayer, mLevel3->GetTallBlackPillar1Collider())
+				&& !CheckCollision(mPlayer, mLevel3->GetTallBlackPillar2Collider())
 				&& !CheckCollision(mPlayer, mLevel3->GetGroundTexture())) {
 
 				mPlayer->SetIsGrounded(false);
@@ -470,6 +476,18 @@ void PlayScreen::level3Update() {
 			if (CheckCollision(mPlayer, mLevel3->GetLedgeStartTexture())) {
 				ResolvePlatformCollision(mPlayer, mLevel3->GetLedgeStartTexture());
 			}
+			else if (CheckCollision(mPlayer, mLevel3->GetSmallPillar1Collider())) {
+				ResolvePlatformCollision(mPlayer, mLevel3->GetSmallPillar1Collider());
+			}
+			else if (CheckCollision(mPlayer, mLevel3->GetMedPillar1Collider())) {
+				ResolvePlatformCollision(mPlayer, mLevel3->GetMedPillar1Collider());
+			}
+			else if (CheckCollision(mPlayer, mLevel3->GetTallPillar1Collider())) {
+				ResolvePlatformCollision(mPlayer, mLevel3->GetTallPillar1Collider());
+			}
+			else if (CheckCollision(mPlayer, mLevel3->GetTallPillar2Collider())) {
+				ResolvePlatformCollision(mPlayer, mLevel3->GetTallPillar2Collider());
+			}
 			if (CheckCollision(mPlayer, mLevel3->GetGroundTexture())) {
 				ResolvePlatformCollision(mPlayer, mLevel3->GetGroundTexture());
 			}
@@ -479,6 +497,18 @@ void PlayScreen::level3Update() {
 		if (!mPlayer->GetIsGrounded() && !mPlayer->GetIsJumping()) {
 			if (CheckCollision(mPlayer, mLevel3->GetBlackLedgeStartTexture())) {
 				ResolvePlatformCollision(mPlayer, mLevel3->GetBlackLedgeStartTexture());
+			}
+			else if (CheckCollision(mPlayer, mLevel3->GetMedBlackPillar1Collider())) {
+				ResolvePlatformCollision(mPlayer, mLevel3->GetMedBlackPillar1Collider());
+			}
+			else if (CheckCollision(mPlayer, mLevel3->GetMedBlackPillar2Collider())) {
+				ResolvePlatformCollision(mPlayer, mLevel3->GetMedBlackPillar2Collider());
+			}
+			else if (CheckCollision(mPlayer, mLevel3->GetTallBlackPillar1Collider())) {
+				ResolvePlatformCollision(mPlayer, mLevel3->GetTallBlackPillar1Collider());
+			}
+			else if (CheckCollision(mPlayer, mLevel3->GetTallBlackPillar2Collider())) {
+				ResolvePlatformCollision(mPlayer, mLevel3->GetTallBlackPillar2Collider());
 			}
 			if (CheckCollision(mPlayer, mLevel3->GetGroundTexture())) {
 				ResolvePlatformCollision(mPlayer, mLevel3->GetGroundTexture());
