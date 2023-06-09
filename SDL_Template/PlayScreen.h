@@ -19,6 +19,8 @@ private:
 	Level3* mLevel3;
 	Player * mPlayer;
 
+	AnimatedGLTexture* mChromaticOrb;
+
 	Vector2 mMoveBoundsLeft;
 
 	bool mIsWhite;
