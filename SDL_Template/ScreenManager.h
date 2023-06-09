@@ -6,13 +6,14 @@
 #include "BackgroundClouds.h"
 #include "Level1.h"
 #include "AudioManager.h"
+#include "CreditsScreen.h"
 
 
 class ScreenManager {
 private:
 	static ScreenManager * sInstance;
 
-	enum Screens { Start, Play, Tutorial };
+	enum Screens { Start, Play, Tutorial, Credits };
 	Screens mCurrentScreen;
 
 	InputManager * mInput;
@@ -21,6 +22,8 @@ private:
 	StartScreen * mStartScreen;
 	PlayScreen * mPlayScreen;
 	TutorialScreen* mTutorialScreen;
+	CreditsScreen* mCreditsScreen;
+
 	AnimatedGLTexture* mGuy;
 	BackgroundClouds* mClouds;
 	Level1* mLevel1;

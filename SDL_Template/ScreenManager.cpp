@@ -107,6 +107,7 @@ ScreenManager::ScreenManager() {
 	mStartScreen = new StartScreen();
 	mPlayScreen = new PlayScreen();
 	mTutorialScreen = new TutorialScreen();
+	mCreditsScreen = new CreditsScreen();
 
 	mGuy = new AnimatedGLTexture("Character Sprite.png", 0, 1936, 320, 320, 6, 1.0f, Animation::Layouts::Horizontal);
 	mGuy->Position(300.0f, 596.0f);
