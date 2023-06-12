@@ -16,10 +16,21 @@ private:
 	AudioManager* mAudio;
 
 	GameEntity* mTopBar;
+	Texture* mThanks;
 
 	GameEntity* mPlayModes;
-
+	Texture* mCreators;
+	Texture* mTrevor;
+	Texture* mBrad;
+	Texture* mAndrew;
+	
 	GameEntity* mBottomBar;
+	Texture* mMusic;
+	Texture* mAndrew2;
+	
+	Texture* mArtwork;
+	Texture* mTrevor2;
+	Texture* mItchGuy;
 	
 	// Screen Animation Variables
 	Vector2 mAnimationStartPos;
