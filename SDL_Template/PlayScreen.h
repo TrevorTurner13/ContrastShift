@@ -49,8 +49,9 @@ public:
 	void Update() override;
 	void Render() override;
 
-	void level1Update();
-	void level2Update();
-	void level3Update();
+	void Level1Update();
+	void Level2Update();
+	void Level3Update();
+	void LevelEndUpdate();
 };
 #endif

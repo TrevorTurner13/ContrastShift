@@ -19,6 +19,10 @@ private:
 	GLTexture* mPillarStartCollider;
 	GLTexture* mBlackPillarStart;
 
+	GLTexture* mMonumentBaseBottom;
+	GLTexture* mMonumentBaseMid;
+	GLTexture* mMonumentBaseTop;
+
 	GLTexture* mPillarEnd;
 	GLTexture* mBlackPillarEnd;
 
@@ -42,6 +46,12 @@ public:
 	void Update();
 	void Render();
 	void RenderBlack();
+
+	GLTexture* GetPillarStartCollider() { return mPillarStartCollider; }
+	GLTexture* GetGroundTexture() { return mGround; }
+	GLTexture* GetMonumentBaseBottom() { return mMonumentBaseBottom; }
+	GLTexture* GetMonumentBaseMid() { return mMonumentBaseMid; }
+	GLTexture* GetMonumentBaseTop() { return mMonumentBaseTop; }
 };
 
 #endif 

@@ -40,18 +40,19 @@ void PlayScreen::Update() {
 
 	switch (level) {
 	case 1:
-		level1Update();
+		Level1Update();
 		mLevel1->Update();
 		break;
 	case 2:
-		level2Update();
+		Level2Update();
 		mLevel2->Update();
 		break;
 	case 3:
-		level3Update();
+		Level3Update();
 		mLevel3->Update();
 		break;
 	case 4:
+		LevelEndUpdate();
 		mLevelEnd->Update();
 		break;
 	}
@@ -238,7 +239,7 @@ bool PlayScreen::VerticallyAlignedBlocks(GLTexture* object1, GLTexture* object2)
 	}
 }
 
-void PlayScreen::level1Update() {
+void PlayScreen::Level1Update() {
 	Vector2 pos = mPlayer->Position(Local);
 	if (pos.x < mMoveBoundsLeft.x) {
 		pos.x = mMoveBoundsLeft.x;
@@ -309,7 +310,7 @@ void PlayScreen::level1Update() {
 	}
 }
 
-void PlayScreen::level2Update() {
+void PlayScreen::Level2Update() {
 	Vector2 pos = mPlayer->Position(Local);
 	if (pos.x < mMoveBoundsLeft.x - 170) {
 		pos.x = mMoveBoundsLeft.x - 170;
@@ -420,7 +421,7 @@ void PlayScreen::level2Update() {
 	}
 }
 
-void PlayScreen::level3Update() {
+void PlayScreen::Level3Update() {
 	Vector2 pos = mPlayer->Position(Local);
 	if (pos.x < mMoveBoundsLeft.x - 170) {
 		pos.x = mMoveBoundsLeft.x - 170;
@@ -549,6 +550,92 @@ void PlayScreen::level3Update() {
 			}
 			if (CheckCollision(mPlayer, mLevel3->GetGroundTexture())) {
 				ResolvePlatformCollision(mPlayer, mLevel3->GetGroundTexture());
+			}
+		}
+	}
+	//if player exits right side of screen the level is incremented up 1 and player position is set
+	//where we want it to be on next level.
+	if (mPlayer->Position().x > 1960 && mPlayer->Position().y <= 475 && mPlayer->Position().y >= 235) {
+		level += 1;
+		mPlayer->Position(0.0f, mPlayer->Position().y);
+	}
+	if (mPlayer->Position().x < -10 && mPlayer->Position().y <= 225) {
+		level -= 1;
+		mPlayer->Position(1900.0f, mPlayer->Position().y);
+	}
+}
+
+void PlayScreen::LevelEndUpdate() {
+	Vector2 pos = mPlayer->Position(Local);
+	if (pos.x < mMoveBoundsLeft.x - 170) {
+		pos.x = mMoveBoundsLeft.x - 170;
+	}
+	else if (pos.x >= mMoveBoundsLeft.y) {
+		pos.x = mMoveBoundsLeft.y;
+	}
+	mPlayer->Position(pos);
+	
+	if (mPlayer->GetIsGrounded() && !mPlayer->GetIsJumping()) {
+		if (!mIsWhite) {
+			if (!CheckCollision(mPlayer, mLevelEnd->GetPillarStartCollider())
+				&& !CheckCollision(mPlayer, mLevelEnd->GetMonumentBaseBottom())
+				&& !CheckCollision(mPlayer, mLevelEnd->GetMonumentBaseMid())
+				&& !CheckCollision(mPlayer, mLevelEnd->GetMonumentBaseTop())
+				&& !CheckCollision(mPlayer, mLevelEnd->GetGroundTexture())) {
+
+				mPlayer->SetIsGrounded(false);
+			}
+		}
+		else {
+			if (!CheckCollision(mPlayer, mLevelEnd->GetPillarStartCollider())
+				&& !CheckCollision(mPlayer, mLevelEnd->GetMonumentBaseBottom())
+				&& !CheckCollision(mPlayer, mLevelEnd->GetMonumentBaseMid())
+				&& !CheckCollision(mPlayer, mLevelEnd->GetMonumentBaseTop())
+				&& !CheckCollision(mPlayer, mLevelEnd->GetGroundTexture())) {
+
+				mPlayer->SetIsGrounded(false);
+			}
+		}
+	}
+	else if (mPlayer->GetIsJumping() && !mPlayer->GetIsGrounded()) {
+		mPlayer->SetIsJumping(false);
+	}
+
+	else if (!mIsWhite) {
+		if (!mPlayer->GetIsGrounded() && !mPlayer->GetIsJumping()) {
+			if (CheckCollision(mPlayer, mLevelEnd->GetPillarStartCollider())) {
+				ResolvePlatformCollision(mPlayer, mLevelEnd->GetPillarStartCollider());
+			}
+			else if (CheckCollision(mPlayer, mLevelEnd->GetMonumentBaseBottom())) {
+				ResolvePlatformCollision(mPlayer, mLevelEnd->GetMonumentBaseBottom());
+			}
+			else if (CheckCollision(mPlayer, mLevelEnd->GetMonumentBaseMid())) {
+				ResolvePlatformCollision(mPlayer, mLevelEnd->GetMonumentBaseMid());
+			}
+			else if (CheckCollision(mPlayer, mLevelEnd->GetMonumentBaseTop())) {
+				ResolvePlatformCollision(mPlayer, mLevelEnd->GetMonumentBaseTop());
+			}
+			if (CheckCollision(mPlayer, mLevelEnd->GetGroundTexture())) {
+				ResolvePlatformCollision(mPlayer, mLevelEnd->GetGroundTexture());
+			}
+		}
+	}
+	else if (mIsWhite) {
+		if (!mPlayer->GetIsGrounded() && !mPlayer->GetIsJumping()) {
+			if (CheckCollision(mPlayer, mLevelEnd->GetPillarStartCollider())) {
+				ResolvePlatformCollision(mPlayer, mLevelEnd->GetPillarStartCollider());
+			}
+			else if (CheckCollision(mPlayer, mLevelEnd->GetMonumentBaseBottom())) {
+				ResolvePlatformCollision(mPlayer, mLevelEnd->GetMonumentBaseBottom());
+			}
+			else if (CheckCollision(mPlayer, mLevelEnd->GetMonumentBaseMid())) {
+				ResolvePlatformCollision(mPlayer, mLevelEnd->GetMonumentBaseMid());
+			}
+			else if (CheckCollision(mPlayer, mLevelEnd->GetMonumentBaseTop())) {
+				ResolvePlatformCollision(mPlayer, mLevelEnd->GetMonumentBaseTop());
+			}
+			if (CheckCollision(mPlayer, mLevelEnd->GetGroundTexture())) {
+				ResolvePlatformCollision(mPlayer, mLevelEnd->GetGroundTexture());
 			}
 		}
 	}

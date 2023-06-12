@@ -39,6 +39,21 @@ LevelEnd::LevelEnd() {
 	mMonumentBlack->Parent(this);
 	mMonumentBlack->Position(1000.0f, 660.0f);
 
+	mMonumentBaseBottom = new GLTexture("Collider.png", 0, 0, 100, 70);
+	mMonumentBaseBottom->Parent(mMonument);
+	mMonumentBaseBottom->Position(0, 270);
+	mMonumentBaseBottom->Scale(Vector2(9.5f, 1.0f));
+
+	mMonumentBaseMid = new GLTexture("Collider.png", 0, 0, 100, 70);
+	mMonumentBaseMid->Parent(mMonument);
+	mMonumentBaseMid->Position(0, 200);
+	mMonumentBaseMid->Scale(Vector2(7.0f, 1.0f));
+
+	mMonumentBaseTop = new GLTexture("Collider.png", 0, 0, 100, 70);
+	mMonumentBaseTop->Parent(mMonument);
+	mMonumentBaseTop->Position(0, 140);
+	mMonumentBaseTop->Scale(Vector2(4.5f, 1.0f));
+
 	mFlag1 = new AnimatedGLTexture("Flag2.png", 0, 0, 320, 320, 14, 1.5f, Animation::Layouts::Horizontal);
 	mFlag1->Parent(this);
 	mFlag1->Position(500.0f, 760.0f);
