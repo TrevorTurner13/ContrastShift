@@ -41,13 +41,23 @@ LevelEnd::LevelEnd() {
 
 	mFlag1 = new AnimatedGLTexture("Flag2.png", 0, 0, 320, 320, 14, 1.5f, Animation::Layouts::Horizontal);
 	mFlag1->Parent(this);
-	mFlag1->Position(500.0f, 753.0f);
+	mFlag1->Position(500.0f, 760.0f);
 	mFlag1->Scale(Vector2(0.85f, 0.85f));
 
 	mFlag2 = new AnimatedGLTexture("Flag2Alt.png", 0, 0, 320, 320, 14, 1.5f, Animation::Layouts::Horizontal);
 	mFlag2->Parent(this);
-	mFlag2->Position(1480.0f, 753.0f);
+	mFlag2->Position(1480.0f, 760.0f);
 	mFlag2->Scale(Vector2(0.85f, 0.85f));
+
+	mBlackFlag1 = new AnimatedGLTexture("BlackFlag2.png", 0, 0, 320, 320, 14, 1.5f, Animation::Layouts::Horizontal);
+	mBlackFlag1->Parent(this);
+	mBlackFlag1->Position(500.0f, 760.0f);
+	mBlackFlag1->Scale(Vector2(0.85f, 0.85f));
+
+	mBlackFlag2 = new AnimatedGLTexture("BlackFlag2Alt.png", 0, 0, 320, 320, 14, 1.5f, Animation::Layouts::Horizontal);
+	mBlackFlag2->Parent(this);
+	mBlackFlag2->Position(1480.0f, 760.0f);
+	mBlackFlag2->Scale(Vector2(0.85f, 0.85f));
 
 	mPillarStart = new GLTexture("ruins.png", 650, 160, 310, 480);
 	mPillarStart->Parent(this);
@@ -63,6 +73,16 @@ LevelEnd::LevelEnd() {
 	mBlackPillarStart->Parent(this);
 	mBlackPillarStart->Position(0.0f, 715.0f);
 	mBlackPillarStart->Scale(Vector2(1.0f, 1.0f));
+
+	mPillarEnd = new GLTexture("Pillarlarge.png", 0, 0, 480, 960);
+	mPillarEnd->Parent(this);
+	mPillarEnd->Position(1950.0f, 480.0f);
+	mPillarEnd->Scale(Vector2(0.75f, 1.0f));
+
+	mBlackPillarEnd = new GLTexture("BlackPillarlarge.png", 0, 0, 480, 960);
+	mBlackPillarEnd->Parent(this);
+	mBlackPillarEnd->Position(1950.0f, 480.0f);
+	mBlackPillarEnd->Scale(Vector2(0.75f, 1.0f));
 }
 
 LevelEnd::~LevelEnd() {
@@ -81,14 +101,30 @@ LevelEnd::~LevelEnd() {
 	delete mMonumentBlack;
 	mMonumentBlack = nullptr;
 
+	delete mFlag1;
+	mFlag1 = nullptr;
+
+	delete mFlag2;
+	mFlag2 = nullptr;
+
+	delete mBlackFlag1;
+	mBlackFlag1 = nullptr;
+
+	delete mBlackFlag2;
+	mBlackFlag2 = nullptr;
+
 	delete mPillarStart;
 	mPillarStart = nullptr;
+
+	delete mPillarEnd;
+	mPillarEnd = nullptr;
 
 	delete mPillarStartCollider;
 	mPillarStartCollider = nullptr;
 
 	delete mBlackPillarStart;
 	mBlackPillarStart = nullptr;
+
 
 }
 
@@ -98,11 +134,14 @@ void LevelEnd::Update() {
 	mMonumentBlack->Update();
 	mFlag1->Update();
 	mFlag2->Update();
+	mBlackFlag1->Update();
+	mBlackFlag2->Update();
 }
 
 void LevelEnd::Render() {
 	mGround->Render();
 	mPillarStart->Render();
+	mPillarEnd->Render();
 	mFlag1->Render();
 	mFlag2->Render();
 	mMonument->Render();
@@ -112,6 +151,9 @@ void LevelEnd::Render() {
 void LevelEnd::RenderBlack() {
 	mGroundBlack->Render();
 	mBlackPillarStart->Render();
+	mBlackPillarEnd->Render();
+	mBlackFlag1->Render();
+	mBlackFlag2->Render();
 	mMonumentBlack->Render();
 	mChromaticOrb->Render();
 }

@@ -19,6 +19,9 @@ private:
 	GLTexture* mPillarStartCollider;
 	GLTexture* mBlackPillarStart;
 
+	GLTexture* mPillarEnd;
+	GLTexture* mBlackPillarEnd;
+
 	AnimatedGLTexture* mFlag1;
 	AnimatedGLTexture* mFlag2;
 
