@@ -14,6 +14,9 @@ PlayScreen::PlayScreen() {
 	delete mLevel3;
 	mLevel3 = new Level3();
 
+	delete mLevelEnd;
+	mLevelEnd = new LevelEnd();
+
 	delete mPlayer;
 	mPlayer = new Player();
 	mPlayer->Position(300.0f, 590.0f);
@@ -21,7 +24,7 @@ PlayScreen::PlayScreen() {
 	mMoveBoundsLeft = Vector2(130.0f, 1980.0f);
 	mIsWhite = false;
 	
-	level = 1;
+	level = 4;
 }
 
 PlayScreen::~PlayScreen() {
@@ -48,6 +51,9 @@ void PlayScreen::Update() {
 		level3Update();
 		mLevel3->Update();
 		break;
+	case 4:
+		mLevelEnd->Update();
+		break;
 	}
 }
 
@@ -58,7 +64,7 @@ void PlayScreen::Render() {
 				mLevel1->Render();
 			}
 			else {
-				mLevel1->RenderWhite();
+				mLevel1->RenderBlack();
 			}
 			break;
 		case 2:
@@ -67,7 +73,7 @@ void PlayScreen::Render() {
 				mLevel2->Render();
 			}
 			else {
-				mLevel2->RenderWhite();
+				mLevel2->RenderBlack();
 			}
 			break;
 		case 3:
@@ -75,9 +81,19 @@ void PlayScreen::Render() {
 				mLevel3->Render();
 			}
 			else {
-				mLevel3->RenderWhite();
+				mLevel3->RenderBlack();
 			}
 			break;	
+		case 4:
+			if (!mIsWhite) {
+				mLevelEnd->Render();
+			}
+			else {
+				mLevelEnd->RenderBlack();
+			}
+			
+			
+			break;
 	}
 	if (!mIsWhite) {
 		mPlayer->Render();

@@ -7,6 +7,7 @@
 #include "Level1.h"
 #include "Level2.h"
 #include "Level3.h"
+#include "LevelEnd.h"
 
 class PlayScreen : public GameEntity {
 private:
@@ -17,6 +18,8 @@ private:
 	Level1* mLevel1;
 	Level2* mLevel2;
 	Level3* mLevel3;
+	LevelEnd* mLevelEnd;
+
 	Player * mPlayer;
 
 	Vector2 mMoveBoundsLeft;

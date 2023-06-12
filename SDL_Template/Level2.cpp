@@ -224,7 +224,7 @@ void Level2::Render() {
 	mBlock2->Render();
 }
 
-void Level2::RenderWhite() {
+void Level2::RenderBlack() {
 	mGroundBlack->Render();
 
 	mBlackPillar1->Render();

@@ -212,7 +212,7 @@ void Level3::Render() {
 	mFlag1->Render();
 }
 
-void Level3::RenderWhite() {
+void Level3::RenderBlack() {
 	mGroundBlack->Render();
 
 	mBlackPillarStart->Render();

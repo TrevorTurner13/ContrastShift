@@ -156,6 +156,9 @@
     <ClCompile Include="CreditsScreen.cpp">
       <Filter>Source Files\Galaga</Filter>
     </ClCompile>
+    <ClCompile Include="LevelEnd.cpp">
+      <Filter>Source Files\Galaga</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameEntity.h">
@@ -267,6 +270,9 @@
       <Filter>Header Files\Galaga</Filter>
     </ClInclude>
     <ClInclude Include="CreditsScreen.h">
+      <Filter>Header Files\Galaga</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelEnd.h">
       <Filter>Header Files\Galaga</Filter>
     </ClInclude>
   </ItemGroup>

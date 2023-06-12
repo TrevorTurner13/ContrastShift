@@ -207,7 +207,7 @@ void Level1::Render() {
 	mFlag1->Render();	
 }
 
-void Level1::RenderWhite() {
+void Level1::RenderBlack() {
 	mGroundBlack->Render();
 
 	mBlackPillar1->Render();

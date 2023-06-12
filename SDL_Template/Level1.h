@@ -56,7 +56,7 @@ public:
 
 	void Update();
 	void Render();
-	void RenderWhite();
+	void RenderBlack();
 
 	GLTexture* GetGroundTexture() { return mGround; }
 	GLTexture* GetDarkGroundTexture() { return mGroundBlack; }

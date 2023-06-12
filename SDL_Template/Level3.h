@@ -65,7 +65,7 @@ public:
 
 	void Update();
 	void Render();
-	void RenderWhite();
+	void RenderBlack();
 
 	void SetBlockVelocity(Vector2 velocity, Vector2 gravity) { mBlockVelocity = velocity += gravity * mTimer->DeltaTime(); }
 	Vector2 GetVelocity() { return mBlockVelocity; }
