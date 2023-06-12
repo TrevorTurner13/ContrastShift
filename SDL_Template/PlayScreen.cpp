@@ -24,7 +24,7 @@ PlayScreen::PlayScreen() {
 	mMoveBoundsLeft = Vector2(130.0f, 1980.0f);
 	mIsWhite = false;
 	
-	level = 4;
+	level = 1;
 }
 
 PlayScreen::~PlayScreen() {
@@ -158,7 +158,7 @@ void PlayScreen::ResolvePushCollision(Player* player, GLTexture* block) {
 			block->Translate(-Vec2_Right * mMoveSpeedTemp * mTimer->DeltaTime(), World);
 		}
 	}
-	mAudio->PlayMusic("SFX/Push.wav", 0);
+	//mAudio->PlayMusic("SFX/Push.wav", 0);
 }
 
 bool PlayScreen::CheckBlockCollision(GLTexture* block1, GLTexture* block2) {

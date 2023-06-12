@@ -1,6 +1,5 @@
 #include "LevelEnd.h"
 
-
 LevelEnd* LevelEnd::sInstance = nullptr;
 
 LevelEnd* LevelEnd::Instance() {
@@ -139,7 +138,6 @@ LevelEnd::~LevelEnd() {
 
 	delete mBlackPillarStart;
 	mBlackPillarStart = nullptr;
-
 
 }
 
