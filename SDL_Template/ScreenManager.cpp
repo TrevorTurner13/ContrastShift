@@ -71,7 +71,11 @@ void ScreenManager::Update() {
 		}
 
 		break;
+
+	case Credits:
+		mCreditsScreen->Update();
 	}
+	
 }
 
 void ScreenManager::Render() { 
@@ -97,6 +101,9 @@ void ScreenManager::Render() {
 		mGuy->Render();
 		mTutorialScreen->Render();
 		break;
+	case Credits:
+		mCreditsScreen->Render();
+		
 	}
 }
 
