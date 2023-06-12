@@ -18,15 +18,10 @@ PlayScreen::PlayScreen() {
 	mPlayer = new Player();
 	mPlayer->Position(300.0f, 590.0f);
 
-	mChromaticOrb = new AnimatedGLTexture("Chromatic Orb.png", 0, 0, 320, 320, 33, 3.5f, Animation::Layouts::Horizontal);
-	mChromaticOrb->Parent(this);
-	mChromaticOrb->Position(1000.0f, 550.0f);
-	mChromaticOrb->Scale(Vector2(1.0f, 1.0f));
-
 	mMoveBoundsLeft = Vector2(130.0f, 1980.0f);
 	mIsWhite = false;
 	
-	level = 4;
+	level = 1;
 }
 
 PlayScreen::~PlayScreen() {
@@ -53,8 +48,6 @@ void PlayScreen::Update() {
 		level3Update();
 		mLevel3->Update();
 		break;
-	case 4:
-		mChromaticOrb->Update();
 	}
 }
 
@@ -85,11 +78,6 @@ void PlayScreen::Render() {
 				mLevel3->RenderWhite();
 			}
 			break;	
-		case 4:
-			
-				mChromaticOrb->Render();
-			
-			break;
 	}
 	if (!mIsWhite) {
 		mPlayer->Render();
@@ -153,10 +141,11 @@ void PlayScreen::ResolvePushCollision(Player* player, GLTexture* block) {
 			block->Translate(-Vec2_Right * mMoveSpeedTemp * mTimer->DeltaTime(), World);
 		}
 	}
-	//mAudio->PlayMusic("SFX/Push.wav", 0);
+	mAudio->PlayMusic("SFX/Push.wav", 0);
 }
 
 bool PlayScreen::CheckBlockCollision(GLTexture* block1, GLTexture* block2) {
+	//With locals it's common usage to use underscores instead of camelCasing
 	float block1Left = block1->Position().x - block1->ScaledDimensions().x / 2;
 	float block1Right = block1->Position().x + block1->ScaledDimensions().x / 2;
 	float block1Top = block1->Position().y - block1->ScaledDimensions().y / 2;
