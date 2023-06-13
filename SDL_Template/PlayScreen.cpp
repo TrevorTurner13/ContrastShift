@@ -21,10 +21,17 @@ PlayScreen::PlayScreen() {
 	mPlayer = new Player();
 	mPlayer->Position(300.0f, 590.0f);
 
+	mEnding = false;
+	
+	mFade = new AnimatedGLTexture("fade out.png", 0, 0, 1920, 1080, 30, 10.0f, Animation::Layouts::Horizontal);
+	mFade->Parent(this);
+	mFade->Position(Vector2(Graphics::SCREEN_WIDTH/2, Graphics::SCREEN_HEIGHT/2));
+	mFade->SetWrapMode(Animation::WrapModes::Once);
+
 	mMoveBoundsLeft = Vector2(130.0f, 1980.0f);
 	mIsWhite = false;
 	
-	level = 1;
+	level = 4;
 }
 
 PlayScreen::~PlayScreen() {
@@ -54,6 +61,11 @@ void PlayScreen::Update() {
 	case 4:
 		LevelEndUpdate();
 		mLevelEnd->Update();
+		
+		if (mEnding) {
+			mLevelEnd->GetChromaticOrb()->Update();
+			mFade->Update();
+		}
 		break;
 	}
 }
@@ -86,6 +98,7 @@ void PlayScreen::Render() {
 			}
 			break;	
 		case 4:
+			
 			if (!mIsWhite) {
 				mLevelEnd->Render();
 			}
@@ -93,7 +106,10 @@ void PlayScreen::Render() {
 				mLevelEnd->RenderBlack();
 			}
 			
-			
+			if (mEnding) {
+				mLevelEnd->GetChromaticOrb()->Render();
+				mFade->Render();
+			}
 			break;
 	}
 	if (!mIsWhite) {
@@ -615,6 +631,14 @@ void PlayScreen::LevelEndUpdate() {
 			else if (CheckCollision(mPlayer, mLevelEnd->GetMonumentBaseTop())) {
 				ResolvePlatformCollision(mPlayer, mLevelEnd->GetMonumentBaseTop());
 			}
+			if (CheckCollision(mPlayer, mLevelEnd->GetOrbCollider())) {
+				mPlayer->Active(false);
+				mPlayer->SetVelocity(Vector2(0.0f, -1.0f));
+				if (mPlayer->Position().y <= 400.0f) {
+					mPlayer->Position(mPlayer->Position().x, 400.0f);
+				}
+				mEnding = true;
+			}
 			if (CheckCollision(mPlayer, mLevelEnd->GetGroundTexture())) {
 				ResolvePlatformCollision(mPlayer, mLevelEnd->GetGroundTexture());
 			}
@@ -633,6 +657,14 @@ void PlayScreen::LevelEndUpdate() {
 			}
 			else if (CheckCollision(mPlayer, mLevelEnd->GetMonumentBaseTop())) {
 				ResolvePlatformCollision(mPlayer, mLevelEnd->GetMonumentBaseTop());
+			}
+			if (CheckCollision(mPlayer, mLevelEnd->GetOrbCollider())) {
+				mPlayer->Active(false);
+				mPlayer->SetVelocity(Vector2(0.0f, -1.0f));
+				if (mPlayer->Position().y <= 400.0f) {
+					mPlayer->Position(mPlayer->Position().x, 400.0f);
+				}
+				mEnding = true;
 			}
 			if (CheckCollision(mPlayer, mLevelEnd->GetGroundTexture())) {
 				ResolvePlatformCollision(mPlayer, mLevelEnd->GetGroundTexture());

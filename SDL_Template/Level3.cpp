@@ -101,6 +101,7 @@ Level3::Level3() {
 	mFlag1->Parent(this);
 	mFlag1->Position(1000.0f, 850.0f);
 	mFlag1->Scale(Vector2(0.85f, 0.85f));
+	mFlag1->SetWrapMode(Animation::WrapModes::Loop);
 
 	//black entities
 	mBlackPillarStart = new GLTexture("BlackPillarLarge.png", 0, 0, 480, 960);
@@ -172,6 +173,7 @@ Level3::Level3() {
 	mBlackFlag2->Parent(this);
 	mBlackFlag2->Position(800.0f, 850.0f);
 	mBlackFlag2->Scale(Vector2(0.85f, 0.85f));
+	mBlackFlag2->SetWrapMode(Animation::WrapModes::Loop);
 }
 
 Level3::~Level3() {

@@ -23,6 +23,8 @@ private:
 	GLTexture* mMonumentBaseMid;
 	GLTexture* mMonumentBaseTop;
 
+	GLTexture* mOrbCollider;
+
 	GLTexture* mPillarEnd;
 	GLTexture* mBlackPillarEnd;
 
@@ -52,6 +54,9 @@ public:
 	GLTexture* GetMonumentBaseBottom() { return mMonumentBaseBottom; }
 	GLTexture* GetMonumentBaseMid() { return mMonumentBaseMid; }
 	GLTexture* GetMonumentBaseTop() { return mMonumentBaseTop; }
+
+	GLTexture* GetChromaticOrb() { return mChromaticOrb; }
+	GLTexture* GetOrbCollider() { return mOrbCollider; }
 };
 
 #endif 

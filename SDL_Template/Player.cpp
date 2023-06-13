@@ -99,6 +99,18 @@ Player::Player() {
 	mGuyJumping->Position(Vec2_Zero);
 	mGuyJumping->Scale(Vector2(0.5f, 0.5f));
 	mGuyJumping->SetWrapMode(Animation::WrapModes::Once);
+
+	mGuyEnd = new AnimatedGLTexture("Character Sprite.png", 0, 2560, 320, 320, 6, 1.0f, Animation::Layouts::Horizontal);
+	mGuyEnd->Parent(this);
+	mGuyEnd->Position(Vec2_Zero);
+	mGuyEnd->Scale(Vector2(0.5f, 0.5f));
+	mGuyEnd->SetWrapMode(Animation::WrapModes::Loop);
+
+	mGuyEndDark = new AnimatedGLTexture("Character Sprite.png", 0, 640, 320, 320, 6, 1.0f, Animation::Layouts::Horizontal);
+	mGuyEndDark->Parent(this);
+	mGuyEndDark->Position(Vec2_Zero);
+	mGuyEndDark->Scale(Vector2(0.5f, 0.5f));
+	mGuyEndDark->SetWrapMode(Animation::WrapModes::Loop);
 	
 	mGuyJumpingDark = new AnimatedGLTexture("Character Sprite.png", 0, 2880, 320, 320, 6, 1.0f, Animation::Layouts::Horizontal);
 	mGuyJumpingDark->Parent(this);
@@ -188,18 +200,23 @@ void Player::Update()
 	Position(Position() + mVelocity);
 
 	//std::cout << mVelocity.y << std::endl;
-
-	if (!mMovingLeft && !mMovingRight && mIsGrounded && mIsFacingRight || !mMovingLeft && !mMovingRight && mIsGrounded && mIsFacingLeft) {
-		mCurrentTexture = mGuy;
-		mCurrentDarkTexture = mGuyDark;
+	if (Active()) {
+		if (!mMovingLeft && !mMovingRight && mIsGrounded && mIsFacingRight || !mMovingLeft && !mMovingRight && mIsGrounded && mIsFacingLeft) {
+			mCurrentTexture = mGuy;
+			mCurrentDarkTexture = mGuyDark;
+		}
+		else if (mMovingRight && mIsGrounded || mMovingLeft && mIsGrounded) {
+			mCurrentTexture = mGuyRunning;
+			mCurrentDarkTexture = mGuyRunningDark;
+		}
+		else if (!mIsGrounded && mIsFacingLeft || !mIsGrounded && mIsFacingRight) {
+			mCurrentTexture = mGuyJumping;
+			mCurrentDarkTexture = mGuyJumpingDark;
+		}
 	}
-	else if (mMovingRight && mIsGrounded || mMovingLeft && mIsGrounded) {
-		mCurrentTexture = mGuyRunning;
-		mCurrentDarkTexture = mGuyRunningDark;
-	}
-	else if (!mIsGrounded && mIsFacingLeft || !mIsGrounded && mIsFacingRight) {
-		mCurrentTexture = mGuyJumping;
-		mCurrentDarkTexture = mGuyJumpingDark;
+	else {
+		mCurrentTexture = mGuyEnd;
+		mCurrentDarkTexture = mGuyEndDark;
 	}
 
 	//Check for lNDING ON GROUND
@@ -223,10 +240,12 @@ void Player::Update()
 			mCurrentTexture->Update();
 			mCurrentDarkTexture->Update();
 
-
 			HandleMovement();
 			HandleJumping();
-
+		}
+		else {
+			mCurrentTexture->Update();
+			mCurrentDarkTexture->Update();
 		}
 	}
 }
@@ -244,10 +263,7 @@ void Player::Render() {
 				mCurrentTexture->RenderFlip();
 			}
 		}
-
-		
 	}
-
 	PhysEntity::Render();
 }
 
@@ -264,10 +280,7 @@ void Player::RenderDark() {
 				mCurrentDarkTexture->RenderFlip();
 			}
 		}
-
-
 	}
-
 	PhysEntity::Render();
 }
 

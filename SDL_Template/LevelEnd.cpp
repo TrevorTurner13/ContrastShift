@@ -29,14 +29,22 @@ LevelEnd::LevelEnd() {
 	mChromaticOrb = new AnimatedGLTexture("Chromatic Orb.png", 0, 0, 320, 320, 33, 3.5f, Animation::Layouts::Horizontal);
 	mChromaticOrb->Parent(this);
 	mChromaticOrb->Position(1000.0f, 550.0f);
+	mChromaticOrb->SetWrapMode(Animation::WrapModes::Loop);
+
+	mOrbCollider = new GLTexture("Collider.png", 0, 0, 50, 50);
+	mOrbCollider->Parent(mChromaticOrb);
+	mOrbCollider->Position(Vec2_Zero);
+	mOrbCollider->Scale(Vector2(1.8f, 1.8f));
 
 	mMonument = new AnimatedGLTexture("Dias.png", 0, 0, 1024, 592, 33, 3.5f, Animation::Layouts::Horizontal);
 	mMonument->Parent(this);
 	mMonument->Position(1000.0f, 660.0f);
+	mMonument->SetWrapMode(Animation::WrapModes::Loop);
 
 	mMonumentBlack = new AnimatedGLTexture("BlackDias.png", 0, 0, 1024, 592, 33, 3.5f, Animation::Layouts::Horizontal);
 	mMonumentBlack->Parent(this);
 	mMonumentBlack->Position(1000.0f, 660.0f);
+	mMonumentBlack->SetWrapMode(Animation::WrapModes::Loop);
 
 	mMonumentBaseBottom = new GLTexture("Collider.png", 0, 0, 100, 70);
 	mMonumentBaseBottom->Parent(mMonument);
@@ -57,21 +65,25 @@ LevelEnd::LevelEnd() {
 	mFlag1->Parent(this);
 	mFlag1->Position(500.0f, 760.0f);
 	mFlag1->Scale(Vector2(0.85f, 0.85f));
+	mFlag1->SetWrapMode(Animation::WrapModes::Loop);
 
 	mFlag2 = new AnimatedGLTexture("Flag2Alt.png", 0, 0, 320, 320, 14, 1.5f, Animation::Layouts::Horizontal);
 	mFlag2->Parent(this);
 	mFlag2->Position(1480.0f, 760.0f);
 	mFlag2->Scale(Vector2(0.85f, 0.85f));
+	mFlag2->SetWrapMode(Animation::WrapModes::Loop);
 
 	mBlackFlag1 = new AnimatedGLTexture("BlackFlag2.png", 0, 0, 320, 320, 14, 1.5f, Animation::Layouts::Horizontal);
 	mBlackFlag1->Parent(this);
 	mBlackFlag1->Position(500.0f, 760.0f);
 	mBlackFlag1->Scale(Vector2(0.85f, 0.85f));
+	mBlackFlag1->SetWrapMode(Animation::WrapModes::Loop);
 
 	mBlackFlag2 = new AnimatedGLTexture("BlackFlag2Alt.png", 0, 0, 320, 320, 14, 1.5f, Animation::Layouts::Horizontal);
 	mBlackFlag2->Parent(this);
 	mBlackFlag2->Position(1480.0f, 760.0f);
 	mBlackFlag2->Scale(Vector2(0.85f, 0.85f));
+	mBlackFlag2->SetWrapMode(Animation::WrapModes::Loop);
 
 	mPillarStart = new GLTexture("ruins.png", 650, 160, 310, 480);
 	mPillarStart->Parent(this);

@@ -15,10 +15,14 @@ private:
 	AudioManager * mAudio;
 	InputManager* mInput;
 
+	bool mEnding;
+
 	Level1* mLevel1;
 	Level2* mLevel2;
 	Level3* mLevel3;
 	LevelEnd* mLevelEnd;
+
+	AnimatedGLTexture* mFade;
 
 	Player * mPlayer;
 
