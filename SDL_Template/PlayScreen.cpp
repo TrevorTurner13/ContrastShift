@@ -38,6 +38,11 @@ PlayScreen::~PlayScreen() {
 	mTimer = nullptr;
 	mAudio = nullptr;
 
+	mLevel1->Release();
+	mLevel2->Release();
+	mLevel3->Release();
+	mLevelEnd->Release();
+
 	delete mPlayer;
 	mPlayer = nullptr;
 }
@@ -63,7 +68,7 @@ void PlayScreen::Update() {
 		mLevelEnd->Update();
 		
 		if (mEnding) {
-			mLevelEnd->GetChromaticOrb()->Update();
+
 			mFade->Update();
 		}
 		break;
@@ -107,7 +112,6 @@ void PlayScreen::Render() {
 			}
 			
 			if (mEnding) {
-				mLevelEnd->GetChromaticOrb()->Render();
  				mFade->Render();
 			}
 			break;
@@ -154,7 +158,7 @@ bool PlayScreen::CheckCollision(Player* player, GLTexture* object) {
 void PlayScreen::ResolvePlatformCollision(Player* player, GLTexture* object) {
    	if (HorizontallyAligned(player, object)) {
 		if (player->Position().y + 60
-			< object->Position().y && player->GetVelocity() > 0) {
+			< object->Position().y && player->GetVelocityY() > 0) {
 			float pushback = (player->Position().y + player->GetCurrentTexture()->ScaledDimensions().y / 2. - 30) - (object->Position().y - object->ScaledDimensions().y / 2);
 
 			player->Position(player->GetLastPosition().x, player->GetLastPosition().y - pushback);
@@ -663,6 +667,7 @@ void PlayScreen::LevelEndUpdate() {
 				mPlayer->SetVelocity(Vector2(0.0f, -1.0f));
 				if (mPlayer->Position().y <= 400.0f) {
 					mPlayer->Position(mPlayer->Position().x, 400.0f);
+					mPlayer->SetVelocity(Vector2(mPlayer->GetVelocityX(), 0.0f));
 				}
 				mEnding = true;
 			}

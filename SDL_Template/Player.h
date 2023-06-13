@@ -85,7 +85,8 @@ public:
 	bool GetIsJumping() { return mIsJumping; }
 	bool GetIsPushing() { return mIsPushing; }
 
-	float GetVelocity() { return mVelocity.y; }
+	float GetVelocityY() { return mVelocity.y; }
+	float GetVelocityX() { return mVelocity.x; }
 	float GetMovespeed() { return mMoveSpeed; }
 
 

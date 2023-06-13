@@ -191,6 +191,15 @@ Level3::~Level3() {
 	mGround = nullptr;
 	delete mGroundBlack;
 	mGroundBlack = nullptr;
+	
+	delete mPillarEnd;
+	mPillarEnd = nullptr;
+	delete mBlackPillarEnd;
+	mBlackPillarEnd = nullptr;
+
+	delete mPillarEndCollider;
+	mPillarEndCollider = nullptr;
+
 }
 
 void Level3::Update() {
