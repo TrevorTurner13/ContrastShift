@@ -108,7 +108,7 @@ void PlayScreen::Render() {
 			
 			if (mEnding) {
 				mLevelEnd->GetChromaticOrb()->Render();
-				mFade->Render();
+ 				mFade->Render();
 			}
 			break;
 	}
