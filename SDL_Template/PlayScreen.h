@@ -23,7 +23,6 @@ private:
 	LevelEnd* mLevelEnd;
 
 	AnimatedGLTexture* mFade;
-	GLTexture* mFade1;
 
 	Player * mPlayer;
 

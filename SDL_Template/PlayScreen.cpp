@@ -27,8 +27,6 @@ PlayScreen::PlayScreen() {
 	mFade->Position(Vector2(Graphics::SCREEN_WIDTH/2 - 100, Graphics::SCREEN_HEIGHT/2) + 50);
 	mFade->SetWrapMode(Animation::WrapModes::Once);
 
-	mFade1 = new GLTexture("fade out.png", 0, 0, 1920, 1080);
-
 	mMoveBoundsLeft = Vector2(130.0f, 1980.0f);
 	mIsWhite = false;
 	
