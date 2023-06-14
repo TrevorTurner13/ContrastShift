@@ -32,7 +32,7 @@ PlayScreen::PlayScreen() {
 	mMoveBoundsLeft = Vector2(130.0f, 1980.0f);
 	mIsWhite = false;
 	
-	level = 4;
+	level = 1;
 }
 
 PlayScreen::~PlayScreen() {

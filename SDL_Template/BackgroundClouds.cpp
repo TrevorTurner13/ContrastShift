@@ -98,8 +98,8 @@ BackgroundClouds::BackgroundClouds() {
 	mHills->Position(895.0f, 875.0f);
 	mHills->Scale(Vector2(2.0f, 1.0f));
 
-	mGround = new GLTexture("Ground.png", 0, 0, 640, 320);
-	mGround->Position(960.0f, 1075.0f);
+	mGround = new GLTexture("Ground.png", 0, 0, 640, 384);
+	mGround->Position(960.0f, 1032.0f);
 	mGround->Scale(Vector2(3.0f, 1.0f));
 
 	// white elements
