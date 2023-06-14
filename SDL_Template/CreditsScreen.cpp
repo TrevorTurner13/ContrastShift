@@ -7,7 +7,7 @@ CreditsScreen::CreditsScreen() {
 
 	//top bar entities
 	mTopBar = new GameEntity(Graphics::SCREEN_WIDTH * 0.5f, Graphics::SCREEN_HEIGHT * 0.1);
-	mThanks = new GLTexture("Thanks For Playing!", "Dragon Fire.ttf", 100, { 230,230,230 });
+	mThanks = new GLTexture("Thanks For Playing!", "Dragon Fire.ttf", 100, { 0,0,0 });
 	mTopBar->Parent(this);
 	mThanks->Parent(mTopBar);
 	
@@ -15,10 +15,10 @@ CreditsScreen::CreditsScreen() {
 
 	//play mode entities
 	mPlayModes = new GameEntity(Graphics::SCREEN_WIDTH * 0.5f, Graphics::SCREEN_HEIGHT * 0.3f);
-	mCreators = new GLTexture("Created By:", "Dragon Fire.ttf", 80, {230, 230, 230});
-	mTrevor = new GLTexture("Trevor Turner", "Dragon Fire.ttf", 60, { 230,230,230 });
-	mBrad = new GLTexture("Bradley Brooker", "Dragon Fire.ttf", 60, { 230,230,230 });
-	mAndrew = new GLTexture("Andrew Hawboldt", "Dragon Fire.ttf", 60, { 230,230,230 });
+	mCreators = new GLTexture("Created By:", "Dragon Fire.ttf", 80, {0, 0, 0});
+	mTrevor = new GLTexture("Trevor Turner", "Dragon Fire.ttf", 60, { 0,0,0 });
+	mBrad = new GLTexture("Bradley Brooker", "Dragon Fire.ttf", 60, { 0,0,0 });
+	mAndrew = new GLTexture("Andrew Hawboldt", "Dragon Fire.ttf", 60, { 0,0,0 });
 
 	mPlayModes->Parent(this);
 	mCreators->Parent(mPlayModes);
@@ -33,12 +33,12 @@ CreditsScreen::CreditsScreen() {
 
 	//bottom bar entities
 	mBottomBar = new GameEntity(Graphics::SCREEN_WIDTH * 0.5f, Graphics::SCREEN_HEIGHT * 0.55f);
-	mMusic = new GLTexture("Music & SFX", "Dragon Fire.ttf", 80, { 230, 230, 230 });
-	mAndrew2 = new GLTexture("Andrew Hawboldt", "Dragon Fire.ttf", 60, { 230,230,230 });
+	mMusic = new GLTexture("Music & SFX", "Dragon Fire.ttf", 80, { 0, 0, 0 });
+	mAndrew2 = new GLTexture("Andrew Hawboldt", "Dragon Fire.ttf", 60, { 0, 0, 0 });
 	
-	mArtwork = new GLTexture("Artwork", "Dragon Fire.ttf", 80, { 230, 230, 230 });
-	mTrevor2 = new GLTexture("Trevor Turner", "Dragon Fire.ttf", 60, { 230,230,230 });
-	mItchGuy = new GLTexture("penusbmic.itch.io", "Dragon Fire.ttf", 60, { 230,230,230 });
+	mArtwork = new GLTexture("Artwork", "Dragon Fire.ttf", 80, { 0, 0, 0 });
+	mTrevor2 = new GLTexture("Trevor Turner", "Dragon Fire.ttf", 60, { 0, 0, 0 });
+	mItchGuy = new GLTexture("penusbmic.itch.io", "Dragon Fire.ttf", 60, { 0, 0, 0 });
 
 	mBottomBar->Parent(this);
 	mMusic->Parent(mBottomBar);
@@ -55,12 +55,8 @@ CreditsScreen::CreditsScreen() {
 	mTrevor2->Position(0.0f, 220.0f);
 	mItchGuy->Position(0.0f, 280.0f);
 
-	
-
 	//screen animation variables
 	ResetAnimation();
-
-	
 }
 
 
@@ -112,12 +108,6 @@ void CreditsScreen::Update() {
 
 void CreditsScreen::Render() {
 
-	if (!mAnimationDone) {
-		
-	}
-	else {
-		
-	}
 	mThanks->Render();
 	
 	mCreators->Render();

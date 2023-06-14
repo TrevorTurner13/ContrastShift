@@ -25,17 +25,13 @@ private:
 	CreditsScreen* mCreditsScreen;
 
 	AnimatedGLTexture* mGuy;
+	AnimatedGLTexture* mGuyColor;
 	BackgroundClouds* mClouds;
 	Level1* mLevel1;
-	int mModeSelected;
-	
-	
 
 public:
 	static ScreenManager * Instance();
 	static void Release();
-
-	
 	
 	void Update();
 	void Render();

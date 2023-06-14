@@ -22,15 +22,17 @@ PlayScreen::PlayScreen() {
 	mPlayer->Position(300.0f, 590.0f);
 
 	mEnding = false;
+	mAnimating = false;
 	
-	mFade = new AnimatedGLTexture("fade out.png", 0, 0, 1920, 1080, 30, 3.0f, Animation::Layouts::Vertical);
-	mFade->Position(Vector2(Graphics::SCREEN_WIDTH/2 - 100, Graphics::SCREEN_HEIGHT/2) + 50);
+	mFade = new AnimatedGLTexture("fade out.png", 0, 0, 640, 360, 36, 3.75f, Animation::Layouts::Vertical);
+	mFade->Position(Vector2(Graphics::SCREEN_WIDTH/2, Graphics::SCREEN_HEIGHT/2));
+	mFade->Scale(Vector2(3.0f, 3.0f));
 	mFade->SetWrapMode(Animation::WrapModes::Once);
 
 	mMoveBoundsLeft = Vector2(130.0f, 1980.0f);
 	mIsWhite = false;
 	
-	level = 1;
+	level = 4;
 }
 
 PlayScreen::~PlayScreen() {
@@ -67,8 +69,9 @@ void PlayScreen::Update() {
 		mLevelEnd->Update();
 		
 		if (mEnding) {
-
 			mFade->Update();
+			
+			mAnimating = mFade->IsAnimating();
 		}
 		break;
 	}
@@ -110,9 +113,7 @@ void PlayScreen::Render() {
 				mLevelEnd->RenderBlack();
 			}
 			
-			if (mEnding) {
- 				mFade->Render();
-			}
+			
 			break;
 	}
 	if (!mIsWhite) {
@@ -120,6 +121,9 @@ void PlayScreen::Render() {
 	}
 	else {
 		mPlayer->RenderDark();
+	}
+	if (mEnding) {
+		mFade->Render();
 	}
 }
 

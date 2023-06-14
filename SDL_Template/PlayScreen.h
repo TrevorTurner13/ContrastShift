@@ -16,6 +16,7 @@ private:
 	InputManager* mInput;
 
 	bool mEnding;
+	bool mAnimating;
 
 	Level1* mLevel1;
 	Level2* mLevel2;
@@ -38,6 +39,8 @@ public:
 
 	bool GetIsWhite() { return mIsWhite; }
 	void SetIsWhite(bool shift);
+	bool GetEnding() { return mEnding; }
+	bool GetAnimationDone() { return mAnimating; }
 	// player/object collision
 	bool CheckCollision(Player* player, GLTexture* object);
 	void ResolvePlatformCollision(Player* player, GLTexture* object);

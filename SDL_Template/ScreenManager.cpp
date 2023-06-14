@@ -29,8 +29,8 @@ void ScreenManager::Update() {
 		mStartScreen->Update();
 		if (mInput->KeyPressed(SDL_SCANCODE_RETURN)&& mStartScreen->SelectedMode()==0) {
 			mCurrentScreen = Play;
-			//mAudio->PauseMusic();
-			//mAudio->PlayMusic("MUS/light.wav", 100);
+			mAudio->PauseMusic();
+			mAudio->PlayMusic("MUS/light.wav", 100);
 			int Mix_MusicVolume(0);
 			//mAudio->PlaySFX("MUS/Dark.wav", 100);
 			//mAudio->PlaySFX("MUS/light.wav", 100);
@@ -47,16 +47,23 @@ void ScreenManager::Update() {
 				glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 				mAudio->PlaySFX("SFX/ShiftLight.wav", 0);
 				mPlayScreen->SetIsWhite(false);
-				//mAudio->PlayMusic("MUS/Light.wav", 100);
+				mAudio->PlayMusic("MUS/Light.wav", 100);
 				int Mix_MusicVolume(-0.2);
 			}
 			else {
 				glClearColor(250.0f, 250.0f, 250.0f, 1.0f);
 				mAudio->PlaySFX("SFX/ShiftDark.wav", 0);
 				mPlayScreen->SetIsWhite(true);
-				//mAudio->PlayMusic("MUS/Dark.wav", 100);
+				mAudio->PlayMusic("MUS/Dark.wav", 100);
 				int Mix_MusicVolume(-0.2);
 			}
+			
+		}
+		if (mPlayScreen->GetEnding() && !mPlayScreen->GetAnimationDone()) {
+				mCurrentScreen = Credits;
+				
+				mAudio->PlayMusic("MUS/End Song.wav", -1);
+				int Mix_MusicVolume(-0.2);
 		}
 		break;
 
@@ -72,19 +79,26 @@ void ScreenManager::Update() {
 		break;
 
 	case Credits:
+		
+		glClearColor(0.65f, 0.75f, 0.85f, 1.0f);
+		mGuyColor->Update();
 		mCreditsScreen->Update();
+	
+		
+		
 	}
 	
 }
 
 void ScreenManager::Render() { 
-	if (mPlayScreen->GetIsWhite()) {
+	if (mCurrentScreen != Credits && mPlayScreen->GetIsWhite()) {
 		mClouds->RenderBlack();
-		//mLevel1->RenderWhite();
+	}
+	else if (mCurrentScreen != Credits && !mPlayScreen->GetIsWhite()) {
+		mClouds->Render();
 	}
 	else {
-		mClouds->Render();
-		//mLevel1->Render();
+		mClouds->RenderColor();
 	}
 	switch (mCurrentScreen) {
 	case Start:
@@ -101,6 +115,7 @@ void ScreenManager::Render() {
 		mTutorialScreen->Render();
 		break;
 	case Credits:
+		mGuyColor->Render();
 		mCreditsScreen->Render();
 		
 	}
@@ -120,11 +135,15 @@ ScreenManager::ScreenManager() {
 	mGuy->Scale(Vector2(0.5f, 0.5f));
 	mGuy->SetWrapMode(Animation::WrapModes::Loop);
 
+	mGuyColor = new AnimatedGLTexture("Character Sprite Color.png", 0, 0, 320, 320, 6, 1.0f, Animation::Layouts::Horizontal);
+	mGuyColor->Position(300.0f, 625.0f);
+	mGuyColor->Scale(Vector2(0.5f, 0.5f));
+	mGuyColor->SetWrapMode(Animation::WrapModes::Loop);
+
 	mClouds = BackgroundClouds::Instance();
 	mLevel1 = Level1::Instance();
 
 	mCurrentScreen = Start;
-
 	
 }
 

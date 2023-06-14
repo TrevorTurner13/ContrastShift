@@ -43,6 +43,7 @@ private:
 	float mBackgroundColor;
 
 
+
 public:
 	CreditsScreen();
 	~CreditsScreen();
