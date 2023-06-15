@@ -132,6 +132,9 @@ Level1::Level1() {
 
 Level1::~Level1() {
 	// white entities
+	delete mCollider;
+	mCollider = nullptr;
+
 	delete mPillar1;
 	mPillar1 = nullptr;
 	delete mPillar2;
@@ -180,6 +183,9 @@ Level1::~Level1() {
 
 	delete mGround;
 	mGround = nullptr;
+	delete mGroundBlack;
+	mGroundBlack = nullptr;
+
 	
 }
 

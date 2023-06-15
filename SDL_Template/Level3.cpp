@@ -194,11 +194,77 @@ Level3::~Level3() {
 	
 	delete mPillarEnd;
 	mPillarEnd = nullptr;
+	delete mLedgeEnd;
+	mLedgeEnd = nullptr;
+
 	delete mBlackPillarEnd;
 	mBlackPillarEnd = nullptr;
 
+	delete mBlackLedgeEnd;
+	mBlackLedgeEnd = nullptr;
+
+	//collider textures
 	delete mPillarEndCollider;
 	mPillarEndCollider = nullptr;
+
+	delete mSmallPillar1Collider;
+	mSmallPillar1Collider = nullptr;
+
+	delete mMedPillar1Collider;
+	mMedPillar1Collider = nullptr;
+
+	delete mTallPillar1Collider;
+	mTallPillar1Collider = nullptr;
+
+	delete mTallPillar2Collider;
+	mTallPillar2Collider = nullptr;
+
+	delete mSmallPillar1;
+	mSmallPillar1 = nullptr;
+
+	delete mMedPillar1;
+	mMedPillar1 = nullptr;
+
+	delete mTallPillar1;
+	mTallPillar1 = nullptr;
+
+	delete mTallPillar2;
+	mTallPillar2 = nullptr;
+
+	delete mFlag1;
+	mFlag1 = nullptr;
+
+	delete mMedBlackPillar1Collider;
+	mMedBlackPillar1Collider = nullptr;
+
+	delete mMedBlackPillar2Collider;
+	mMedBlackPillar2Collider = nullptr;
+
+	delete mTallBlackPillar1Collider;
+	mTallBlackPillar1Collider = nullptr;
+
+	delete mTallBlackPillar2Collider;
+	mTallBlackPillar2Collider = nullptr;
+
+	delete mMedBlackPillar1;
+	mMedBlackPillar1 = nullptr;
+
+	delete mMedBlackPillar2;
+	mMedBlackPillar2 = nullptr;
+
+	delete mTallBlackPillar1;
+	mTallBlackPillar1 = nullptr;
+
+	delete mTallBlackPillar2;
+	mTallBlackPillar2 = nullptr;
+
+	delete mBlackBlock1;
+	mBlackBlock1 = nullptr;
+
+	delete mBlackFlag2;
+	mBlackFlag2 = nullptr;
+
+	mTimer = nullptr;
 
 }
 

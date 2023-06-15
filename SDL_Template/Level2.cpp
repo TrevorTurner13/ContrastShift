@@ -145,6 +145,8 @@ Level2::Level2() {
 }
 
 Level2::~Level2() {
+	delete mCollider;
+	mCollider = nullptr;
 	// white entities
 	delete mPillar1;
 	mPillar1 = nullptr;
@@ -155,6 +157,11 @@ Level2::~Level2() {
 	mBlock1 = nullptr;
 	delete mBlock2;
 	mBlock2 = nullptr;
+
+	delete mColliderBlock1;
+	mColliderBlock1 = nullptr;
+	delete mColliderBlock2;
+	mColliderBlock2 = nullptr;
 
 	delete mLedge1;
 	mLedge1 = nullptr;
@@ -179,6 +186,9 @@ Level2::~Level2() {
 	delete mBlackBlock1;
 	mBlackBlock1 = nullptr;
 
+	delete mColliderBlackBlock1;
+	mColliderBlackBlock1 = nullptr;
+
 	delete mBlackLedge1;
 	mBlackLedge1 = nullptr;
 
@@ -186,7 +196,6 @@ Level2::~Level2() {
 	mBlackSword1 = nullptr;
 	delete mBlackSword2;
 	mBlackSword2 = nullptr;
-	
 
 	delete mBlackFlag1;
 	mBlackFlag1 = nullptr;
@@ -196,6 +205,8 @@ Level2::~Level2() {
 	delete mGround;
 	mGround = nullptr;
 
+	delete mGroundBlack;
+	mGroundBlack = nullptr;
 }
 
 void Level2::Update() {

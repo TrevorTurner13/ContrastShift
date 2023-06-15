@@ -118,11 +118,6 @@ Player::Player() {
 	mGuyJumpingDark->Scale(Vector2(0.5f, 0.5f));
 	mGuyJumpingDark->SetWrapMode(Animation::WrapModes::Once);
 
-	mDeathAnimation = new AnimatedGLTexture("PlayerExplosion.png", 0, 0, 128, 128, 4, 1.0f, Animation::Layouts::Horizontal);
-	mDeathAnimation->Parent(this);
-	mDeathAnimation->Position(Vec2_Zero);
-	mDeathAnimation->SetWrapMode(Animation::WrapModes::Once);
-
 	mCurrentTexture = mGuy;
 
 	mId = PhysicsManager::Instance()->RegisterEntity(this, PhysicsManager::CollisionLayers::Friendly);
@@ -138,12 +133,32 @@ Player::~Player() {
 	delete mGuy;
 	mGuy = nullptr;
 
-	delete mDeathAnimation;
-	mDeathAnimation = nullptr;
+	delete mGuyDark;
+	mGuyDark = nullptr;
 
-	/*for (auto b : mBullets) {
-		delete b;
-	}*/
+	delete mGuyJumping;
+	mGuyJumping = nullptr;
+
+	delete mGuyEnd;
+	mGuyEnd = nullptr;
+
+	delete mGuyRunning;
+	mGuyRunning = nullptr;
+
+	delete mGuyRunningDark;
+	mGuyRunningDark = nullptr;
+
+	delete mGuyJumpingDark;
+	mGuyJumpingDark = nullptr;
+
+	delete mGuyEndDark;
+	mGuyEndDark = nullptr;
+
+	delete mCurrentTexture;
+	mCurrentTexture = nullptr;
+
+	delete mCurrentDarkTexture;
+	mCurrentDarkTexture = nullptr;
 }
 
 void Player::Visible(bool visible) {
@@ -152,34 +167,6 @@ void Player::Visible(bool visible) {
 
 bool Player::IsAnimating() {
 	return mAnimating;
-}
-
-int Player::Score() {
-	return mScore;
-}
-
-int Player::Lives() {
-	return mLives;
-}
-
-void Player::AddScore(int change) {
-	mScore += change;
-}
-
-bool Player::IgnoreCollisions() {
-	return !mVisible || mAnimating;
-}
-
-void Player::Hit(PhysEntity* other) {
-	mLives -= 1;
-	mAnimating = true;
-	mDeathAnimation->ResetAnimation();
-	mAudio->PlaySFX("SFX/PlayerExplosion.wav");
-	mWasHit = true;
-}
-
-bool Player::WasHit() {
-	return mWasHit;
 }
 
 void Player::Update() 
@@ -221,16 +208,7 @@ void Player::Update()
 
 	//Check for lNDING ON GROUND
 
-	if (mAnimating) {
-
-		if (mWasHit) {
-			mWasHit = false;
-		}
-
-		mDeathAnimation->Update();
-		mAnimating = mDeathAnimation->IsAnimating();
-	}
-	else {
+	if (!mAnimating) {
 		if (Active()) {
 			if (mIsGrounded) {
 				mGuyJumping->ResetAnimation();
@@ -252,10 +230,7 @@ void Player::Update()
 
 void Player::Render() {
 	if (mVisible) {
-		if (mAnimating) {
-			mDeathAnimation->Render();
-		}
-		else {
+		if (!mAnimating) {
 			if (mIsFacingRight) {
 				mCurrentTexture->Render();
 			}
@@ -269,10 +244,7 @@ void Player::Render() {
 
 void Player::RenderDark() {
 	if (mVisible) {
-		if (mAnimating) {
-			mDeathAnimation->Render();
-		}
-		else {
+		if (!mAnimating) {
 			if (mIsFacingRight) {
 				mCurrentDarkTexture->Render();
 			}

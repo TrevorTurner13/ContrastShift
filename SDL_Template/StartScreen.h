@@ -2,7 +2,6 @@
 #define __STARTSCREEN_H
 #include "AnimatedGLTexture.h"
 #include "InputManager.h"
-//#include "BackgroundStars.h"
 #include "Scoreboard.h"
 #include "AudioManager.h"
 
@@ -18,12 +17,6 @@ private:
 
 	// Top Bar Entities
 	GameEntity* mTopBar;
-	Texture* mPlayerOne;
-	Texture* mPlayerTwo;
-	Texture* mHiScore;
-	Scoreboard* mPlayerOneScore;
-	Scoreboard* mPlayerTwoScore;
-	Scoreboard* mTopScore;
 
 	// Logo Entities
 	Texture* mLogo;
@@ -33,17 +26,11 @@ private:
 	GameEntity* mPlayModes;
 	Texture* mOnePlayerMode;
 	Texture* mTwoPlayerMode;
-	Texture* mCursor;
 	Texture* mPlayDefault;
 	Texture* mPlayHighlight;
 	Texture* mHowToPlayHighlight;
 	Texture* mHowToPlayDefault;
-	Vector2 mCursorStartPos;
-	Vector2 mCursorOffset;
 	int mSelectedMode;
-
-
-
 
 	// Bottom Bar Entities
 	GameEntity* mBottomBar;

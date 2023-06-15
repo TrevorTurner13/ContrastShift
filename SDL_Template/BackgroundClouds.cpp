@@ -175,6 +175,62 @@ BackgroundClouds::~BackgroundClouds() {
 	delete mMoonColor;
 	mMoonColor = nullptr;
 	
+
+	delete mMountains;
+	mMountains = nullptr;
+
+	delete mMountains2;
+	mMountains2 = nullptr;
+
+	delete mHills;
+	mHills = nullptr;
+
+	delete mGround;
+	mGround = nullptr;
+
+	delete mPillarStart;
+	mPillarStart = nullptr;
+
+	delete mRuinStart;
+	mRuinStart = nullptr;
+
+	delete mPillar1;
+	mPillar1 = nullptr;
+
+	delete mPillar2;
+	mPillar2 = nullptr;
+
+	delete mLedge1;
+	mLedge1 = nullptr;
+
+	delete mLedge2;
+	mLedge2 = nullptr;
+
+	delete mLedgeEnd;
+	mLedgeEnd = nullptr;
+
+	delete mRuinEnd;
+	mRuinEnd = nullptr;
+
+	delete mSword1;
+	mSword1 = nullptr;
+	
+	delete mSword2;
+	mSword2 = nullptr;
+	
+	delete mSword3;
+	mSword3 = nullptr;
+
+	delete mSword4;
+	mSword4 = nullptr;
+
+	delete mSword5;
+	mSword5 = nullptr;
+
+	delete mSword6;
+	mSword6 = nullptr;
+
+	
 	for (int i = 0; i < LAYER_COUNT; i++) {
 		delete mLayers[i];
 		mLayers[i] = nullptr;

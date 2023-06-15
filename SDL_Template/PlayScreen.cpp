@@ -33,17 +33,22 @@ PlayScreen::PlayScreen() {
 	mMoveBoundsLeft = Vector2(130.0f, 1980.0f);
 	mIsWhite = false;
 	
-	level = 3;
+	level = 1;
+
 }
 
 PlayScreen::~PlayScreen() {
 	mTimer = nullptr;
 	mAudio = nullptr;
+	mInput = nullptr;
 
 	mLevel1->Release();
 	mLevel2->Release();
 	mLevel3->Release();
 	mLevelEnd->Release();
+
+	delete mFade;
+	mFade = nullptr;
 
 	delete mPlayer;
 	mPlayer = nullptr;
@@ -586,7 +591,6 @@ void PlayScreen::Level3Update() {
 	if (mPlayer->Position().x > 1960 && mPlayer->Position().y <= 475 && mPlayer->Position().y >= 235) {
 		level += 1;
 		mPlayer->Position(0.0f, mPlayer->Position().y);
-		mAudio->PlaySFX("SFX/Orb.wav", 0, -1);
 	}
 	if (mPlayer->Position().x < -10 && mPlayer->Position().y <= 225) {
 		level -= 1;

@@ -46,6 +46,48 @@ TutorialScreen::TutorialScreen() {
 
 
 TutorialScreen::~TutorialScreen() {
+	delete mMoveLeft;
+	mMoveLeft = nullptr;
+
+	delete mMoveRight;
+	mMoveRight = nullptr;
+
+	delete mJump;
+	mJump = nullptr;
+
+	delete mShift;
+	mShift = nullptr;
+
+	delete mPush;
+	mPush = nullptr;
+
+	delete mA;
+	mA = nullptr;
+
+	delete mD;
+	mD = nullptr;
+
+	delete mSpace;
+	mSpace = nullptr;
+
+	delete mShiftKey;
+	mShiftKey = nullptr;
+
+	delete mCaps;
+	mCaps = nullptr;
+
+	delete mBottomBar;
+	mBottomBar = nullptr;
+
+	delete mNamco;
+	mNamco = nullptr;
+
+	delete mDates;
+	mDates = nullptr;
+
+	delete mRights;
+	mRights = nullptr;
+
 
 }
 

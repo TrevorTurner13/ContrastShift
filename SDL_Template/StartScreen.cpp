@@ -28,8 +28,7 @@ StartScreen::StartScreen() {
 
 	mPlayModes->Parent(this);
 	mOnePlayerMode->Parent(mPlayModes);
-	mTwoPlayerMode->Parent(mPlayModes);
-	
+
 	mPlayHighlight->Parent(mPlayModes);
 	mPlayDefault->Parent(mPlayModes);
 	mHowToPlayDefault->Parent(mPlayModes);
@@ -80,6 +79,7 @@ StartScreen::~StartScreen() {
 	mLogo = nullptr;
 	delete mAnimatedLogo;
 	mAnimatedLogo = nullptr;
+	delete mTopBar;
 
 	// play mode entities
 	delete mPlayModes;
@@ -88,7 +88,15 @@ StartScreen::~StartScreen() {
 	mOnePlayerMode = nullptr;
 	delete mTwoPlayerMode;
 	mTwoPlayerMode = nullptr;
-	
+	delete mPlayDefault;
+	mPlayDefault = nullptr;
+
+	delete mPlayHighlight;
+	mPlayHighlight = nullptr;
+	delete mHowToPlayHighlight;
+	mHowToPlayHighlight = nullptr;
+	delete mHowToPlayDefault;
+	mHowToPlayDefault = nullptr;
 
 	// bottom bar entities
 	delete mBottomBar;
@@ -102,6 +110,7 @@ StartScreen::~StartScreen() {
 
 	mTimer = nullptr;
 	mInput = nullptr;
+	mAudio = nullptr;
 }
 
 void StartScreen::ResetAnimation() {

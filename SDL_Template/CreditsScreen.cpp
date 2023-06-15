@@ -65,13 +65,41 @@ CreditsScreen::~CreditsScreen() {
 	// play mode entities
 	delete mPlayModes;
 	mPlayModes = nullptr;
+	delete mCreators;
+	mCreators = nullptr;
+	delete mTrevor;
+	mTrevor = nullptr;
+	delete mBrad;
+	mBrad = nullptr;
+	delete mAndrew;
+	mAndrew = nullptr;
+	
 
 	// bottom bar entities
 	delete mBottomBar;
 	mBottomBar = nullptr;
-	
+	delete mMusic;
+	mMusic = nullptr;
+	delete mAndrew2;
+	mAndrew2 = nullptr;
+
+	delete mArtwork;
+	mArtwork = nullptr;
+	delete mTrevor2;
+	mTrevor2 = nullptr;
+	delete mItchGuy;
+	mItchGuy = nullptr;
+
+
+	// top bar
+	delete mTopBar;
+	mTopBar = nullptr;
+	delete mThanks;
+	mThanks = nullptr;
+
 	mTimer = nullptr;
 	mInput = nullptr;
+	mAudio = nullptr;
 }
 
 void CreditsScreen::ResetAnimation() {

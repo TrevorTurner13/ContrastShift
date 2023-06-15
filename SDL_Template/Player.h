@@ -47,14 +47,10 @@ private:
 	AnimatedGLTexture* mCurrentTexture;
 	AnimatedGLTexture* mCurrentDarkTexture;
 
-	AnimatedGLTexture* mDeathAnimation;
 
 	float mMoveSpeed;
 
 	Vector2 mMoveBoundsRight;
-
-	static const int MAX_BULLETS = 2;
-	//Bullet* mBullets[MAX_BULLETS];
 
 private:
 	void HandleMovement();
@@ -67,17 +63,6 @@ public:
 	void Visible(bool visible);
 	bool IsAnimating();
 
-	int Score();
-	int Lives();
-
-	void AddScore(int change);
-
-	// Inherited from PhysEntity
-	bool IgnoreCollisions() override;
-	void Hit(PhysEntity* other) override;
-
-	bool WasHit();
-
 	AnimatedGLTexture* GetCurrentTexture() { return mCurrentTexture; }
 	AnimatedGLTexture* GetCurrentDarkTexture() { return mCurrentDarkTexture; }
 	Vector2 GetLastPosition() { return mLastPosition; }
@@ -88,7 +73,6 @@ public:
 	float GetVelocityY() { return mVelocity.y; }
 	float GetVelocityX() { return mVelocity.x; }
 	float GetMovespeed() { return mMoveSpeed; }
-
 
 	void SetIsGrounded(bool isGrounded);
 	void SetIsJumping(bool isJumping);

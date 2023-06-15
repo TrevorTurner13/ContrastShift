@@ -164,4 +164,7 @@ ScreenManager::~ScreenManager() {
 
 	delete mGuy;
 	mGuy = nullptr;
+
+	delete mGuyColor;
+	mGuyColor = nullptr;
 }

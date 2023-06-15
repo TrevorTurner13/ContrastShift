@@ -153,6 +153,20 @@ LevelEnd::~LevelEnd() {
 	delete mBlackPillarStart;
 	mBlackPillarStart = nullptr;
 
+	delete mMonumentBaseBottom;
+	mMonumentBaseBottom = nullptr;
+
+	delete mMonumentBaseMid;
+	mMonumentBaseMid = nullptr;
+
+	delete mMonumentBaseTop;
+	mMonumentBaseTop = nullptr;
+
+	delete mOrbCollider;
+	mOrbCollider = nullptr;
+
+	mTimer = nullptr;
+
 }
 
 void LevelEnd::Update() {
