@@ -17,6 +17,7 @@ private:
 
 	bool mEnding;
 	bool mAnimating;
+	bool mEndingSFXPlaying;
 
 	Level1* mLevel1;
 	Level2* mLevel2;
